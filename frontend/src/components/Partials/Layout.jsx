@@ -7,12 +7,12 @@ import Footer from "./Footer/Footer";
 const Layout = () => {
 //   scrollToTop();
   return (
-    <div className="min-h-screen flex flex-col">
-      <main className="flex-grow">
+    <div className="min-h-screen flex flex-col ">
       <Navbar />
+      <main className="flex-grow">
         <Outlet key={location.pathname + location.search} /> {/* Renders the current route’s component */}
-      <Footer />
       </main>
+      <Footer />
       {/* <div> hello </div> */}
     </div>
   );

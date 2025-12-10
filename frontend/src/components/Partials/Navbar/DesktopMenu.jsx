@@ -32,8 +32,9 @@ const DesktopMenu = ({ menu }) => {
   };
 
   const hasSubMenu = menu?.subMenu?.length;
-
+  console.log(menu)
   return (
+    
     <motion.li
       className="group/link  z-9999"
       onHoverStart={() => {

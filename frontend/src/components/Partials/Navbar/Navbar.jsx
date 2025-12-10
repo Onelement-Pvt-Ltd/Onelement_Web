@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Logo from "../../../assets/logo.png"
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,NavLink } from "react-router-dom";
 import { Menus } from "../utils/NavbarMenu";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
@@ -49,17 +49,18 @@ const Navbar = () => {
   //   navigate("/event/upload");
   // };
 
-  return (
-    <div className="max-w-full relative z-9999">
+  return ( <div className="max-w-full relative z-[9999]">
       <header className="h-16 mx-auto text-[15px] fixed inset-0 flex-center bg-[#ffffffb9] backdrop-blur-sm">
-        <nav className="px-3.5 flex-center-between w-full max-w-full mx-2.5">
+        <nav className="px-3.5 flex-center-between w-full max-w-full mx-[10px]">
           <div className="flex-center gap-x-3 relative">
             <div className="flex-center">
-              {Logo}
+              <NavLink to="/" className="  rounded-md  ">
+          <img src={Logo} alt="" className="w-24 bg-blend-color-burn" />
+     </NavLink>
             </div>
           </div>
-          <div className="gap-x-1 lg:flex-center">
-            <ul className="gap-x-2 lg:flex-center hidden">
+          <div className="gap-x-1 flex lg:flex-center">
+            <ul className="gap-x-2 flex lg:flex-center hidden ">
               {Menus.map((menu) => (
                 <DesktopMenu menu={menu} key={menu.name} />
               ))}
