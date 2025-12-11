@@ -21,7 +21,7 @@ export default function MobileMenu({ Menus }) {
     exit: {
       height: 0,
       overflow: "hidden",
-    },
+    }
   };
 
   return (

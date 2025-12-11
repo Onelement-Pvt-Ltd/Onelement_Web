@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import Logo from "../../../assets/logo.png"
-import { useNavigate ,NavLink } from "react-router-dom";
+import Logo from "../../../assets/logo.png";
+import { useNavigate, NavLink } from "react-router-dom";
 import { Menus } from "../utils/NavbarMenu";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import { motion } from "framer-motion";
+import Info from "./Info";
 // import { useDispatch, useSelector } from "react-redux";
 // import { setUser } from "../../../features/authSlice";
 // import axios from "axios";
@@ -15,7 +16,7 @@ const Navbar = () => {
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
   // const user = useSelector((state) => state.auth.user);
-  
+
   // Use authentication status from AuthContext
   // const { isAuthenticated } = useContext(AuthContext);
   // console.log(isAuthenticated);
@@ -49,59 +50,79 @@ const Navbar = () => {
   //   navigate("/event/upload");
   // };
 
-  return ( <div className="max-w-full relative z-[9999]">
-      <header className="h-16 mx-auto text-[15px] fixed inset-0 flex-center bg-[#ffffffb9] backdrop-blur-sm">
-        <nav className="px-3.5 flex-center-between w-full max-w-full mx-[10px]">
+  return (
+    <div className="max-w-full relative z-[9999]">
+      <div>
+        <Info />
+      </div>
+
+
+
+      {/* <header className="h-16 mx-auto text-[15px] fixed inset-0 flex-center bg-[#ffffffb9] backdrop-blur-sm">
+        <nav className="px-3.5 flex-center-between   w-full max-w-full mx-[10px]">
           <div className="flex-center gap-x-3 relative">
             <div className="flex-center">
               <NavLink to="/" className="  rounded-md  ">
-          <img src={Logo} alt="" className="w-24 bg-blend-color-burn" />
-     </NavLink>
+                <img src={Logo} alt="" className="w-24 bg-blend-color-burn" />
+              </NavLink>
             </div>
           </div>
           <div className="gap-x-1 flex lg:flex-center">
-            <ul className="gap-x-2 flex lg:flex-center hidden ">
+            <ul className="gap-x-2 mr-10 lg:flex lg:flex-center hidden ">
               {Menus.map((menu) => (
                 <DesktopMenu menu={menu} key={menu.name} />
               ))}
             </ul>
-            <div className="flex-center gap-x-5">
+            <div className="flex-center gap-x-5"> */}
+
+
+
+
               {/* {(isAuthenticated && user)&&( */}
-                <motion.button
+              {/* <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-[#00629B] text-white px-4 py-1.5 rounded-lg shadow-md hover:bg-[#00629be2] transition-all"
                   // onClick={handleNewEvent}
                 >
                   New Event
-                </motion.button>
+                </motion.button> */}
               {/* )} */}
               {/* {(isAuthenticated && user)? ( */}
-                <motion.button
+              {/* <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-[#00629B] text-white px-4 py-1.5 rounded-lg shadow-md hover:bg-[#00629be2] transition-all"
                   // onClick={handleLogout}
                 >
                   Logout
-                </motion.button>
+                </motion.button> */}
               {/* ) : ( */}
-                <motion.button
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-[#00629B] text-white px-4 py-1.5 rounded-lg shadow-md hover:bg-[#00629be2] transition-all"
-                  // onClick={handleLogin}
-                >
-                  Login
-                </motion.button>
+
+              
+              {/* <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#00629B] text-white px-4 py-1.5 rounded-lg shadow-md hover:bg-[#00629be2] transition-all"
+                // onClick={handleLogin}
+              >
+                Contact Us
+              </motion.button>
+ */}
+
+
               {/* )} */}
-              <div className="lg:hidden">
+
+
+
+
+              {/* <div className="lg:hidden">
                 <MobileMenu Menus={Menus} />
               </div>
             </div>
           </div>
         </nav>
-      </header>
+      </header> */}
     </div>
   );
 };
