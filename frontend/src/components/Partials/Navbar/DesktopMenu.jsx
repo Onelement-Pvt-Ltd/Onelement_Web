@@ -1,30 +1,31 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 import Info from "./Info";
 
-const DesktopMenu = ({ menu }) => {
+const DesktopMenu = ({ menu,loc }) => {
   const [isHover, toggleHover] = useState(false);
   const toggleHoverMenu = () => {
+    console.log(!isHover)
     toggleHover(!isHover);
   };
-  // console.log(menu)
-
+  const isActiveMenu = loc.pathname==menu.path;
+  // console.log(loc.pathname)
   const subMenuAnimate = {
     enter: {
       opacity: 1,
-      rotateX: 0,
+      y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.2,
       },
       display: "block",
     },
     exit: {
-      opacity: 0,
-      rotateX: -15,
+      opacity: 1,
+      y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.2,
       },
       transitionEnd: {
         display: "none",
@@ -33,9 +34,9 @@ const DesktopMenu = ({ menu }) => {
   };
 
   const hasSubMenu = menu?.subMenu?.length;
-  console.log(menu);
+  // console.log(menu);
   return (
-    <div>
+    <div >
 
 
     <motion.li
@@ -46,29 +47,29 @@ const DesktopMenu = ({ menu }) => {
       onHoverEnd={toggleHoverMenu}
       key={menu.name}
     >
-      <NavLink
+      <Link 
         to={menu.path}
-        className=" flex-center  text-[#0A2955] font-semibold gap-1 hover:text-[#255672] cursor-pointer px-3 py-1 rounded-xl"
+        className=" flex-center z-9 h-16 text-[#0A2955] font-semibold gap-1 hover:text-[#0a346e] cursor-pointer px-3 rounded-xl"
       >
         <p
           className={`${
-            !hasSubMenu ? "nav-underline" : " "
-          } text-[#0A2955] font-semibold gap-1 hover:text-[#255672]`}
+            !hasSubMenu ? "nav-underline" : "nav-underline"
+          } text-[#0A2955] text-decoration-none font-semibold gap-1 hover:text-[#0a346e]`}
         >
           {menu.name}
         </p>
         {hasSubMenu && (
           <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
         )}
-      </NavLink>
+      </Link>
       {hasSubMenu && (
         <motion.div
-          className="sub-menu bg-white absolute p-3 mt-5 rounded-lg shadow-lg"
+          className="sub-menu  text-[#0A2955] bg-[white] absolute  flex  w-auto z-20 rounded shadow-lg"
           initial="exit"
           animate={isHover ? "enter" : "exit"}
           variants={subMenuAnimate}
         >
-          <div
+          {/* <div
             className={`grid gap-2 ${
               menu.gridCols === 3
                 ? "grid-cols-3"
@@ -76,11 +77,13 @@ const DesktopMenu = ({ menu }) => {
                 ? "grid-cols-2"
                 : "grid-cols-1"
             }`}
-          >
+          > */}
+          <div className="flex flex-col">
             {hasSubMenu &&
               menu.subMenu.map((submenu, i) => (
+                  <Link to={submenu?.path} className=" hover:text-[#1f7902]">
                 <div
-                  className="relative cursor-pointer bg-opacity-30 bg-white"
+                  className="flex justify-center items-center px-3 h-12 min-w-30 rounded cursor-pointer bg-opacity-30 "
                   key={i}
                 >
                   {menu.gridCols > 1 && menu?.subMenuHeading?.[i] && (
@@ -88,7 +91,7 @@ const DesktopMenu = ({ menu }) => {
                       {menu?.subMenuHeading?.[i]}
                     </p>
                   )}
-                  <div className="flex-center gap-x-4 group/menubox">
+                  <div className=" group/menubox">
                     {/* <div className="bg-white/5 w-fit p-2 rounded-md group-hover/menubox:bg-white/90 group-hover/menubox:text-[#009ca6] duration-300">
                       {submenu.icon && <submenu.icon />}
                     </div> */}
@@ -98,6 +101,7 @@ const DesktopMenu = ({ menu }) => {
                     </div>
                   </div>
                 </div>
+                </Link>
               ))}
           </div>
         </motion.div>

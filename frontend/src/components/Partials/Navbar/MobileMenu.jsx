@@ -11,12 +11,12 @@ export default function MobileMenu({ Menus }) {
     setIsOpen(!isOpen);
     setClicked(null);
   };
-  console.log(Menus)
+  // console.log(Menus)
 
   const subMenuDrawer = {
     enter: {
       height: "auto",
-      overflow: "hidden",
+      overflow: "hidden"
     },
     exit: {
       height: 0,

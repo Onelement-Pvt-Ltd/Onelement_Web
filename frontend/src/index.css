@@ -15,8 +15,8 @@ body {
 @layer components{
     .sub-menu{
         position:absolute;
-        margin-top: 0.5rem;
-        padding: 15px;
+        /* padding: 15px; */
+        color:#00629b;
         border-radius: 6px;
         transform-origin: 50% -170px;
         --tw-backdrop-blur: blur(8px);
@@ -35,6 +35,10 @@ body {
         display: flex;
         align-items: center;
         justify-content:space-between;
+    }
+    .flex-justify-center{
+       display: flex;
+       justify-content: center;
     }
 }
 
@@ -93,7 +97,7 @@ body {
 
 .nav-underline {
   position: relative;
-  color: inherit;
+  /* color: inherit; */
   transition: color 0.3s ease;
 }
 
@@ -105,7 +109,7 @@ body {
   transform: translateX(-50%);
   height: 2.2px;
   width: 0;
-  background: #00629B ;
+  background: #1f7902 ;
   transition: width 0.5s ease;
 }
 
@@ -113,6 +117,69 @@ body {
   width: 100%;
 }
 
-.nav-underline:hover {
-  color: #6621c8;
+/* .nav-underline:hover {
+  color: #1f7902
+} */
+
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 8px;
 }
+    
+.div1 {
+    grid-column: span 2 / span 2;
+    grid-row: span 3 / span 3;
+}
+
+.div2 {
+    grid-column: span 2 / span 2;
+    grid-row: span 6 / span 6;
+    grid-column-start: 1;
+    grid-row-start: 4;
+}
+
+.div3 {
+    grid-column: span 2 / span 2;
+    grid-row: span 3 / span 3;
+    grid-column-start: 3;
+    grid-row-start: 1;
+}
+
+.div4 {
+    grid-column: span 2 / span 2;
+    grid-row: span 3 / span 3;
+    grid-column-start: 8;
+    grid-row-start: 4;
+}
+
+.div5 {
+    grid-column: span 2 / span 2;
+    grid-row: span 3 / span 3;
+    grid-column-start: 3;
+    grid-row-start: 7;
+}
+
+.div6 {
+    grid-column: span 5 / span 5;
+    grid-row: span 3 / span 3;
+    grid-column-start: 5;
+    grid-row-start: 1;
+}
+
+.div7 {
+    grid-column: span 5 / span 5;
+    grid-row: span 3 / span 3;
+    grid-column-start: 3;
+    grid-row-start: 4;
+}
+
+.div8 {
+    grid-column: span 5 / span 5;
+    grid-row: span 3 / span 3;
+    grid-column-start: 5;
+    grid-row-start: 7;
+}
+        
