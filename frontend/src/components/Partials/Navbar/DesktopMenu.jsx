@@ -49,7 +49,7 @@ const DesktopMenu = ({ menu,loc }) => {
     >
       <Link 
         to={menu.path}
-        className=" flex-center z-9 h-16 text-[#0A2955] font-semibold gap-1 hover:text-[#0a346e] cursor-pointer px-3 rounded-xl"
+        className=" flex-center z-9 h-16 text-[#0A2955] font-semibold gap-1 hover:text-[#0a346e] cursor-pointer px-3 "
       >
         <p
           className={`${
@@ -64,7 +64,7 @@ const DesktopMenu = ({ menu,loc }) => {
       </Link>
       {hasSubMenu && (
         <motion.div
-          className="sub-menu  text-[#0A2955] bg-[white] absolute  flex  w-auto z-20 rounded shadow-lg"
+          className="sub-menu  text-[#0A2955] bg-gray-300 absolute  flex  w-auto z-20  shadow-lg"
           initial="exit"
           animate={isHover ? "enter" : "exit"}
           variants={subMenuAnimate}
@@ -81,9 +81,9 @@ const DesktopMenu = ({ menu,loc }) => {
           <div className="flex flex-col">
             {hasSubMenu &&
               menu.subMenu.map((submenu, i) => (
-                  <Link to={submenu?.path} className=" hover:text-[#1f7902]">
+                  <Link to={submenu?.path} className=" hover:bg-gray-200 hover:text-[#1f7902]">
                 <div
-                  className="flex justify-center items-center px-3 h-12 min-w-30 rounded cursor-pointer bg-opacity-30 "
+                  className="flex justify-center items-center px-3 h-12 min-w-30  cursor-pointer bg-opacity-30 "
                   key={i}
                 >
                   {menu.gridCols > 1 && menu?.subMenuHeading?.[i] && (

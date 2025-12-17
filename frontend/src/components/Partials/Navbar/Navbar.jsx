@@ -6,57 +6,10 @@ import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import { motion } from "framer-motion";
 import Info from "./Info";
-// import { useDispatch, useSelector } from "react-redux";
-// import { setUser } from "../../../features/authSlice";
-// import axios from "axios";
-// import { toast } from "sonner";
-// import { AuthContext } from "../../../Context/AuthContext";
+
 
 const Navbar = (loc) => {
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const user = useSelector((state) => state.auth.user);
-
-  // Use authentication status from AuthContext
-  // const { isAuthenticated } = useContext(AuthContext);
-  // console.log(isAuthenticated);
-
-  // const handleLogout = async () => {
-  //   try {
-  //     // Call your backend logout route to clear session cookie.
-  //     const res = await axios.get("http://localhost:3000/api/ieeegcetsb/user/logout", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       withCredentials: true,
-  //     });
-  //     if (res.data.success) {
-  //       toast.success("Logged out successfully");
-  //       dispatch(setUser(null));
-  //       navigate("/login");
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     toast.error("Logout failed. Please try again.");
-  //   }
-  // };
-
-  // Navigate to login if not authenticated.
-  // const handleLogin = () => {
-  //   navigate("/login");
-  // };
-
-  // const handleNewEvent = () => {
-  //   navigate("/event/upload");
-  // };
-
-  // --------------------------
-  // Header translation on scroll
-  // - measures the top "info" area height (the empty div below is the placeholder)
-  // - translates the header upward smoothly up to the info height as the page scrolls
-  // - uses requestAnimationFrame for performant updates and cleans up on unmount
-  // --------------------------
-
+ 
   const infoRef = useRef(null);
   const headerRef = useRef(null);
   const infoHeightRef = useRef(0);
@@ -111,8 +64,8 @@ const Navbar = (loc) => {
   return (
     <div className="max-w-full relative z-9999">
       {/* Info placeholder — keep it here (you can replace with <Info /> or leave empty). We measure its height. */}
-        {/* If you want the original Info component rendered, uncomment the next line */}
-        <div ref={infoRef}>
+      {/* If you want the original Info component rendered, uncomment the next line */}
+      <div ref={infoRef}>
         <Info />
       </div>
 
@@ -120,7 +73,7 @@ const Navbar = (loc) => {
         ref={headerRef}
         className="h-16 mx-auto text-[15px]  fixed  md:mt-[30.5px] z-99 inset-0 flex-center bg-[#ffffffb9] backdrop-blur-sm"
       >
-        <nav className="px-3.5 flex-center-between   w-full max-w-full mx-[10px]">
+        <nav className="px-3.5 flex-center-between   w-full max-w-full mx-2.5">
           <div className="flex-center gap-x-3 relative">
             <div className="flex-center">
               <NavLink to="/" className="  rounded-md  ">
@@ -135,34 +88,13 @@ const Navbar = (loc) => {
               ))}
             </ul>
             <div className="flex-center gap-x-5">
-              {/* {(isAuthenticated && user)&&( */}
-              {/* <motion.button
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-[#00629B] text-white px-4 py-1.5 rounded-lg shadow-md hover:bg-[#00629be2] transition-all"
-                  // onClick={handleNewEvent}
-                >
-                  New Event
-                </motion.button> */}
-              {/* )} */}
-              {/* {(isAuthenticated && user)? ( */}
-              {/* <motion.button
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-[#00629B] text-white px-4 py-1.5 rounded-lg shadow-md hover:bg-[#00629be2] transition-all"
-                  // onClick={handleLogout}
-                >
-                  Logout
-                </motion.button> */}
-              {/* ) : ( */}
-
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-[#0A2955] text-white px-4 py-1.5 rounded shadow-md hover:bg-[#0a346e] transition-all"
                 // onClick={handleLogin}
               >
-                Contact Us
+                <a  key="contactus" href="#contactus">Contact Us</a>
               </motion.button>
 
               {/* )} */}

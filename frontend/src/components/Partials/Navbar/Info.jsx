@@ -15,7 +15,7 @@ const Info = () => {
           <div className="flex-center gap-2 ">
             <info.logo className="size-5" />
             <div className="text-[15px]">
-              <a href={info.link}>{info.content}</a>
+              <a className="underline" href={info.link}>{info.content}</a>
             </div>
           </div>
         ))}

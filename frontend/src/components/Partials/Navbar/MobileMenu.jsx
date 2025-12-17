@@ -16,12 +16,12 @@ export default function MobileMenu({ Menus }) {
   const subMenuDrawer = {
     enter: {
       height: "auto",
-      overflow: "hidden"
+      overflow: "hidden",
     },
     exit: {
       height: 0,
       overflow: "hidden",
-    }
+    },
   };
 
   return (
@@ -29,13 +29,13 @@ export default function MobileMenu({ Menus }) {
       <div className="realtive h-auto">
         {/* Mobile Menu Toggle Button */}
         <button
-          className="lg:hidden z-999  relative text-white bg-[#00629B] p-2 rounded-md shadow-md"
+          className="lg:hidden z-999  relative text-[#0a2955] hover:bg-[#0a2955] hover:text-white hover:border-[#0a2955] cursor-pointer font-extrabold  p-1.5 border-3 rounded-md"
           onClick={toggleDrawer}
         >
           {isOpen ? (
-            <X className="w-[17px] h-[17px]" />
+            <X className="w-[17px] h-[17px] " />
           ) : (
-            <Menu className="w-[17px] h-[17px]" />
+            <Menu className="w-[17px] h-[17px] stroke-[4px]" />
           )}
         </button>
 
@@ -43,19 +43,19 @@ export default function MobileMenu({ Menus }) {
         {/* Overlay to prevent background elements from interfering */}
         {isOpen && (
           <div
-            className="absolute top-0 left-0 w-full h-[100vh] bg-black/70 z-[9999]"
+            className="absolute top-0 left-0 w-full h-screen bg-black/70 z-9999"
             onClick={toggleDrawer}
           ></div>
         )}
 
         {/* Mobile Navigation Drawer */}
         <motion.div
-          className="fixed top-0 h-[100vh] left-0 w-1/2  bg-[#00629B] backdrop-blur-lg text-white p-6 pb-20 z-[9999] overflow-y-auto ease-linear   duration-300"
-          initial={{ x: "200%" }}
-          animate={{ x: isOpen ? "100%" : "200%" }}
+          className="fixed top-0 h-screen left-0 w-2/3  bg-[#0a2955] backdrop-blur-lg text-white p-6  pb-20 z-9999 overflow-y-auto ease-linear   duration-300"
+          initial={{ x: "50%" }}
+          animate={{ x: isOpen ? "50%" : "200%" }}
         >
           <div className="flex justify-end">
-            <button className="p-2" onClick={toggleDrawer}>
+            <button className="p-1 cursor-pointer" onClick={toggleDrawer}>
               <X size={28} />
             </button>
           </div>
@@ -64,11 +64,12 @@ export default function MobileMenu({ Menus }) {
             {Menus.map(({ name, path, subMenu }, i) => {
               const isClicked = clicked === i;
               const hasSubMenu = subMenu?.length;
+             
 
               return (
-                <li key={name} className="border-t border-white/20">
+                <li key={name} className="border-t-2 border-white/20">
                   <span
-                    className="flex items-center justify-between p-3 hover:bg-white/10 rounded-md cursor-pointer"
+                    className="flex items-center justify-between p-3 hover:bg-white/10 cursor-pointer"
                     onClick={() => setClicked(isClicked ? null : i)}
                   >
                     <NavLink
@@ -92,14 +93,15 @@ export default function MobileMenu({ Menus }) {
                       initial="exit"
                       animate={isClicked ? "enter" : "exit"}
                       variants={subMenuDrawer}
-                      className="ml-5"
+                      className=" sub-menu-mobile"
                     >
-                      {subMenu.map(({ name, path, icon: Icon }) => (
+                      {
+                      subMenu.map(({ name, path, icon: Icon }) => (
                         <NavLink
                           to={path}
                           key={name}
                           onClick={toggleDrawer}
-                          className="flex p-2 items-center hover:bg-white/10 rounded-md gap-x-3 cursor-pointer"
+                          className={`flex p-4 items-center sub-menu-mobile bg-[#072651] hover:bg-[#06234b] gap-x-3 cursor-pointer`}
                         >
                           <Icon size={17} />
                           {name}

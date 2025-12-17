@@ -16,7 +16,7 @@ const AboutVideo = () => {
             whileHover={{ scale: 1.1, opacity: 1 }}
             whileTap={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 18 }}
-            className="flex"
+            className="flex hover:cursor-pointer"
           >
             <BsPlayBtn strokeWidth="0.2px" className="size-12 text-white " />
           </motion.div>
