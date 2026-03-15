@@ -1,0 +1,52 @@
+.blog-grid {
+    /* background-color: aquamarine; */
+    display: grid;
+    gap: 24px;
+    max-inline-size: 1250px;
+    margin-inline: auto;
+    height: 900px;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-areas:
+        "one one three three three three  four four"
+        "one one three three three three four four"
+        "one one three three three three four four"
+        "two two five five five six six six six"
+        "two two five five five six six six six"
+        "two two five five five six six six six"
+        "two two seven seven seven seven eight eight"
+        "two two seven seven seven seven eight eight"
+        "two two seven seven seven seven eight eight"
+}
+
+.first{
+    grid-area: one;
+}
+
+.second {
+    grid-area: two;
+}
+
+.third {
+    grid-area: three;
+}
+
+.fourth{
+    grid-area: four;
+}
+
+.fifth {
+    grid-area: five;
+}
+
+.sixth {
+    grid-area: six;
+}
+
+.bento-grid> :nth-child(7) {
+    grid-area: seven;
+}
+
+.bento-grid> :nth-child(8) {
+    grid-area: eight;
+}

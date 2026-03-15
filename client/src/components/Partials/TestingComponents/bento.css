@@ -1,0 +1,116 @@
+/* bento.css
+   Only grid-related rules: template areas, columns/rows, gap and nth-child -> grid-area mapping.
+   No colors, no padding, no text styles here.
+*/
+
+.bento-grid {
+    display: grid;
+    gap: 24px;
+    max-inline-size: 90vw;
+    margin-inline: auto;
+
+    /* mobile: single column stack using grid areas */
+    grid-template-areas:
+        "one"
+        "two"
+        "three"
+        "four"
+        "five"
+        "six"
+        "seven"
+        "eight";
+}
+
+/* assign each child to its grid-area */
+.bento-grid> :nth-child(1) {
+    grid-area: one;
+}
+
+.bento-grid> :nth-child(2) {
+    grid-area: two;
+}
+
+.bento-grid> :nth-child(3) {
+    grid-area: three;
+}
+
+.bento-grid> :nth-child(4) {
+    grid-area: four;
+}
+
+.bento-grid> :nth-child(5) {
+    grid-area: five;
+}
+
+.bento-grid> :nth-child(6) {
+    grid-area: six;
+}
+
+.bento-grid> :nth-child(7) {
+    grid-area: seven;
+}
+
+.bento-grid> :nth-child(8) {
+    grid-area: eight;
+}
+
+/* medium breakpoint: two-column layout with specified template */
+@media (min-width: 661px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+            "one one"
+            "two three"
+            "four six"
+            "four seven"
+            "five eight";
+    }
+}
+
+/* large breakpoint: four-column complex layout */
+@media (min-width: 961px) {
+    .bento-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas:
+            "seven one one one"
+            "eight two two four"
+            "eight  six three three"
+            "eight five five five";
+    }
+}
+
+/* full screen */
+
+/* "one one three three three four four" */
+/* "one one three three three four four" */
+/* "one one three three three four four" */
+/* "two two five five six six six" */
+/* "two two five five six six six" */
+/* "two two five five six six six" */
+/* "two two seven seven seven eight eight" */
+/* "two two seven seven seven eight eight" */
+/* "two two seven seven seven eight eight" */
+
+/* mid screens */
+
+/* "one  three three three four " */
+/* "one  three three three four " */
+/* "one one three three three four " */
+/* "two five six six six" */
+/* "two five six six six" */
+/* "two five six six six" */
+/* "two seven seven seven eight" */
+/* "two seven seven seven eight" */
+/* "two seven seven seven eight" */
+
+
+/* small screens */ 
+
+/* one one */
+/* two two */
+/* three     */
+/* four four */
+/*      five */
+/* six six    */
+/*seven      */
+/*eight eigtht*/
