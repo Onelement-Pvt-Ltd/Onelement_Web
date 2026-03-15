@@ -1,41 +1,81 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-import Layout from './components/Partials/Layout';
-import Home from './components/PageComponents/Home/Home';
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-function App() {
-  // const [count, setCount] = useState(0)
-const appRouter = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
-      {/* Public Routes */}
-      <Route index element={<Home />} />
-      {/* <Route path="/login" element={<Login />} /> */}
-      {/* <Route path="/about" element={<About />} /> */}
+import Layout from "./components/Partials/Layout";
+import Home from "./components/PageComponents/Home/Home";
+import About from "./components/PageComponents/About/About";
+import Team from "./components/PageComponents/Team/Team";
 
-      {/* Protected Routes - no automatic redirection */}
-      {/* <Route element={<ProtectedRoute />}> */}
-        {/* <Route path="/event/upload" element={<EventFormWrapper />} /> */}
-        {/* <Route path="/event/:eventId" element={<EventViewCard />} /> */}
-      {/* </Route> */}
-    </Route>
-  )
-);
+import AllTechnologies from "./components/PageComponents/Technology/SectionComponents/AllTechnologies";
+import TechnologyLayout from "./components/PageComponents/Technology/TechnologyLayout";
+import TechnologyDetails from "./components/PageComponents/Technology/TechnologyDetailsComponents/TechnologyDetails";
+import Technology from "./components/PageComponents/Technology/Technology";
 
-  return (
-    <>
+import BlogsLayout from "./components/PageComponents/Blogs/BlogsLayout";
+import Blog from "./components/PageComponents/Blogs/Blog";
+import BlogDetails from "./components/PageComponents/Blogs/BlogDetails";
 
-        {/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
-      {/* <AuthProvider> */}
-        <RouterProvider router={appRouter} />
-      {/* </AuthProvider> */}
-    {/* </LocalizationProvider> */}
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      },
 
-    </>
-  )
-}
+      {
+        path: "about",
+        element: <About />
+      },
 
-export default App
+      {
+        path: "/teams",
+        element: <Team />
+      },
+
+      /* ---------------- TECHNOLOGY ---------------- */
+
+      {
+        path: "technologies",
+        element: <Technology />
+      },
+
+      {
+        path: "technologies/details/:techId",
+        element: <TechnologyLayout />,
+        children: [
+          {
+            index: true,
+            element: <TechnologyDetails />
+          }
+        ]
+      },
+
+      /* ---------------- BLOGS ---------------- */
+
+      {
+        path: "blogs",
+        element: <Blog />
+      },
+
+      {
+        path: "blogs/:slug",   // ✅ IMPORTANT FIX
+        element: <BlogsLayout />,
+        children: [
+          {
+            index: true,
+            element: <BlogDetails />
+          }
+        ]
+      }
+    ]
+  }
+]);
+
+const App = () => {
+  return <RouterProvider router={appRouter} />;
+};
+
+export default App;

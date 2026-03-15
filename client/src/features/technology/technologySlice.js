@@ -10,21 +10,30 @@ export const getTechnologies = createAsyncThunk(
 
 export const getTechnology = createAsyncThunk(
   "technology/get",
-  async (slug, { getState }) => {
-    const { technology } = getState();
+  async (slug, { getState, rejectWithValue }) => {
+    try {
+      const { technology } = getState();
 
-    if (technology.cache[slug]) {
-      return { data: technology.cache[slug], slug, fromCache: true };
+      // Cache check
+      if (technology.cache[slug]) {
+        return { data: technology.cache[slug], slug };
+      }
+
+      const data = await fetchTechnology(slug);
+
+      return { data, slug };
+
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch technology"
+      );
     }
-
-    const data = await fetchTechnology(slug);
-
-    return { data, slug, fromCache: false };
   }
 );
 
 const technologySlice = createSlice({
   name: "technology",
+
   initialState: {
     current: null,
     technologies: [],
@@ -33,24 +42,42 @@ const technologySlice = createSlice({
     error: null,
     cache: {}
   },
-  reducers: {},
+
+  reducers: {
+    clearTechnology: (state) => {
+      state.current = null;
+    }
+  },
+
   extraReducers: (builder) => {
     builder
+
+      /* ALL TECHNOLOGIES */
+
       .addCase(getTechnologies.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
+
       .addCase(getTechnologies.fulfilled, (state, action) => {
         state.loading = false;
         state.technologies = action.payload.data;
         state.pagination = action.payload.pagination;
       })
+
       .addCase(getTechnologies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       })
+
+
+      /* SINGLE TECHNOLOGY */
+
       .addCase(getTechnology.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
+
       .addCase(getTechnology.fulfilled, (state, action) => {
         state.loading = false;
 
@@ -59,11 +86,14 @@ const technologySlice = createSlice({
         state.current = data;
         state.cache[slug] = data;
       })
+
       .addCase(getTechnology.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   }
 });
+
+export const { clearTechnology } = technologySlice.actions;
 
 export default technologySlice.reducer;

@@ -50,32 +50,32 @@ export const Menus = [
         name: "Carbon Capture",
         icon: ShieldPlus,
         type: "Society",
-        path: "/carbon-capture",
+        path: "/details/carbon-capture",
       },
       {
         name: "PEM Fuel Cell",
         icon: Users,
         type: "Society",
-        path: "/pem-fuel-cell",
+        path: "/details/pem-fuel-cell",
       },
       {
         name: "GH2",
         icon: Dessert,
         type: "Society",
-        path: "/gh2",
+        path: "/details/gh2",
       },
       {
         name: "EFUEL",
         icon: Lock,
         type: "Council",
-        path: "/efuel",
+        path: "/details/efuel",
       },
     ],
     gridCols: 2,
   },
   {
     name: "Blogs",
-    path: "/event",
+    path: "/blogs",
     gridCols: 1,
   }
 ];
