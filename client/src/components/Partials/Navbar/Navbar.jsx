@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import Logo from "../../../assets/logo.png";
+import Logo from "../../../assets/Logo.png";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Menus } from "../utils/NavbarMenu";
 import DesktopMenu from "./DesktopMenu";
