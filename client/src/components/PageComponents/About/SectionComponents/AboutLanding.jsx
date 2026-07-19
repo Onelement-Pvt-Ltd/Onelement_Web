@@ -48,105 +48,71 @@ const AboutLanding = () => {
                 </motion.div>
               </motion.button>
             </div>
-
           </div>
         </div>
-        {/* <div className=" md:max-h-100 max-h-1/2 flex justify-center -mt-5 px-5 sm:px-0 overflow-hidden   items-center"> */}
-          {/* <div className="flex justify-center items-center"> */}
-            {/* <div className=" my-5 md:my-10 w-3/4 sm:w-2/3 md:w-1/4 md:mx-0 mx-auto">
-            
-                <div className="w-full max-w-7xl sm:max-w-7xl gap-5 ">
-                  <div className="grid grid-cols-6 grid-rows-9  gap-2 md:gap-3 ">
-                    <div className=" col-start-1 row-start-1 col-span-3 row-span-5 ">
-                      <div className="aspect-1/2 bg-gray-300 rounded-md overflow-hidden flex items-center justify-center min-w-full">
-                        <span className="text-sm md:text-base">Hello 1</span>
-                      </div>
+        <div className=" w-3/4 md:w-3/7 lg:w-3/8">
+          <div className=" my-5 md:my-10 md:w-[95%] mx-auto">
+            <div className="w-full max-w-7xl sm:max-w-7xl gap-5 ">
+              <div className="grid grid-cols-6 grid-rows-7 gap-2 lg:gap-3 ">
+                <div className=" col-start-1 row-start-1 col-span-3 row-span-4 ">
+                  <div className="relative h-full rounded-md overflow-hidden min-w-0 group">
+                    {/* Background Image */}
+                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" />
+                    {/* Black Overlay */}
+                    <div className="absolute inset-0 bg-black/30  transition duration-300" />
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex items-center justify-center text-white">
+                      <span className="text-sm md:text-base font-semibold tracking-wide"></span>
                     </div>
-                    <div className="row-start-6 col-start-1 col-span-3 row-span-4 ">
-                      <div className="h-full bg-gray-300 rounded-md overflow-hidden flex items-center justify-center min-w-0">
-                        <span className="text-sm md:text-base">Hello 2</span>
-                      </div>
+                  </div>
+                </div>
+                <div className="row-start-5 col-start-1 col-span-3 row-span-3">
+                  <div className="relative h-full rounded-md overflow-hidden min-w-0 group">
+                    {/* Background Image */}
+                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" />
+
+                    {/* Black Overlay */}
+                    <div className="absolute inset-0 bg-black/30  transition duration-300" />
+
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex items-center justify-center text-white">
+                      <span className="text-sm md:text-base font-semibold tracking-wide"></span>
                     </div>
-                    <div className=" col-start-4 row-start-1 col-span-3 row-span-4">
-                      <div className="h-full bg-gray-300 rounded-md overflow-hidden flex items-center justify-center min-w-0">
-                        <span className="text-sm md:text-base">Hello 3</span>
-                      </div>
+                  </div>
+                </div>
+
+                <div className=" col-start-4 row-start-1 col-span-3 row-span-3">
+                  <div className="relative h-full aspect-9/8 rounded-md overflow-hidden min-w-0 group">
+                    {/* Background Image */}
+                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" />
+
+                    {/* Black Overlay */}
+                    <div className="absolute inset-0 bg-black/30  transition duration-300" />
+
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex items-center justify-center text-white">
+                      <span className="text-sm md:text-base font-semibold tracking-wide"></span>
                     </div>
-                    <div className=" col-start-4 row-start-5 col-span-3 row-span-6">
-                      <div className="aspect-1/2 bg-gray-300 rounded-md overflow-hidden flex items-center justify-center min-w-0">
-                        <span className="text-sm md:text-base">Hello 4</span>
-                      </div>
-                    </div>
-            </div>
-          </div>
-        </div> */}
-             <div className=" w-3/4 md:w-3/7 lg:w-3/8">
-                <div className=" my-5 md:my-10 md:w-[95%] mx-auto">
-                  <div className="w-full max-w-7xl sm:max-w-7xl gap-5 ">
-                    <div className="grid grid-cols-6 grid-rows-7 gap-2 lg:gap-3 ">
-                      <div className=" col-start-1 row-start-1 col-span-3 row-span-4 ">
-                        <div className="relative h-full rounded-md overflow-hidden min-w-0 group">
-                          {/* Background Image */}
-                          <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" />
-                          {/* Black Overlay */}
-                          <div className="absolute inset-0 bg-black/30  transition duration-300" />
-                          {/* Content */}
-                          <div className="relative z-10 h-full flex items-center justify-center text-white">
-                            <span className="text-sm md:text-base font-semibold tracking-wide">
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row-start-5 col-start-1 col-span-3 row-span-3">
-                        <div className="relative h-full rounded-md overflow-hidden min-w-0 group">
-                          {/* Background Image */}
-                          <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" />
+                  </div>
+                </div>
+                <div className=" col-start-4 row-start-4 col-span-3 row-span-4">
+                  <div className="relative h-full rounded-md overflow-hidden min-w-0 group">
+                    {/* Background Image */}
+                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" />
 
-                          {/* Black Overlay */}
-                          <div className="absolute inset-0 bg-black/30  transition duration-300" />
+                    {/* Black Overlay */}
+                    <div className="absolute inset-0 bg-black/30  transition duration-300" />
 
-                          {/* Content */}
-                          <div className="relative z-10 h-full flex items-center justify-center text-white">
-                            <span className="text-sm md:text-base font-semibold tracking-wide">
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className=" col-start-4 row-start-1 col-span-3 row-span-3">
-                        <div className="relative h-full aspect-9/8 rounded-md overflow-hidden min-w-0 group">
-                          {/* Background Image */}
-                          <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" />
-
-                          {/* Black Overlay */}
-                          <div className="absolute inset-0 bg-black/30  transition duration-300" />
-
-                          {/* Content */}
-                          <div className="relative z-10 h-full flex items-center justify-center text-white">
-                            <span className="text-sm md:text-base font-semibold tracking-wide">
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className=" col-start-4 row-start-4 col-span-3 row-span-4">
-                        <div className="relative h-full rounded-md overflow-hidden min-w-0 group">
-                          {/* Background Image */}
-                          <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" />
-
-                          {/* Black Overlay */}
-                          <div className="absolute inset-0 bg-black/30  transition duration-300" />
-
-                          {/* Content */}
-                          <div className="relative z-10 h-full flex items-center justify-center text-white">
-                            <span className="text-sm md:text-base font-semibold tracking-wide">
-                            </span>
-                          </div>
-                        </div>
-                      </div>
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex items-center justify-center text-white">
+                      <span className="text-sm md:text-base font-semibold tracking-wide"></span>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

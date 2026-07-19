@@ -24,7 +24,7 @@ const Navbar = (loc) => {
       }
       // prefer offsetHeight for an integer pixel measurement
       infoHeightRef.current = infoEl.offsetHeight || 0;
-      console.log(rafRef.current);
+      // console.log(rafRef.current);
     };
 
     measure();

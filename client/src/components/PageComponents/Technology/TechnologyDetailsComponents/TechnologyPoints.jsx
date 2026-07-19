@@ -6,7 +6,7 @@ const TechnologyPoints = ({ points }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <div className="min-w-full">
+    <div className="min-w-full px-5">
       <ul className="space-y-3">
         {points?.map((point, index) => {
           const isOpen = openIndex === index;

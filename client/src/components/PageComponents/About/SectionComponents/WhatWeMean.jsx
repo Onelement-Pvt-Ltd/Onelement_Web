@@ -1,61 +1,93 @@
 import mission from "@/assets/AboutImages/mission.png";
 import vision from "@/assets/AboutImages/vision.png";
+
 const WhatWeMean = () => {
   return (
-    <div className="bg-[#0a2955] px-[4%] sm:px-[5%] md:px-[8%] lg:px-[12%] xl:px-[15%] py-10 text-white ">
-      <div className="w-full text-justify">
-        <div className="flex items-center">
-          <div className=" size-3 sm:size-4 md:size-5 mr-4 bg-[#1F7902]" />
-          <div className=" md:text-lg lg:text-xl font-semibold">
-            <h1>WHAT WE MEAN</h1>
+    <section className="bg-[#0a2955] py-16 md:py-20 lg:py-24 text-white">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+        <div className="max-w-3xl">
+          <div className="flex items-center gap-4">
+            <span className="h-3 w-3 rounded-full bg-[#35b46e]" />
+
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#7effe5]">
+              What We Mean
+            </p>
           </div>
+
+          <h2 className="mt-6 text-4xl font-black leading-tight md:text-5xl">
+            Our Vision & Mission
+          </h2>
+
+          <p className="mt-5 text-slate-300 leading-8">
+            Discover the principles that guide our innovation and commitment
+            towards building sustainable technologies for a cleaner tomorrow.
+          </p>
         </div>
-        <div className="flex-col mt-5">
-          {/* vision */}
-          <div className="w-full items-center flex md:flex-row flex-col gap-x-8 md:gap-x-10 lg:gap-x-20">
-            <div className="flex flex-col w-full">
-              <div className=" flex justify-start">
-                          <h1 className="relative inline-block md:text-4xl text-3xl lg:text-5xl font-extrabold b:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-3/4 after:h-[5px] after:bg-[#1d6903]"> VISION
-</h1>
-              </div>
-              <p className="text-[14px] md:text-[16px] lg:text-[18px] mt-5">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
-                inventore autem dolorum earum in ut error laborum sequi facilis
-                reprehenderit voluptatibus aliquam, architecto modi, porro
-                doloremque nisi pariatur cupiditate laboriosam repudiandae animi
-                eaque vitae? Obcaecati aut non minus optio a.
+
+        <div className="mt-20 space-y-20">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div>
+              <span className="text-sm font-semibold uppercase tracking-[0.3em] text-[#35b46e]">
+                01
+              </span>
+
+              <h3 className="mt-3 text-3xl font-black md:text-4xl">Vision</h3>
+
+              <div className="mt-4 h-1 w-20 rounded-full bg-[#35b46e]" />
+
+              <p className="mt-8 text-base leading-8 text-slate-300 lg:text-lg">
+                To contribute to the ecosystem by developing and delivering
+                sustainable and reliable technologies in alternative clean
+                energy, energy storage and carbon capture.
+                <br />
+                We provide turnkey solutions and integration process for Carbon
+                capture , its storage and utilization. We strive to develop zero
+                emission power systems, for off-grid and auxiliary power
+                applications that can draw us closer to an energy independent
+                society.
               </p>
             </div>
-            <div className="mt-5 relative inline-block">
-              <img src={vision} alt="vision" className="block" />
 
-              {/* Bottom strip */}
-              <div className="absolute bottom-0 left-0 w-full h-4 bg-[#1F7902] rounded-b transition duration-300" />
+            <div className="overflow-hidden rounded-[28px] border border-white/10">
+              <img
+                src={vision}
+                alt="Vision"
+                className="h-[260px] w-full object-cover sm:h-[340px] lg:h-[420px]"
+              />
             </div>
           </div>
 
-          {/* // mission */}
-          <div className="w-full items-center flex md:flex-row flex-col-reverse gap-x-8 md:gap-x-10 lg:gap-x-20 mt-10">
-            <div className="mt-5 relative inline-block">
-              <img className="" src={mission} alt="mission" />
-              <div className="absolute bottom-0 left-0 w-full h-4 bg-[#1F7902] rounded-b transition duration-300" />
+          <div className="h-px bg-linear-to-r from-transparent via-white/20 to-transparent" />
+
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="order-2 lg:order-1 overflow-hidden rounded-[28px] border border-white/10">
+              <img
+                src={mission}
+                alt="Mission"
+                className="h-[260px] w-full object-cover sm:h-[340px] lg:h-[420px]"
+              />
             </div>
-            <div className="flex flex-col w-full">
-              <div className=" flex justify-end">
-          <h1 className="relative inline-block md:text-4xl text-3xl lg:text-5xl font-extrabold b:content-[''] after:absolute after:right-0 after:-bottom-1 after:w-3/4 after:h-[5px] after:bg-[#1d6903]">MISSION</h1>
+
+            <div className="order-1 text-right lg:order-2">
+              <span className="text-sm font-semibold uppercase tracking-[0.3em] text-[#35b46e]">
+                02
+              </span>
+
+              <h3 className="mt-3 text-3xl font-black md:text-4xl">Mission</h3>
+              <div className="flex justify-end">
+                <div className="relative right-0 mt-4 h-1 w-20 rounded-full bg-[#35b46e]" />
               </div>
-              <p className="text-[14px] md:text-[16px] lg:text-[18px] mt-5">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
-                inventore autem dolorum earum in ut error laborum sequi facilis
-                reprehenderit voluptatibus aliquam, architecto modi, porro
-                doloremque nisi pariatur cupiditate laboriosam repudiandae animi
-                eaque vitae? Obcaecati aut non minus optio a.
+
+              <p className="mt-8 text-base leading-8 text-slate-300 lg:text-lg">
+                Creating ,a futuristic ecosystem that contributes to sustainable
+                living
               </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
+
 export default WhatWeMean;

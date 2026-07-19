@@ -23,7 +23,13 @@ const DesktopMenu = ({ menu }) => {
     }
   };
 
-  const isActive = location.pathname.startsWith(menu.path);
+  
+
+const isActive = menu.path === "/" 
+  ? location.pathname === "/" 
+  : location.pathname.startsWith(menu.path);
+
+  console.log(isActive)
 
   return (
     <li
@@ -36,7 +42,7 @@ const DesktopMenu = ({ menu }) => {
       <Link
         to={menu.path}
         className={`flex items-center gap-1 font-semibold px-4 transition
-        ${isActive ? "text-[#1d6903]" : "text-[#0A2955] hover:text-[#1d6903]"}`}
+        ${isActive ? "text-[#1d6903] underline" : "text-[#0A2955] hover:text-[#1d6903]"}`}
       >
         {menu.name}
 
@@ -67,10 +73,9 @@ const DesktopMenu = ({ menu }) => {
                 mt-0
                 w-64
                 bg-white
-                rounded-xl
                 shadow-xl
                 border
-                border-gray-200
+                rounded-b-xl
                 overflow-hidden
                 z-[999]
               "

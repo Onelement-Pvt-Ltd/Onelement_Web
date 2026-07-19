@@ -1,16 +1,42 @@
-const Content = [{
-    name: "Climate Risk",
-    content: "As we hurtle towards 2C global warming threshold that will put the future generations and the habitat of the planet at risk , it is our moral obligation to pass on a sustainable environment and contribute in building a liveable future."
-}, {
-    name: "What Onelement Does",
-    content: "A fast paced and safe approach in deploying technologies that will help in mitigating emissions and adapt to alternate clean energy and energy management methods on a day to day base."
-}, {
-    name: "Target for 2030",
-    content: "We are ambitious about reaching 5000TPD capture capacity and 2MMTPA overall abatement capacity by 2030. We are strategically working with HTA sectors in inclusively work towards decarbonization."
-}, {
-    name: "Social Responsibility",
-    content: "Bring about a collaborative and responsible approach in supporting states and country’s sustainable development goals and net zero targets."
-}];
+import {
+    Shield,
+    Leaf,
+    Target,
+    Users,
+} from "lucide-react";
+
+const Content = [
+    {
+        name: "Climate Risk",
+        subtitle: "Managing Carbon Emissions",
+        icon: Shield,
+        content:
+            "As we hurtle towards the 2°C global warming threshold, it is our moral obligation to build a sustainable future and reduce climate risk through responsible innovation.",
+    },
+
+    {
+        name: "What OneElement Does",
+        subtitle: "Clean Technology",
+        icon: Leaf,
+        content:
+            "We deploy fast, scalable and safe technologies that mitigate emissions while enabling industries to adopt clean energy and sustainable operations.",
+    },
+
+    {
+        name: "Target for 2030",
+        subtitle: "Net Zero Vision",
+        icon: Target,
+        content:
+            "Our goal is to achieve 5000 TPD capture capacity and 2 MMTPA overall abatement capacity by 2030 through strategic partnerships and innovative carbon solutions.",
+    },
+
+    {
+        name: "Social Responsibility",
+        subtitle: "People & Planet",
+        icon: Users,
+        content:
+            "We collaborate with governments, industries and communities to accelerate sustainable development goals and global net-zero commitments.",
+    },
+];
 
 export default Content;
-

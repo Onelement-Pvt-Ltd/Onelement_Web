@@ -11,8 +11,8 @@ const Info = () => {
   return (
     <div className="max-w-full z-50 px-5 py-1 max-h-8 hidden align-items-center bg-[#0A2955] text-white md:flex justify-between">
       <div className="flex-center gap-5 ">
-        {info_menu.map((info) => (
-          <div className="flex-center gap-2 ">
+        {info_menu.map((info,key) => (
+          <div className="flex-center gap-2 " key={key}>
             <info.logo className="size-5" />
             <div className="text-[15px]">
               <a className="underline" href={info.link}>{info.content}</a>

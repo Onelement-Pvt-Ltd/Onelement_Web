@@ -30,8 +30,12 @@ const WhatWeDo = () => {
                 {/* 2: top-second square */}
                 <div className="md:col-start-5 col-start-3 row-start-2  md:row-start-1">
                   <div className="w-full h-full bg-[#0a2955] rounded-md overflow-hidden flex flex-col justify-end items-end p-3 min-w-0">
-                    <h1 className="text-3xl sm:text-5xl md:text-2xl lg:text-4xl font-extrabold" >45+</h1>
-                    <p className="text-xs sm:text-2xl md:text-base lg:text-xl text-right font-semibold">Projects Completed</p>
+                    <h1 className="text-3xl sm:text-5xl md:text-2xl lg:text-4xl font-extrabold">
+                      45+
+                    </h1>
+                    <p className="text-xs sm:text-2xl md:text-base lg:text-xl text-right font-semibold">
+                      Projects Completed
+                    </p>
                   </div>
                 </div>
 
@@ -69,16 +73,24 @@ const WhatWeDo = () => {
                 {/* 6: row 2 right square at col 4 */}
                 <div className="md:col-start-3 col-start-1 row-start-3 md:row-start-2">
                   <div className="w-full h-full bg-[#0a2955] rounded-md overflow-hidden flex flex-col justify-end items-end p-3 min-w-0">
-                    <h1 className="text-3xl sm:text-5xl md:text-2xl lg:text-4xl font-extrabold" >17+</h1>
-                    <p className="text-xs sm:text-2xl md:text-base lg:text-xl text-right font-semibold">Experts Contractors</p>
+                    <h1 className="text-3xl sm:text-5xl md:text-2xl lg:text-4xl font-extrabold">
+                      17+
+                    </h1>
+                    <p className="text-xs sm:text-2xl md:text-base lg:text-xl text-right font-semibold">
+                      Experts Contractors
+                    </p>
                   </div>
                 </div>
 
                 {/* 7: row 3 left of right block -> col 2 */}
                 <div className=" col-start-3  row-start-4 md:col-start-5 md:row-start-3">
                   <div className="w-full h-full bg-[#0a2955] rounded-md overflow-hidden flex flex-col justify-end items-end p-3 min-w-0">
-                    <h1 className="text-3xl sm:text-5xl md:text-2xl lg:text-4xl font-extrabold" >28+</h1>
-                    <p className="text-xs sm:text-2xl md:text-base lg:text-xl text-right font-semibold">Happy Clients</p>
+                    <h1 className="text-3xl sm:text-5xl md:text-2xl lg:text-4xl font-extrabold">
+                      28+
+                    </h1>
+                    <p className="text-xs sm:text-2xl md:text-base lg:text-xl text-right font-semibold">
+                      Happy Clients
+                    </p>
                   </div>
                 </div>
 

@@ -38,9 +38,10 @@ body {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
   }
-    .sub-menu-mobile:last-child{
-         border-bottom-width: 0;
-    }
+
+  .sub-menu-mobile:last-child {
+    border-bottom-width: 0;
+  }
 
 
 }
@@ -61,6 +62,15 @@ body {
     display: flex;
     justify-content: center;
   }
+
+  .text-green {
+    color: #35b46e;
+  }
+  .bg-green{
+    background-color: #35b46e;
+  }
+  
+
 }
 
 /* Add this CSS to ensure responsive styling */
@@ -179,4 +189,13 @@ body {
   grid-row: span 5 / span 5;
   grid-column-start: 1;
   grid-row-start: 6;
+}
+.info-text{
+  @apply text-slate-600 leading-7
+  text-[15px]
+  sm:text-base
+  md:text-[17px]
+  lg:text-lg
+  xl:text-[19px]
+  2xl:text-xl;
 }

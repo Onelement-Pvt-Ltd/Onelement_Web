@@ -47,8 +47,6 @@ const TechnologyCard = ({ tech, index }) => {
         <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
 
         {/* Floating Tag */}
-       
-      
       </div>
 
       {/* Content Section */}
@@ -77,6 +75,10 @@ const TechnologyCard = ({ tech, index }) => {
             "
           >
             {tech.banner?.subtitle}
+          </p>
+          {console.log(tech)}
+          <p>
+            {tech.description[0]}
           </p>
         </div>
 

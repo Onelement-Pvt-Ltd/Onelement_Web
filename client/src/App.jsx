@@ -14,6 +14,7 @@ import Technology from "./components/PageComponents/Technology/Technology";
 import BlogsLayout from "./components/PageComponents/Blogs/BlogsLayout";
 import Blog from "./components/PageComponents/Blogs/Blog";
 import BlogDetails from "./components/PageComponents/Blogs/BlogDetails";
+import VissionMissionSection from "./components/PageComponents/About/VisionMissionComponents/VissionMissionSection";
 
 const appRouter = createBrowserRouter([
   {
@@ -33,6 +34,12 @@ const appRouter = createBrowserRouter([
       {
         path: "about/teams",
         element: <Team />
+      },
+      ,
+
+      {
+        path: "about/VM",
+        element: <VissionMissionSection />
       },
 
       /* ---------------- TECHNOLOGY ---------------- */

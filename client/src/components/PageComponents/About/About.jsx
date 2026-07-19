@@ -1,7 +1,9 @@
-import AboutLanding from "./SectionComponents/AboutLanding";
+// import AboutLanding from "./SectionComponents/AboutLanding";
+import AboutLanding from "./SectionComponents/LandingSectionComponents/AboutLanding"; 
 import WhatWeDo from "./SectionComponents/WhatWeDo";
-import WhatWeMean from "./SectionComponents/WhatWeMean";
-import WhoWeAre from "./SectionComponents/WhoWeAre";
+import WhatWeBelieve from "./SectionComponents/WhatWeMean";
+// import WhoWeAre from "./SectionComponents/WhoWeAre";
+import WhoWeAre from "./SectionComponents/WhoWeAreComponents/WhoWeAre";
 
 const About = () => {
   return (
@@ -10,14 +12,14 @@ const About = () => {
         <AboutLanding />
       </div>
       <div>
+        <WhatWeBelieve />
+      </div>
+      <div>
         <WhoWeAre />
       </div>
-      <div>
-        <WhatWeMean />
-      </div>
-      <div>
+      {/* <div>
         <WhatWeDo />
-      </div>
+      </div> */}
     </div>
   );
 };
