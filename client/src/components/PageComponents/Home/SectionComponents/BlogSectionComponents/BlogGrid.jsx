@@ -1,4 +1,4 @@
-import { BLOG_LAYOUT } from "./blogLayout";
+import { BLOG_LAYOUT } from "./BlogLayout";
 import BlogCard from "./BlogCard";
 import BlogCardSkeleton from "./BlogCardSkeleton";
 import BlogCard2 from "./BlogCard2";
