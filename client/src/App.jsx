@@ -1,81 +1,64 @@
 import "./App.css";
+import { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Layout from "./components/Partials/Layout";
-import Home from "./components/PageComponents/Home/Home";
-import About from "./components/PageComponents/About/About";
-import Team from "./components/PageComponents/Team/Team";
-
-import AllTechnologies from "./components/PageComponents/Technology/SectionComponents/AllTechnologies";
 import TechnologyLayout from "./components/PageComponents/Technology/TechnologyLayout";
-import TechnologyDetails from "./components/PageComponents/Technology/TechnologyDetailsComponents/TechnologyDetails";
-import Technology from "./components/PageComponents/Technology/Technology";
-
 import BlogsLayout from "./components/PageComponents/Blogs/BlogsLayout";
-import Blog from "./components/PageComponents/Blogs/Blog";
-import BlogDetails from "./components/PageComponents/Blogs/BlogDetails";
-import VissionMissionSection from "./components/PageComponents/About/VisionMissionComponents/VissionMissionSection";
+
+const Home = lazy(() => import("./components/PageComponents/Home/Home"));
+const About = lazy(() => import("./components/PageComponents/About/About"));
+const Team = lazy(() => import("./components/PageComponents/Team/Team"));
+const VissionMissionSection = lazy(() =>
+  import("./components/PageComponents/About/VisionMissionComponents/VissionMissionSection")
+);
+
+const Technology = lazy(() =>
+  import("./components/PageComponents/Technology/Technology")
+);
+const TechnologyDetails = lazy(() =>
+  import("./components/PageComponents/Technology/TechnologyDetailsComponents/TechnologyDetails")
+);
+
+const Blog = lazy(() => import("./components/PageComponents/Blogs/Blog"));
+const BlogDetails = lazy(() =>
+  import("./components/PageComponents/Blogs/BlogDetails")
+);
+
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="animate-pulse text-[#0a2955] text-lg">Loading...</div>
+  </div>
+);
+
+const withSuspense = (Component) => (
+  <Suspense fallback={<PageLoader />}>
+    <Component />
+  </Suspense>
+);
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      {
-        index: true,
-        element: <Home />
-      },
+      { index: true, element: withSuspense(Home) },
+      { path: "about", element: withSuspense(About) },
+      { path: "about/teams", element: withSuspense(Team) },
+      { path: "about/VM", element: withSuspense(VissionMissionSection) },
 
-      {
-        path: "about",
-        element: <About />
-      },
-
-      {
-        path: "about/teams",
-        element: <Team />
-      },
-      ,
-
-      {
-        path: "about/VM",
-        element: <VissionMissionSection />
-      },
-
-      /* ---------------- TECHNOLOGY ---------------- */
-
-      {
-        path: "technologies",
-        element: <Technology />
-      },
-
+      { path: "technologies", element: withSuspense(Technology) },
       {
         path: "technologies/details/:techId",
         element: <TechnologyLayout />,
-        children: [
-          {
-            index: true,
-            element: <TechnologyDetails />
-          }
-        ]
+        children: [{ index: true, element: withSuspense(TechnologyDetails) }]
       },
 
-      /* ---------------- BLOGS ---------------- */
-
+      { path: "blogs", element: withSuspense(Blog) },
       {
-        path: "blogs",
-        element: <Blog />
-      },
-
-      {
-        path: "blogs/:slug",   // ✅ IMPORTANT FIX
+        path: "blogs/:slug",
         element: <BlogsLayout />,
-        children: [
-          {
-            index: true,
-            element: <BlogDetails />
-          }
-        ]
+        children: [{ index: true, element: withSuspense(BlogDetails) }]
       }
     ]
   }

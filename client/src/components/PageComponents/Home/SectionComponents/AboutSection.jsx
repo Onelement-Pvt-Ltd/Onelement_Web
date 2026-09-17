@@ -17,12 +17,9 @@ const AboutSection = () => {
             </div>
           </div>
         </div>
-        {/* <div> */}
           <QuantitativeInfo />
-        {/* </div> */}
       </div>
     </div>
-    // </div>
   );
 };
 export default AboutSection;

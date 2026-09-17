@@ -1,99 +1,152 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { motion } from "framer-motion";
-import { getTechnologies } from "@/features/technology/technologySlice";
-import TechnologyCard from "./SectionComponents/TechnologyCard";
+import { useState } from "react";
+import { useTechnologies } from "@/features/technology/technologyQueries";
+import TechnologyThread from "./TechnologyThread";
 
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
+const LIMIT = 12;
+
+// Builds a windowed page list, e.g. [1, "...", 4, 5, 6, "...", 20]
+const getPageRange = (current, total, delta = 1) => {
+  const range = [];
+  const withDots = [];
+  let last;
+
+  for (let i = 1; i <= total; i++) {
+    if (i === 1 || i === total || (i >= current - delta && i <= current + delta)) {
+      range.push(i);
+    }
+  }
+
+  range.forEach((i) => {
+    if (last !== undefined) {
+      if (i - last === 2) {
+        withDots.push(last + 1);
+      } else if (i - last !== 1) {
+        withDots.push("...");
+      }
+    }
+    withDots.push(i);
+    last = i;
+  });
+
+  return withDots;
 };
 
+const heading = { fontFamily: "'Space Grotesk', sans-serif" };
+const body = { fontFamily: "'IBM Plex Sans', sans-serif" };
+
 const Technology = () => {
-  const dispatch = useDispatch();
-  const { technologies, loading } = useSelector((state) => state.technology);
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    dispatch(getTechnologies({ page: 1, limit: 12 }));
-  }, [dispatch]);
+  const { data, isLoading, isFetching, isError, error } = useTechnologies(
+    page,
+    LIMIT
+  );
 
-  if (loading) {
+  const technologies = data?.data ?? [];
+  const pagination = data?.pagination;
+  const totalPages = pagination?.totalPages ?? 1;
+
+  if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="animate-pulse text-[#0a2955] text-lg">
+      <div className="flex min-h-screen items-center justify-center bg-[#F6F8F6]">
+        <div style={body} className="animate-pulse text-lg text-[#0B2440]">
           Loading technologies...
         </div>
       </div>
     );
   }
 
+  if (isError) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#F6F8F6] px-6 text-center">
+        <p style={body} className="text-lg text-red-600">
+          {error?.response?.data?.message ||
+            "Failed to load technologies. Please try again shortly."}
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <main className="bg-white overflow-hidden">
-
-      <section className="relative min-h-[70vh] sm:min-h-[80vh] flex items-center">
-
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-100"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1920&auto=format&fit=crop')",
-          }}
-        />
-
-        <div className="absolute inset-0 bg-linear-to-r from-[#0a2955]/90 via-[#0a2955]/70 to-[#1d6903]/70" />
-
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-[#9fe870]/20 rounded-full blur-3xl" />
-
-        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-16 text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
+    <main className="bg-[#F6F8F6]">
+      <section className="bg-[#0B2440] px-6 py-28 text-[#F6F8F6] md:py-36">
+        <div className="mx-auto max-w-3xl md:mx-0 md:ml-[8%]">
+          <h1
+            style={heading}
+            className="text-4xl font-semibold leading-[1.1] sm:text-5xl md:text-6xl"
           >
-            <p className="uppercase tracking-[0.3em] text-xs sm:text-sm text-[#9fe870] font-semibold">
-              Technology Stack
-            </p>
-
-            <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-              Our Technology <br />
-              <span className="text-[#9fe870]">Ecosystem</span>
-            </h1>
-
-            <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl">
-              Explore intelligent energy systems engineered for scale,
-              resilience, and long-term sustainability.
-            </p>
-          </motion.div>
+            Engineering renewable power for what's next
+          </h1>
+          <p style={body} className="mt-6 max-w-xl text-base leading-relaxed text-[#F6F8F6]/70 sm:text-lg">
+            Four core technologies working together to capture, store, and
+            deliver clean energy reliably.
+          </p>
         </div>
       </section>
 
-      <section className="py-16 sm:py-10 md:py-16 bg-[#f4f7f9]">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="
-              grid 
-              gap-8 sm:gap-10 md:gap-12
-              justify-items-center
-              grid-cols-1 
-              sm:grid-cols-1 
-              md:grid-cols-2 
-              lg:grid-cols-3
-            "
+      <section className="px-6 py-20 md:py-28">
+        {technologies.length === 0 ? (
+          <p style={body} className="py-12 text-center text-lg text-[#4B5563]">
+            No technologies available right now.
+          </p>
+        ) : (
+          <TechnologyThread technologies={technologies} />
+        )}
+
+        {totalPages > 1 && (
+          <nav
+            aria-label="Technology pagination"
+            className="mt-16 flex flex-wrap items-center justify-center gap-2"
           >
-            {technologies.map((tech, index) => (
-              <TechnologyCard key={tech.slug} tech={tech} index={index} />
-            ))}
-          </motion.div>
-        </div>
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1 || isFetching}
+              style={body}
+              className="rounded-lg border border-gray-300 px-4 py-2 text-[#0B2440] transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Prev
+            </button>
+
+            {getPageRange(page, totalPages).map((p, idx) =>
+              p === "..." ? (
+                <span
+                  key={`dots-${idx}`}
+                  aria-hidden="true"
+                  className="select-none px-2 text-gray-400"
+                >
+                  &hellip;
+                </span>
+              ) : (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => setPage(p)}
+                  disabled={isFetching}
+                  aria-current={p === page ? "page" : undefined}
+                  style={body}
+                  className={`rounded-lg border px-4 py-2 transition ${
+                    p === page
+                      ? "border-[#0B2440] bg-[#0B2440] text-white"
+                      : "border-gray-300 text-[#0B2440] hover:bg-gray-100"
+                  }`}
+                >
+                  {p}
+                </button>
+              )
+            )}
+
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages || isFetching}
+              style={body}
+              className="rounded-lg border border-gray-300 px-4 py-2 text-[#0B2440] transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Next
+            </button>
+          </nav>
+        )}
       </section>
     </main>
   );

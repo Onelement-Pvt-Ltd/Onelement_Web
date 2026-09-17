@@ -11,51 +11,46 @@ export default function MobileMenu({ Menus }) {
     setIsOpen(!isOpen);
     setClicked(null);
   };
-  // console.log(Menus)
 
   const subMenuDrawer = {
-    enter: {
-      height: "auto",
-      overflow: "hidden",
-    },
-    exit: {
-      height: 0,
-      overflow: "hidden",
-    },
+    enter: { height: "auto", overflow: "hidden" },
+    exit: { height: 0, overflow: "hidden" }
   };
 
   return (
     <div>
-      <div className="realtive h-auto">
-        {/* Mobile Menu Toggle Button */}
+      <div className="relative h-auto">
         <button
-          className="lg:hidden z-999  relative text-[#0a2955] hover:bg-[#0a2955] hover:text-white hover:border-[#0a2955] cursor-pointer font-extrabold  p-1.5 border-3 rounded-md"
+          className="relative z-[999] cursor-pointer rounded-md border-3 p-1.5 font-extrabold text-[#0B2440] hover:border-[#0B2440] hover:bg-[#0B2440] hover:text-white lg:hidden"
           onClick={toggleDrawer}
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
         >
           {isOpen ? (
-            <X className="w-[17px] h-[17px] " />
+            <X className="h-[17px] w-[17px]" />
           ) : (
-            <Menu className="w-[17px] h-[17px] stroke-[4px]" />
+            <Menu className="h-[17px] w-[17px] stroke-[4px]" />
           )}
         </button>
 
-        {/* Overlay to prevent background elements from interfering */}
-        {/* Overlay to prevent background elements from interfering */}
         {isOpen && (
           <div
-            className="absolute top-0 left-0 w-full h-screen bg-black/70 z-9999"
+            className="absolute left-0 top-0 z-[9999] h-screen w-full bg-black/70"
             onClick={toggleDrawer}
-          ></div>
+          />
         )}
 
-        {/* Mobile Navigation Drawer */}
         <motion.div
-          className="fixed top-0 h-screen left-0 w-2/3  bg-[#0a2955] backdrop-blur-lg text-white p-6  pb-20 z-9999 overflow-y-auto ease-linear   duration-300"
+          className="fixed left-0 top-0 z-[10000] h-screen w-2/3 overflow-y-auto bg-[#0B2440] p-6 pb-20 text-white backdrop-blur-lg duration-300 ease-linear"
           initial={{ x: "50%" }}
           animate={{ x: isOpen ? "50%" : "200%" }}
         >
           <div className="flex justify-end">
-            <button className="p-1 cursor-pointer" onClick={toggleDrawer}>
+            <button
+              className="cursor-pointer p-1"
+              onClick={toggleDrawer}
+              aria-label="Close menu"
+            >
               <X size={28} />
             </button>
           </div>
@@ -64,19 +59,14 @@ export default function MobileMenu({ Menus }) {
             {Menus.map(({ name, path, subMenu }, i) => {
               const isClicked = clicked === i;
               const hasSubMenu = subMenu?.length;
-             
 
               return (
                 <li key={name} className="border-t-2 border-white/20">
                   <span
-                    className="flex items-center justify-between p-3 hover:bg-white/10 cursor-pointer"
+                    className="flex cursor-pointer items-center justify-between p-3 hover:bg-white/10"
                     onClick={() => setClicked(isClicked ? null : i)}
                   >
-                    <NavLink
-                      to={path}
-                      onClick={toggleDrawer}
-                      className="pr-7 py-2"
-                    >
+                    <NavLink to={path} onClick={toggleDrawer} className="py-2 pr-7">
                       {name}
                     </NavLink>
                     {hasSubMenu && (
@@ -93,15 +83,14 @@ export default function MobileMenu({ Menus }) {
                       initial="exit"
                       animate={isClicked ? "enter" : "exit"}
                       variants={subMenuDrawer}
-                      className=" sub-menu-mobile"
+                      className="sub-menu-mobile"
                     >
-                      {
-                      subMenu.map(({ name, path, icon: Icon }) => (
+                      {subMenu.map(({ name, path, icon: Icon }) => (
                         <NavLink
                           to={path}
                           key={name}
                           onClick={toggleDrawer}
-                          className={`flex p-4 items-center sub-menu-mobile bg-[#072651] hover:bg-[#06234b] gap-x-3 cursor-pointer`}
+                          className="sub-menu-mobile flex cursor-pointer items-center gap-x-3 bg-[#163B22] p-4 hover:bg-[#0B2440]"
                         >
                           <Icon size={17} />
                           {name}

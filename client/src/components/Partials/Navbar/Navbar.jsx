@@ -1,103 +1,61 @@
-import React, { useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "../../../assets/Logo.png";
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Menus } from "../utils/NavbarMenu";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Info from "./Info";
 
-
-const Navbar = (loc) => {
- 
+const Navbar = ({ loc }) => {
   const infoRef = useRef(null);
-  const headerRef = useRef(null);
-  const infoHeightRef = useRef(0);
-  const rafRef = useRef(null);
+  const [infoHeight, setInfoHeight] = useState(0);
 
   useEffect(() => {
-    const measure = () => {
-      const infoEl = infoRef.current;
-      if (!infoEl) {
-        infoHeightRef.current = 0;
-        return;
-      }
-      // prefer offsetHeight for an integer pixel measurement
-      infoHeightRef.current = infoEl.offsetHeight || 0;
-      // console.log(rafRef.current);
-    };
-
+    const measure = () => setInfoHeight(infoRef.current?.offsetHeight || 0);
     measure();
     window.addEventListener("resize", measure);
-
-    const onScroll = () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => {
-        const headerEl = headerRef.current;
-        if (!headerEl) return;
-        const scrollY = window.scrollY || window.pageYOffset || 0;
-        const translate = Math.min(Math.max(scrollY, 0), infoHeightRef.current);
-        // translate header up by translate px (negative Y)
-        headerEl.style.transform = `translateY(-${translate}px)`;
-        // hint for better rendering
-        headerEl.style.willChange = "transform";
-      });
-    };
-
-    // initialize in case the page is pre-scrolled
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("resize", measure);
-      window.removeEventListener("scroll", onScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      // cleanup inline styles
-      const headerEl = headerRef.current;
-      if (headerEl) {
-        headerEl.style.transform = "";
-        headerEl.style.willChange = "";
-      }
-    };
+    return () => window.removeEventListener("resize", measure);
   }, []);
 
+  const { scrollY } = useScroll();
+  const headerY = useTransform(scrollY, (value) =>
+    -Math.min(Math.max(value, 0), infoHeight)
+  );
+
   return (
-    <div className="max-w-full relative z-9999">
-      {/* Info placeholder — keep it here (you can replace with <Info /> or leave empty). We measure its height. */}
-      {/* If you want the original Info component rendered, uncomment the next line */}
+    <div className="relative z-[9999] max-w-full">
       <div ref={infoRef}>
         <Info />
       </div>
 
-      <header
-        ref={headerRef}
-        className="h-16 mx-auto text-[15px]  fixed  md:mt-[30.5px] z-99 inset-0 flex-center bg-[#ffffffb9] backdrop-blur-sm"
+      <motion.header
+        style={{ y: headerY }}
+        className="fixed inset-0 z-[99] mx-auto flex h-16 items-center bg-[#F6F8F6]/90 text-[15px] backdrop-blur-sm md:mt-[30.5px]"
       >
-        <nav className="px-3.5 flex-center-between   w-full max-w-full mx-2.5">
-          <div className="flex-center gap-x-3 relative">
-            <div className="flex-center">
-              <NavLink to="/" className="  rounded-md  ">
-                <img src={Logo} alt="" className="w-24 bg-blend-color-burn" />
-              </NavLink>
-            </div>
+        <nav className="mx-2.5 flex w-full max-w-full items-center justify-between px-3.5">
+          <div className="flex items-center gap-x-3">
+            <NavLink to="/" className="rounded-md">
+              <img src={Logo} alt="OEPL" className="w-24" />
+            </NavLink>
           </div>
-          <div className="gap-x-1 flex lg:flex-center">
-            <ul className="gap-x-2 mr-10 lg:flex lg:flex-center hidden ">
+
+          <div className="flex gap-x-1 lg:items-center">
+            <ul className="mr-10 hidden gap-x-2 lg:flex lg:items-center">
               {Menus.map((menu) => (
-                <DesktopMenu menu={menu} loc={loc} key={menu.name} />
+                <DesktopMenu menu={menu} key={menu.name} />
               ))}
             </ul>
-            <div className="flex-center gap-x-5">
-              <motion.button
+
+            <div className="flex items-center gap-x-5">
+              <motion.a
+                href="#contactus"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-[#0A2955] text-white px-4 py-1.5 rounded shadow-md hover:bg-[#0a346e] transition-all"
-                // onClick={handleLogin}
+                className="rounded bg-[#0B2440] px-4 py-1.5 text-white shadow-md transition-colors hover:bg-[#163B22]"
               >
-                <a  key="contactus" href="#contactus">Contact Us</a>
-              </motion.button>
-
-              {/* )} */}
+                Contact Us
+              </motion.a>
 
               <div className="lg:hidden">
                 <MobileMenu Menus={Menus} />
@@ -105,7 +63,7 @@ const Navbar = (loc) => {
             </div>
           </div>
         </nav>
-      </header>
+      </motion.header>
     </div>
   );
 };

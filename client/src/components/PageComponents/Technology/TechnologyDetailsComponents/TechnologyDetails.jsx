@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getTechnology } from "@/features/technology/technologySlice";
+import { useTechnology } from "@/features/technology/technologyQueries";
 
 import TechnologyBanner from "./TechnologyBanner";
 import TechnologyDescription from "./TechnologyDescription";
@@ -9,59 +8,42 @@ import TechnologyPoints from "./TechnologyPoints";
 import { TechnologySkeleton } from "../TechnologySkeleton";
 
 const TechnologyDetails = () => {
-
   const { techId } = useParams();
-  const dispatch = useDispatch();
 
-  const { current, loading, error } = useSelector(
-    (state) => state.technology
-  );
+  const {
+    data: current,
+    isLoading,
+    isError,
+    error
+  } = useTechnology(techId);
 
-  /* Fetch technology */
-
+  /* Scroll to top on slug change */
   useEffect(() => {
-    if (!techId) return;
-
-    if (!current || current.slug !== techId) {
-      dispatch(getTechnology(techId));
-    }
-
     window.scrollTo(0, 0);
-
-  }, [techId, current, dispatch]);
-
-
+  }, [techId]);
 
   /* Set page title */
-
   useEffect(() => {
     if (current?.title) {
       document.title = `${current.title} | Technologies`;
     }
   }, [current]);
 
-
-
   /* Loading */
-
-  if (loading) return <TechnologySkeleton />;
-
-
+  if (isLoading) return <TechnologySkeleton />;
 
   /* Error */
-
-  if (error) {
+  if (isError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-500">{error}</p>
+        <p className="text-red-500">
+          {error?.response?.data?.message || "Failed to load technology"}
+        </p>
       </div>
     );
   }
 
-
-
   /* Not Found */
-
   if (!current) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -70,18 +52,11 @@ const TechnologyDetails = () => {
     );
   }
 
-
-
   return (
     <div>
-
-      <TechnologyBanner
-        name={current.title}
-        banner={current.banner}
-      />
+      <TechnologyBanner name={current.title} banner={current.banner} />
 
       <div className="flex flex-col my-[5%] mx-3 md:mx-[10%]">
-
         <TechnologyDescription
           title={current.description.highlightTitle}
           paragraphs={current.description.paragraphs}
@@ -90,9 +65,7 @@ const TechnologyDetails = () => {
         <div className="w-[95%] h-[1.5px] mt-[5%] md:my-[2.5%] mx-auto bg-gray-300" />
 
         <TechnologyPoints points={current.points} />
-
       </div>
-
     </div>
   );
 };
