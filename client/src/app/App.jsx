@@ -24,6 +24,7 @@ const Blog = lazy(() => import("@/features/blog/ui/Blog"));
 const BlogDetails = lazy(() =>
   import("@/features/blog/ui/BlogDetails")
 );
+const AdminViews = lazy(() => import("@/features/admin/ui/AdminViews"));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-white">
@@ -61,7 +62,8 @@ const appRouter = createBrowserRouter([
         children: [{ index: true, element: withSuspense(BlogDetails) }]
       }
     ]
-  }
+  },
+  { path: "/admin/views", element: withSuspense(AdminViews) }
 ]);
 
 const App = () => {
