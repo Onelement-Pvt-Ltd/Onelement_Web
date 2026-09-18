@@ -2,6 +2,7 @@ import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
 import LogoWhite from "../../../assets/Logo_White.png";
+import ViewCounter from "@/shared/components/ViewCounter";
 import "./Footer.css";
 
 const footerLinks = [
@@ -50,6 +51,7 @@ const Footer = () => (
             <a href="mailto:info@onelement.in"><Mail aria-hidden="true" size={18} /><span>info@onelement.in</span></a>
             <p><MapPin aria-hidden="true" size={18} /><span>Jubilee Hills<br />Hyderabad, India</span></p>
           </address>
+          <ViewCounter />
         </section>
       </div>
 
