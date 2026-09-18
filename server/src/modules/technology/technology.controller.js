@@ -68,3 +68,37 @@ export const getTechnologyBySlug = async (req, res) => {
     });
   }
 };
+
+export const getRelatedTechnologies = async (req, res) => {
+  try {
+    const currentTechnology = await Technology.exists({
+      slug: req.params.slug,
+      isDeleted: false,
+      isActive: true
+    });
+
+    if (!currentTechnology) {
+      return res.status(404).json({
+        success: false,
+        message: "Technology not found"
+      });
+    }
+
+    const technologies = await Technology.find({
+      slug: { $ne: req.params.slug },
+      isDeleted: false,
+      isActive: true
+    })
+      .select("title slug banner description.highlightTitle description.paragraphs")
+      .sort({ createdAt: -1 })
+      .limit(3)
+      .lean();
+
+    res.status(200).json({ success: true, data: technologies });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+};

@@ -24,4 +24,6 @@ const blogSchema = new Schema(
     { timestamps: true }
 );
 
+blogSchema.index({ category: 1, publishedAt: -1 });
+
 export default mongoose.model("Blog", blogSchema);

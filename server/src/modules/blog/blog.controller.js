@@ -2,44 +2,51 @@ import Blog from "./blog.model.js";
 
 export const getBlogs = async (req, res) => {
   try {
-    const { category, year, month, page = 1, limit = 6 } = req.query;
+    const {
+      category = [], year = [], month = [], page = 1, limit = 6
+    } = req.validated.query;
 
     const filter = {};
-      // console.log('fetched blog data')
+    if (category.length) filter.category = { $in: category };
 
-    if (category) filter.category = category;
-
-    if (year) {
-      const start = new Date(year, month ? month - 1 : 0, 1);
-      const end = month
-        ? new Date(year, month, 0)
-        : new Date(year, 11, 31);
-
-      filter.publishedAt = { $gte: start, $lte: end };
+    if (year.length) {
+      const ranges = year.flatMap((selectedYear) =>
+        (month.length ? month : [null]).map((selectedMonth) => ({
+          publishedAt: {
+            $gte: new Date(Date.UTC(selectedYear, selectedMonth ? selectedMonth - 1 : 0, 1)),
+            $lt: new Date(Date.UTC(selectedYear + (selectedMonth ? 0 : 1), selectedMonth || 0, 1))
+          }
+        }))
+      );
+      if (ranges.length === 1) Object.assign(filter, ranges[0]);
+      else filter.$or = ranges;
     }
 
     const skip = (page - 1) * limit;
 
-    const total = await Blog.countDocuments(filter);
-
-    const blogs = await Blog.find(filter)
-      .sort({ publishedAt: -1 })
-      .skip(skip)
-      .limit(Number(limit))
-      .lean();
+    const [total, blogs] = await Promise.all([
+      Blog.countDocuments(filter),
+      Blog.find(filter)
+        .select("title slug excerpt coverImage category author publishedAt")
+        .sort({ publishedAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean()
+    ]);
 
     res.json({
       success: true,
       data: blogs,
       pagination: {
         total,
-        page: Number(page),
+        page,
         totalPages: Math.ceil(total / limit)
       }
     });
 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Failed to fetch blogs", error);
+    res.status(500).json({ message: "Failed to fetch blogs" });
   }
 };
 
@@ -68,13 +75,14 @@ export const getHomeBlogs = async (req, res) => {
 
 export const getBlogBySlug = async (req, res) => {
   try {
-    const blog = await Blog.findOne({ slug: req.params.slug }).lean();
+    const blog = await Blog.findOne({ slug: req.validated.params.slug }).lean();
 
     if (!blog) return res.status(404).json({ message: "Not found" });
 
     res.json({ success: true, data: blog });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Failed to fetch blog", error);
+    res.status(500).json({ message: "Failed to fetch blog" });
   }
 };
 
@@ -93,48 +101,67 @@ export const createBlog = async (req, res) => {
       });
     }
 
-    res.status(500).json({ message: error.message });
+    console.error("Failed to create blog", error);
+    res.status(500).json({ message: "Failed to create blog" });
   }
 };
 export const getBlogMeta = async (req, res) => {
   try {
-    const blogs = await Blog.find({}, "category publishedAt").lean();
+    const grouped = await Blog.aggregate([
+      { $group: {
+        _id: {
+          category: "$category",
+          year: { $year: { date: "$publishedAt", timezone: "UTC" } },
+          month: { $month: { date: "$publishedAt", timezone: "UTC" } }
+        },
+        count: { $sum: 1 }
+      } },
+      { $sort: { "_id.category": 1, "_id.year": -1, "_id.month": 1 } }
+    ]);
 
-    const categories = [...new Set(blogs.map(b => b.category))];
-
-    const yearsSet = new Set();
-    const monthsByYear = {};
-  ;
-    blogs.forEach(blog => {
-      const date = new Date(blog.publishedAt);
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-
-      yearsSet.add(year);
-
-      if (!monthsByYear[year]) {
-        monthsByYear[year] = new Set();
-      }
-
-      monthsByYear[year].add(month);
-    });
-
-    const years = Array.from(yearsSet).sort((a, b) => b - a);
-
-    Object.keys(monthsByYear).forEach(year => {
-      monthsByYear[year] = Array.from(monthsByYear[year]).sort((a, b) => a - b);
-    });
+    const facets = grouped.map(({ _id, count }) => ({ ..._id, count }));
+    const categories = [...new Set(facets.map((item) => item.category))];
+    const years = [...new Set(facets.map((item) => item.year))].sort((a, b) => b - a);
 
     res.json({
       success: true,
       data: {
         categories,
         years,
-        monthsByYear
+        facets
       }
     });
 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Failed to fetch blog filters", error);
+    res.status(500).json({ message: "Failed to fetch blog filters" });
+  }
+};
+
+export const getRelatedBlogs = async (req, res) => {
+  try {
+    const currentBlog = await Blog.findOne({
+      slug: req.validated.params.slug
+    })
+      .select("category")
+      .lean();
+
+    if (!currentBlog) {
+      return res.status(404).json({ message: "Not found" });
+    }
+
+    const blogs = await Blog.find({
+      category: currentBlog.category,
+      slug: { $ne: req.validated.params.slug }
+    })
+      .select("title slug excerpt coverImage category author publishedAt")
+      .sort({ publishedAt: -1 })
+      .limit(3)
+      .lean();
+
+    res.json({ success: true, data: blogs });
+  } catch (error) {
+    console.error("Failed to fetch related blogs", error);
+    res.status(500).json({ message: "Failed to fetch related blogs" });
   }
 };

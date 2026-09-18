@@ -1,16 +1,21 @@
 import express from "express";
 import {
-  getBlogs, getBlogBySlug, createBlog, getBlogMeta,
+  getBlogs, getBlogBySlug, getRelatedBlogs, createBlog, getBlogMeta,
   getHomeBlogs} from "./blog.controller.js";
 import { validate } from "../../middlewares/validate.middleware.js";
-import { createBlogValidation } from "./blog.validation.js";
+import {
+  blogListQueryValidation,
+  blogSlugValidation,
+  createBlogValidation
+} from "./blog.validation.js";
 
 const router = express.Router();
 
-router.get("/", getBlogs);
+router.get("/", validate(blogListQueryValidation, "query"), getBlogs);
 router.get("/meta", getBlogMeta);
 router.get("/home", getHomeBlogs);
-router.get("/:slug", getBlogBySlug);
+router.get("/related/:slug", validate(blogSlugValidation, "params"), getRelatedBlogs);
+router.get("/:slug", validate(blogSlugValidation, "params"), getBlogBySlug);
 
 router.post(
   "/",

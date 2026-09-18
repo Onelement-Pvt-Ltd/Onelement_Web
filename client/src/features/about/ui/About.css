@@ -1,0 +1,185 @@
+.about-page {
+  --about-ink: #0a2955;
+  --about-muted: rgba(10, 41, 85, .68);
+  --about-green: #23b65f;
+  --about-line: rgba(10, 41, 85, .14);
+  background: rgba(35, 182, 95, .035);
+  color: var(--about-ink);
+  overflow: hidden;
+}
+
+.about-shell {
+  width: min(100% - 2rem, 1280px);
+  margin-inline: auto;
+}
+
+.about-section { padding-block: clamp(4.5rem, 8vw, 7.5rem); }
+.about-eyebrow {
+  color: var(--about-green);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.about-title {
+  max-width: 13ch;
+  margin-top: 1rem;
+  color: var(--about-ink);
+  font-size: clamp(2.8rem, 6vw, 5.8rem);
+  font-weight: 700;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.about-heading {
+  max-width: 14ch;
+  margin-top: .8rem;
+  font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: -.035em;
+  line-height: 1.04;
+}
+
+.about-copy {
+  color: var(--about-muted);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.8;
+}
+
+.about-hero {
+  border-bottom: 1px solid var(--about-line);
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(360px, .96fr);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 7rem);
+}
+
+.about-hero-copy { max-width: 44rem; margin-top: 2rem; }
+.about-rule { width: 4.5rem; height: 3px; margin-top: 2rem; background: var(--about-green); }
+
+.about-bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(7, minmax(0, 1fr));
+  gap: clamp(.65rem, 1.2vw, .9rem);
+  width: 100%;
+  max-width: 36rem;
+  aspect-ratio: 1 / 1.05;
+  margin-inline: auto;
+}
+
+.about-bento-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(10, 41, 85, .1);
+  border-radius: .7rem;
+  background: rgba(10, 41, 85, .12);
+  box-shadow: 0 18px 45px -38px rgba(10, 41, 85, .65);
+}
+
+.about-bento-card:nth-child(1) { grid-row: 1 / span 4; }
+.about-bento-card:nth-child(2) { grid-row: 5 / span 3; }
+.about-bento-card:nth-child(3) { grid-column: 2; grid-row: 1 / span 3; }
+.about-bento-card:nth-child(4) { grid-column: 2; grid-row: 4 / span 4; }
+.about-bento-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.22,1,.36,1); }
+.about-bento-card:hover img { transform: scale(1.035); }
+.about-bento-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 38%, rgba(10, 41, 85, .78)); }
+.about-bento-label { position: absolute; inset: auto 1rem 1rem; color: #ffffff; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.about-bento-note { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(1.1rem, 2vw, 1.7rem); }
+.about-bento-note strong { max-width: 9ch; font-size: clamp(1.25rem, 2.2vw, 2rem); line-height: 1.08; }
+.about-bento-note span { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.about-bento-note--light { background: rgba(35, 182, 95, .14); color: var(--about-ink); }
+.about-bento-note--dark { background: #0a2955; color: #ffffff; }
+
+.about-beliefs { background: #0a2955; color: #ffffff; }
+.about-beliefs .about-eyebrow { color: #23b65f; }
+.about-beliefs .about-heading { max-width: 17ch; }
+.about-beliefs-intro { display: flex; align-items: end; justify-content: space-between; gap: 3rem; }
+.about-beliefs-intro .about-copy { max-width: 35rem; color: rgba(255,255,255,.72); }
+.belief-grid { display: grid; gap: 1rem; margin-top: clamp(3rem, 6vw, 5rem); }
+.belief-row { display: grid; grid-template-columns: repeat(12, 1fr); min-height: 25rem; gap: 1rem; }
+.belief-media, .belief-card { overflow: hidden; border-radius: 1rem; }
+.belief-media { grid-column: span 5; }
+.belief-media img { width: 100%; height: 100%; object-fit: cover; }
+.belief-card { grid-column: span 7; display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem, 5vw, 4.5rem); border: 1px solid rgba(255,255,255,.11); background: rgba(255,255,255,.055); }
+.belief-index { color: #23b65f; font-size: .75rem; font-weight: 700; letter-spacing: .2em; }
+.belief-card h3 { margin-top: .8rem; font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 700; letter-spacing: -.035em; }
+.belief-card p { max-width: 42rem; margin-top: 1.5rem; color: rgba(255,255,255,.72); font-size: 1.03rem; line-height: 1.8; }
+.belief-row:nth-child(even) .belief-card { grid-column: 1 / span 7; grid-row: 1; }
+.belief-row:nth-child(even) .belief-media { grid-column: 8 / span 5; }
+
+.about-verticals { background: #ffffff; }
+.verticals-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--about-line); }
+.verticals-head .about-copy { max-width: 47rem; margin-top: 1.5rem; }
+.vertical-count { padding-left: 1.25rem; border-left: 3px solid var(--about-green); }
+.vertical-count strong { display: block; font-size: 3rem; line-height: 1; }
+.vertical-count span { display: block; margin-top: .5rem; color: var(--about-green); font-weight: 700; }
+.vertical-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; }
+.vertical-card { min-height: 22rem; padding: clamp(1.5rem, 3vw, 2.25rem); border: 1px solid var(--about-line); border-radius: 1rem; background: rgba(35,182,95,.035); transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+.vertical-card:hover { transform: translateY(-3px); border-color: rgba(35,182,95,.45); box-shadow: 0 22px 45px -38px rgba(10,41,85,.7); }
+.vertical-icon { display: grid; width: 3rem; height: 3rem; place-items: center; border-radius: .7rem; background: rgba(35,182,95,.13); color: var(--about-green); }
+.vertical-short { display: block; margin-top: 3.5rem; color: var(--about-green); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.vertical-card h3 { margin-top: .8rem; font-size: 1.45rem; font-weight: 700; line-height: 1.2; }
+.vertical-card p { margin-top: 1.2rem; color: var(--about-muted); line-height: 1.7; }
+
+.about-approach-wrap { background: #ffffff; padding: 0 clamp(.625rem, 2vw, 2rem) clamp(4.5rem, 8vw, 7.5rem); }
+.about-approach { position: relative; overflow: hidden; padding: clamp(2rem, 6vw, 5rem); border-radius: clamp(1.5rem, 3vw, 2.5rem); background: #0a2955; color: #ffffff; }
+.about-approach::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px); background-size: 2.5rem 2.5rem; content: ""; pointer-events: none; }
+.about-approach .about-eyebrow { display: inline-block; color: #23b65f; }
+.about-approach .about-heading { color: #ffffff; }
+.approach-head { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 2rem; padding-bottom: 2rem; border-bottom: 2px solid #23b65f; }
+.approach-marker { padding: .55rem .8rem; border: 1px solid #23b65f; border-radius: 999px; background: rgba(255,255,255,.055); color: #ffffff; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.approach-grid { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.25rem; width: min(100%, 70rem); margin-top: 3rem; margin-left: auto; }
+.approach-card { display: grid; grid-template-columns: 6rem minmax(12rem, 19rem) minmax(0, 1fr); align-items: center; width: 100%; min-height: 9rem; padding: clamp(1.25rem, 2.5vw, 2rem); border: 1px solid rgba(255,255,255,.18); border-radius: 1.25rem; background: rgba(255,255,255,.07); color: #ffffff; box-shadow: .55rem .55rem 0 rgba(35,182,95,.72); backdrop-filter: blur(6px); transition: background-color .25s ease, box-shadow .25s ease, translate .25s ease; }
+.approach-card:nth-child(2) { width: calc(100% - clamp(1.5rem, 5vw, 5rem)); margin-left: clamp(1.5rem, 5vw, 5rem); }
+.approach-card:nth-child(3) { width: calc(100% - clamp(3rem, 10vw, 10rem)); margin-left: clamp(3rem, 10vw, 10rem); }
+.approach-card:hover { background: rgba(255,255,255,.11); box-shadow: .8rem .8rem 0 #23b65f; translate: 0 -.18rem; }
+.approach-card > span { align-self: stretch; display: grid; place-items: center; border-right: 1px solid rgba(35,182,95,.35); color: #23b65f; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; letter-spacing: -.06em; line-height: 1; }
+.approach-card-copy { display: contents; }
+.approach-card h3 { padding-inline: clamp(1.25rem, 3vw, 2.5rem); font-size: clamp(1.25rem, 2.2vw, 1.7rem); font-weight: 700; line-height: 1.2; }
+.approach-card p { padding-left: clamp(1.25rem, 3vw, 2.5rem); border-left: 1px solid rgba(35,182,95,.35); color: rgba(255,255,255,.72); line-height: 1.7; }
+
+@media (max-width: 900px) {
+  .about-hero-grid { grid-template-columns: 1fr; }
+  .about-hero-copy { max-width: 48rem; }
+  .about-bento { max-width: 40rem; }
+  .about-beliefs-intro { align-items: start; flex-direction: column; }
+  .belief-row { min-height: auto; }
+  .belief-media, .belief-card,
+  .belief-row:nth-child(even) .belief-card,
+  .belief-row:nth-child(even) .belief-media { grid-column: 1 / -1; grid-row: auto; }
+  .belief-media { height: 22rem; }
+  .vertical-grid { grid-template-columns: 1fr 1fr; }
+  .approach-card { grid-template-columns: 4.5rem minmax(10rem, 15rem) minmax(0, 1fr); }
+}
+
+@media (max-width: 620px) {
+  .about-shell { width: min(100% - 1.25rem, 1280px); }
+  .about-title { font-size: clamp(2.55rem, 13vw, 4rem); }
+  .about-bento { aspect-ratio: .92 / 1; }
+  .belief-media { height: 16rem; }
+  .belief-card { padding: 1.6rem; }
+  .verticals-head { grid-template-columns: 1fr; }
+  .vertical-count { display: flex; align-items: center; gap: 1rem; }
+  .vertical-count span { margin-top: 0; }
+  .vertical-grid { grid-template-columns: 1fr; }
+  .approach-head { grid-template-columns: 1fr; align-items: start; }
+  .approach-marker { width: fit-content; }
+  .approach-grid { gap: 1.15rem; }
+  .approach-card, .approach-card:nth-child(2), .approach-card:nth-child(3) { grid-template-columns: 3.5rem 1fr; width: calc(100% - .55rem); margin-left: 0; padding: 1.15rem; }
+  .approach-card-copy { display: block; padding-left: 1rem; }
+  .approach-card h3, .approach-card p { padding: 0; border: 0; }
+  .approach-card p { margin-top: .75rem; }
+  .vertical-card { min-height: auto; }
+  .vertical-short { margin-top: 2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page *, .about-page *::before, .about-page *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
