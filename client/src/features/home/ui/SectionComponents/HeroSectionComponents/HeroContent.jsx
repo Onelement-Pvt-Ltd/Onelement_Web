@@ -29,7 +29,7 @@ const HeroContent = () => {
       variants={container}
       initial="hidden"
       animate="visible"
-      className="relative z-10 mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-7xl flex-col justify-center px-6 py-20 sm:px-10 lg:px-14 lg:py-24 xl:px-8"
+      className="relative z-10 mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-7xl flex-col justify-center px-6 py-24 sm:px-10 lg:px-14 lg:py-24 xl:px-8"
     >
       <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_.85fr] xl:gap-20">
         <div className="relative max-w-3xl">

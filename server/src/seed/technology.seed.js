@@ -2,12 +2,14 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import Technology from "../modules/technology/technology.model.js";
 import {technologies} from "../utils/data.js"
+import { assertSeedAllowed } from "./seedGuard.js";
 dotenv.config();
 
 
 
 const seedTechnologies = async () => {
   try {
+    assertSeedAllowed();
     await mongoose.connect(process.env.MONGO_URI);
 
     console.log("MongoDB Connected");

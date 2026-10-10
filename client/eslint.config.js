@@ -35,8 +35,6 @@ export default defineConfig([
   {
     files: [
       'src/shared/components/scroll/SmoothScroll.jsx',
-      'src/shared/components/ui/button.jsx',
-      'src/shared/components/ui/form.jsx',
     ],
     rules: {
       // These modules intentionally export a component together with a helper.

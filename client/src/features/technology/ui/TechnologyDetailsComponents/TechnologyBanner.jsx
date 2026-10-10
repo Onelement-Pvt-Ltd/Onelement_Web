@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import Blog1 from "@/assets/BlogImages/Blog1.png";
+import Blog1 from "@/assets/BlogImages/Blog1.webp";
 
 const TechnologyBanner = ({ name, banner }) => {
   return (
     <section className="relative w-full min-h-[70vh] flex items-center overflow-hidden">
 
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${banner?.image || Blog1})`
-        }}
+      <img
+        src={banner?.image || Blog1}
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        fetchPriority="high"
+        className="absolute inset-0 h-full w-full object-cover object-center"
       />
 
       <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/40" />

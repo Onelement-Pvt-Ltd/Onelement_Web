@@ -1,12 +1,12 @@
 import { motion as Motion } from "framer-motion";
-import bentoOne from "@/assets/AboutImages/About_Bento_1.png";
-import bentoTwo from "@/assets/AboutImages/About_Bento_2.png";
+import bentoOne from "@/assets/AboutImages/About_Bento_1.webp";
+import bentoTwo from "@/assets/AboutImages/About_Bento_2.webp";
 import { revealItem } from "../../aboutMotion";
 
 const tiles = [
-  { image: bentoOne, label: "Practical engineering" },
+  { image: bentoOne, label: "Practical engineering", width: 501, height: 654 },
   { note: "Purpose-driven deep tech", kicker: "Hyderabad · India", theme: "light" },
-  { image: bentoTwo, label: "Scalable systems" },
+  { image: bentoTwo, label: "Scalable systems", width: 553, height: 507 },
   { note: "Climate action and economic growth", kicker: "Built together", theme: "dark" }
 ];
 
@@ -19,7 +19,14 @@ const AboutBento = () => (
       >
         {tile.image ? (
           <>
-            <img src={tile.image} alt="" />
+            <img
+              src={tile.image}
+              alt=""
+              width={tile.width}
+              height={tile.height}
+              loading="lazy"
+              decoding="async"
+            />
             <div className="about-bento-overlay" />
             <p className="about-bento-label">{tile.label}</p>
           </>

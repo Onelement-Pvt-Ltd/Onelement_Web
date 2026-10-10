@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { createPortal } from "react-dom";
 import { NavLink, useLocation } from "react-router-dom";
+import { useModalFocus } from "@/shared/hooks/useModalFocus";
 
 const resolveSubmenuPath = (parentPath, childPath) =>
   childPath.startsWith(parentPath) ? childPath : `${parentPath}${childPath}`;
@@ -12,6 +13,9 @@ export default function MobileMenu({ Menus }) {
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
   const reduceMotion = useReducedMotion();
+  const drawerRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const triggerRef = useRef(null);
 
   const closeDrawer = () => {
     setIsOpen(false);
@@ -23,26 +27,19 @@ export default function MobileMenu({ Menus }) {
     setExpandedMenu(null);
   };
 
-  useEffect(() => {
-    if (!isOpen) return undefined;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const handleKeyDown = (event) => event.key === "Escape" && closeDrawer();
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen]);
+  useModalFocus({
+    isOpen,
+    containerRef: drawerRef,
+    initialFocusRef: closeButtonRef,
+    onClose: closeDrawer,
+  });
 
   const drawer = (
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.button
-            type="button"
-            aria-label="Close navigation"
+          <motion.div
+            aria-hidden="true"
             className="fixed inset-0 z-[9998] cursor-default bg-[#071526]/55 backdrop-blur-[2px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -51,20 +48,35 @@ export default function MobileMenu({ Menus }) {
             onClick={closeDrawer}
           />
 
-          <motion.aside
+          <motion.div
+            ref={drawerRef}
             id="mobile-navigation"
+            role="dialog"
+            aria-modal="true"
             aria-label="Mobile navigation"
+            tabIndex={-1}
             className="fixed bottom-0 right-0 top-0 z-[10000] flex w-[min(88vw,390px)] flex-col overflow-hidden bg-[#f7f9f6] text-[#0B2440] shadow-[-24px_0_70px_rgba(7,21,38,0.22)]"
             initial={reduceMotion ? { opacity: 0 } : { x: "100%" }}
             animate={reduceMotion ? { opacity: 1 } : { x: 0 }}
             exit={reduceMotion ? { opacity: 0 } : { x: "100%" }}
             transition={{ duration: reduceMotion ? 0 : 0.34, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="border-b border-[#0B2440]/10 px-6 pb-5 pt-7">
-              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#1d6903]">
-                Navigation
-              </p>
-              <p className="mt-2 text-2xl font-bold tracking-tight">Explore Onelement</p>
+            <div className="flex items-start justify-between gap-4 border-b border-[#0B2440]/10 px-6 pb-5 pt-7">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#1d6903]">
+                  Navigation
+                </p>
+                <p className="mt-2 text-2xl font-bold tracking-tight">Explore Onelement</p>
+              </div>
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={closeDrawer}
+                aria-label="Close navigation"
+                className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#0B2440]/12 bg-white text-[#0B2440] transition-colors hover:bg-[#0B2440] hover:text-white"
+              >
+                <X aria-hidden="true" size={19} />
+              </button>
             </div>
 
             <motion.ul
@@ -169,7 +181,7 @@ export default function MobileMenu({ Menus }) {
                 Developing sustainable technologies for a cleaner future.
               </p>
             </div>
-          </motion.aside>
+          </motion.div>
         </>
       )}
     </AnimatePresence>
@@ -178,6 +190,7 @@ export default function MobileMenu({ Menus }) {
   return (
     <div>
       <button
+        ref={triggerRef}
         type="button"
         className="relative z-[10001] grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-[#0B2440]/15 bg-white/70 text-[#0B2440] shadow-sm transition-colors hover:bg-[#0B2440] hover:text-white lg:hidden"
         onClick={toggleDrawer}

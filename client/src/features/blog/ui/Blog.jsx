@@ -11,6 +11,7 @@ import BlogPagination from "./BlogPagination";
 import { smoothScrollTo } from "@/shared/components/scroll/SmoothScroll";
 import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
+import { useModalFocus } from "@/shared/hooks/useModalFocus";
 
 const SKELETON_COUNT = 6;
 
@@ -19,6 +20,8 @@ const Blog = () => {
   const { filters, setFilter, setPage, clearAll } = useBlogFilters();
   const [isMobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const resultsTopRef = useRef(null);
+  const filterDrawerRef = useRef(null);
+  const filterCloseRef = useRef(null);
 
   const {
     data: blogData,
@@ -38,21 +41,12 @@ const Blog = () => {
   );
   const insightsPath = `${location.pathname}${location.search}`;
 
-  useEffect(() => {
-    document.body.style.overflow = isMobileFiltersOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMobileFiltersOpen]);
-
-  useEffect(() => {
-    if (!isMobileFiltersOpen) return;
-    const handleKey = (e) => {
-      if (e.key === "Escape") setMobileFiltersOpen(false);
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [isMobileFiltersOpen]);
+  useModalFocus({
+    isOpen: isMobileFiltersOpen,
+    containerRef: filterDrawerRef,
+    initialFocusRef: filterCloseRef,
+    onClose: () => setMobileFiltersOpen(false),
+  });
 
   useEffect(() => {
     if (isLoading || isFetching || isError || filters.page <= 1) return;
@@ -156,6 +150,7 @@ const Blog = () => {
               <>
                 <Motion.div
                   key="backdrop"
+                  aria-hidden="true"
                   className="fixed inset-0 bg-black/40 z-40 lg:hidden"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -163,10 +158,12 @@ const Blog = () => {
                   onClick={() => setMobileFiltersOpen(false)}
                 />
                 <Motion.div
+                  ref={filterDrawerRef}
                   key="drawer"
                   role="dialog"
                   aria-modal="true"
                   aria-label="Filter blogs"
+                  tabIndex={-1}
                   className="fixed left-0 top-0 z-50 h-full w-[90%] max-w-sm overflow-y-auto bg-[#f7f8f5] p-5 lg:hidden"
                   initial={{ x: "-100%" }}
                   animate={{ x: 0 }}
@@ -176,6 +173,7 @@ const Blog = () => {
                   <div className="flex justify-between items-center mb-6">
                     <h2 className="font-semibold text-lg text-[#0a2955]">Filters</h2>
                     <button
+                      ref={filterCloseRef}
                       type="button"
                       onClick={() => setMobileFiltersOpen(false)}
                       aria-label="Close filters"

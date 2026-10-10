@@ -17,9 +17,9 @@ Public website and read-only content API for Onelement Energy.
 ## Quality checks
 
 - `npm run lint` — frontend linting.
-- `npm test` — backend tests.
+- `npm test` — frontend and backend tests.
 - `npm run build` — sitemap generation and production frontend build.
-- `npm run check` — all production checks in sequence.
+- `npm run check` — linting, frontend tests, backend tests, production build and SEO validation.
 
 ## Production deployment
 

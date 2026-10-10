@@ -10,7 +10,7 @@ import RouteError from "@/shared/components/RouteError";
 
 const Home = lazy(() => import("@/features/home/ui/Home"));
 const About = lazy(() => import("@/features/about/ui/About"));
-const Team = lazy(() => import("@/features/team/ui/Team"));
+const Team = lazy(() => import("@/features/team/ui/WhoWeAre"));
 const VissionMissionSection = lazy(() =>
   import("@/features/about/ui/VisionMissionComponents/VissionMissionSection")
 );

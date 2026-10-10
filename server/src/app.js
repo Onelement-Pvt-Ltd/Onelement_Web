@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 import { rateLimit } from "express-rate-limit";
+import mongoose from "mongoose";
 
 import { env, isProduction } from "./config/env.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
@@ -64,9 +65,28 @@ app.get("/health", (_req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
+app.get("/ready", (_req, res) => {
+  const databaseReady = mongoose.connection.readyState === 1;
+  res.status(databaseReady ? 200 : 503).json({
+    status: databaseReady ? "ready" : "not-ready",
+    database: databaseReady ? "connected" : "disconnected",
+  });
+});
+
+const cachePublicContent = (req, res, next) => {
+  const sendJson = res.json.bind(res);
+  res.json = (body) => {
+    if (req.method === "GET" && res.statusCode >= 200 && res.statusCode < 300) {
+      res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=300");
+    }
+    return sendJson(body);
+  };
+  next();
+};
+
 app.use("/api", apiLimiter);
-app.use("/api/technologies", technologyRoutes);
-app.use("/api/blogs", blogRoutes);
+app.use("/api/technologies", cachePublicContent, technologyRoutes);
+app.use("/api/blogs", cachePublicContent, blogRoutes);
 app.use("/api", analyticsRoutes);
 
 app.use((req, res) => {

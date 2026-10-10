@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: onelement
+    runtime: node
+    rootDir: server
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_ORIGINS
+        value: https://onelement.in,https://www.onelement.in
+      - key: TRUST_PROXY
+        value: "1"
+      - key: SHUTDOWN_TIMEOUT_MS
+        value: "10000"
+      - key: MONGO_URI
+        sync: false
+      - key: VIEW_STATS_USERNAME
+        sync: false
+      - key: VIEW_STATS_PASSWORD
+        sync: false

@@ -32,6 +32,7 @@ Configure these Render environment variables:
 - `VIEW_STATS_USERNAME=<private username>`
 - `VIEW_STATS_PASSWORD=<strong unique password of at least 12 characters>`
 - `TRUST_PROXY=1`
+- `SHUTDOWN_TIMEOUT_MS=10000`
 
 Do not place database credentials or administration passwords in any `VITE_`
 variable. Vite variables are visible in the browser bundle.
@@ -41,6 +42,9 @@ variable. Vite variables are visible in the browser bundle.
 Run `npm ci` and `npm run build` inside `client`. Upload the contents of `dist`
 directly into the GoDaddy document root, normally `public_html`. Preserve the
 generated `.htaccess`, `robots.txt`, and `sitemap.xml` files.
+
+Build after the production API is reachable. The build creates route-specific
+HTML metadata and sitemap entries for every available blog and technology.
 
 The production client calls `https://api.onelement.in/api`. Public blog and
 technology reads are intentionally accessible. Create, update, and delete
@@ -54,3 +58,13 @@ authentication and does not block Postman. Public information visible on a
 website cannot be made impossible to retrieve with another HTTP client. Data
 integrity is protected by keeping mutation routes disabled, validating inputs,
 limiting request rates, and requiring authentication for private statistics.
+
+## Database readiness and seeding
+
+Use `/health` for process uptime and `/ready` when confirming that MongoDB is
+connected. Seed scripts replace existing content and are blocked unless
+`SEED_CONFIRMATION=replace-all-content` is explicitly provided. Production also
+requires `ALLOW_PRODUCTION_SEED=true`; create and verify a backup before using it.
+
+The complete release, verification and rollback procedure is in
+`docs/PRODUCTION_CHECKLIST.md`.

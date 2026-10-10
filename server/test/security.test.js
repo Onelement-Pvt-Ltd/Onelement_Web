@@ -33,9 +33,23 @@ test("health endpoint remains available to the hosting platform", async () => {
   assert.equal(response.status, 200);
 });
 
+test("readiness reports unavailable while the database is disconnected", async () => {
+  const response = await fetch(`${baseUrl}/ready`);
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), {
+    status: "not-ready",
+    database: "disconnected",
+  });
+});
+
 test("public read routes validate malformed input", async () => {
   const response = await fetch(`${baseUrl}/api/technologies?page=invalid`);
   assert.equal(response.status, 400);
+});
+
+test("invalid content responses are not stored in shared caches", async () => {
+  const response = await fetch(`${baseUrl}/api/technologies?page=invalid`);
+  assert.notEqual(response.headers.get("cache-control"), "public, max-age=60, stale-while-revalidate=300");
 });
 
 test("public content write methods remain disabled", async () => {

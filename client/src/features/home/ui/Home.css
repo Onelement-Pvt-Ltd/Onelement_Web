@@ -7,11 +7,6 @@
   text-rendering: optimizeLegibility;
 }
 
-.home-page ::selection {
-  background: var(--home-green);
-  color: #fff;
-}
-
 .home-display {
   letter-spacing: -0.045em;
   text-wrap: balance;
@@ -34,6 +29,17 @@
 @keyframes hero-accent-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+.hero-carousel-progress {
+  animation-name: hero-carousel-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hero-carousel-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {

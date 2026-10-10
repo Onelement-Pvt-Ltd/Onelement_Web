@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 import {connectDB} from "../config/db.js";
 import Blog from "../modules/blog/blog.model.js";
 import { blogs } from "../utils/data.js";
+import { assertSeedAllowed } from "./seedGuard.js";
 
 dotenv.config();
 
 const seedBlogs = async () => {
   try {
+    assertSeedAllowed();
     await connectDB();
 
     console.log("Seeding started...");

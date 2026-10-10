@@ -31,6 +31,8 @@ const trustProxy = /^\d+$/.test(process.env.TRUST_PROXY || "")
   ? Number(process.env.TRUST_PROXY)
   : false;
 
+const shutdownTimeoutMs = Number(process.env.SHUTDOWN_TIMEOUT_MS || 10_000);
+
 export const env = Object.freeze({
   PORT: Number(process.env.PORT) || 5000,
   MONGO_URI: process.env.MONGO_URI,
@@ -39,6 +41,7 @@ export const env = Object.freeze({
   VIEW_STATS_USERNAME: process.env.VIEW_STATS_USERNAME || "",
   VIEW_STATS_PASSWORD: process.env.VIEW_STATS_PASSWORD || "",
   TRUST_PROXY: trustProxy,
+  SHUTDOWN_TIMEOUT_MS: shutdownTimeoutMs,
 });
 
 export const isProduction = env.NODE_ENV === "production";
@@ -52,6 +55,9 @@ export const validateEnvironment = () => {
   }
   if (isProduction && (!env.VIEW_STATS_USERNAME || env.VIEW_STATS_PASSWORD.length < 12)) {
     problems.push("VIEW_STATS_USERNAME and a VIEW_STATS_PASSWORD of at least 12 characters are required in production");
+  }
+  if (!Number.isInteger(env.SHUTDOWN_TIMEOUT_MS) || env.SHUTDOWN_TIMEOUT_MS < 1_000 || env.SHUTDOWN_TIMEOUT_MS > 30_000) {
+    problems.push("SHUTDOWN_TIMEOUT_MS must be an integer between 1000 and 30000");
   }
 
   if (problems.length) {

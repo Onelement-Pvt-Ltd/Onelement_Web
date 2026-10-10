@@ -7,7 +7,10 @@ const ImageFrame = ({ image, alt }) => {
         <img
           src={image}
           alt={alt}
+          width="490"
+          height="328"
           loading="lazy"
+          decoding="async"
           className="w-full object-cover"
         />
 
