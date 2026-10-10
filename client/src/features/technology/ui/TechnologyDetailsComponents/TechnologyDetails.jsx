@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import {
@@ -11,6 +11,8 @@ import TechnologyBanner from "./TechnologyBanner";
 import TechnologyDescription from "./TechnologyDescription";
 import TechnologyPoints from "./TechnologyPoints";
 import { TechnologySkeleton } from "../TechnologySkeleton";
+import Seo from "@/shared/seo/Seo";
+import { breadcrumbSchema } from "@/shared/seo/seoData";
 
 const TechnologyDetails = () => {
   const { techId } = useParams();
@@ -29,12 +31,29 @@ const TechnologyDetails = () => {
     window.scrollTo(0, 0);
   }, [techId]);
 
-  /* Set page title */
-  useEffect(() => {
-    if (current?.title) {
-      document.title = `${current.title} | Technologies`;
-    }
-  }, [current]);
+  const pageDescription = current?.banner?.subtitle || current?.description?.paragraphs?.[0];
+  const structuredData = useMemo(() => {
+    if (!current) return null;
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          name: current.title,
+          description: pageDescription,
+          url: `https://onelement.in/technologies/details/${current.slug}`,
+          primaryImageOfPage: current.banner?.image
+            ? { "@type": "ImageObject", url: current.banner.image }
+            : undefined,
+        },
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Technologies", path: "/technologies" },
+          { name: current.title, path: `/technologies/details/${current.slug}` },
+        ]),
+      ],
+    };
+  }, [current, pageDescription]);
 
   /* Loading */
   if (isLoading) return <TechnologySkeleton />;
@@ -61,6 +80,13 @@ const TechnologyDetails = () => {
 
   return (
     <div className="min-h-screen bg-[#f6f8f6]">
+      <Seo
+        title={current.title}
+        description={pageDescription}
+        path={`/technologies/details/${current.slug}`}
+        image={current.banner?.image}
+        structuredData={structuredData}
+      />
       <TechnologyBanner name={current.title} banner={current.banner} />
 
       <main className="mx-auto flex max-w-7xl flex-col px-5 py-16 sm:px-6 sm:py-20 lg:px-8">

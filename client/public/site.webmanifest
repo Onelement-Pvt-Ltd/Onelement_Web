@@ -1,0 +1,15 @@
+{
+  "name": "Onelement Energy",
+  "short_name": "Onelement",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f8f6",
+  "theme_color": "#0a2955",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

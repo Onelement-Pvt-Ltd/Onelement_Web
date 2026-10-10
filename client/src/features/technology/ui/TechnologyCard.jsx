@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import Blog1 from "@/assets/BlogImages/Blog1.png"; // TODO: swap for a dedicated technology fallback image
+import TechnologyFallback from "@/assets/CarbonCapture.png";
 
-const FALLBACK_IMAGE = Blog1;
+const FALLBACK_IMAGE = TechnologyFallback;
 
 const TechnologySection = ({ tech, index }) => {
   const previewText = tech.description?.paragraphs?.[0];

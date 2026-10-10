@@ -1,23 +1,14 @@
-import { z } from "zod";
+import Joi from "joi";
 
-export const createTechnologySchema = z.object({
-  body: z.object({
-    title: z.string().min(3),
-    banner: z.object({
-      image: z.string().url(),
-      subtitle: z.string().optional()
-    }),
-    description: z.object({
-      highlightTitle: z.string(),
-      paragraphs: z.array(z.string()).min(1)
-    }),
-    points: z.array(
-      z.object({
-        title: z.string(),
-        content: z.string()
-      })
-    )
-  })
-});
+export const technologyListQueryValidation = Joi.object({
+  page: Joi.number().integer().min(1).max(100000).default(1),
+  limit: Joi.number().integer().min(1).max(24).default(10),
+}).unknown(false);
 
-export const updateTechnologySchema = createTechnologySchema.partial();
+export const technologySlugValidation = Joi.object({
+  slug: Joi.string()
+    .pattern(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+    .min(2)
+    .max(120)
+    .required(),
+}).unknown(false);

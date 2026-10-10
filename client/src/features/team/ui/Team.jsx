@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ExternalLink, Globe2, Instagram, Linkedin, Quote, Twitter, X } from "lucide-react";
 import dummy from "../../../assets/dummy.png";
+import Seo from "@/shared/seo/Seo";
+import { breadcrumbSchema } from "@/shared/seo/seoData";
 
 const teamMembers = Array.from({ length: 6 }).map((_, index) => ({
   id: index + 1,
@@ -122,6 +124,16 @@ export default function Team() {
 
   return (
     <div className="min-h-screen bg-[#f5f7f3] text-[#0a2955]">
+      <Seo
+        title="Who We Are"
+        description="Meet the people behind Onelement Energy and learn about the team working across energy, environment and industry."
+        path="/about/teams"
+        structuredData={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About Us", path: "/about" },
+          { name: "Who We Are", path: "/about/teams" },
+        ])}
+      />
       <section className="relative isolate overflow-hidden bg-[#0a2955] px-6 pb-24 pt-32 text-white sm:pb-28 sm:pt-36">
         <div className="absolute inset-0 -z-10 opacity-25 [background-image:radial-gradient(circle_at_75%_25%,#7bc96f_0,transparent_25%),linear-gradient(120deg,transparent_45%,rgba(255,255,255,.08)_45%,rgba(255,255,255,.08)_46%,transparent_46%)]" />
         <div className="absolute -right-28 bottom-0 -z-10 h-80 w-80 rounded-full border border-white/10" />

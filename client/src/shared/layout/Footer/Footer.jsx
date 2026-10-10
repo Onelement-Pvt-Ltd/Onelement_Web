@@ -14,7 +14,7 @@ const footerLinks = [
 ];
 
 const Footer = () => (
-  <footer className="site-footer">
+  <footer className="site-footer scroll-mt-24" id="contactus">
     <div className="footer-accent" aria-hidden="true" />
     <div className="footer-shell">
       <div className="footer-lead">

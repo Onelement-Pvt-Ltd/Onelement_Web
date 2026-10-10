@@ -27,7 +27,6 @@ area stays inside that feature; code used across features lives in shared.
     |   |-- lib/             Library integration helpers
     |   -- utils/           Framework-independent utilities
     |-- styles/              Global and application-wide styles
-    |-- _legacy/             Unreferenced code kept temporarily for recovery
     -- main.jsx             Browser entry point and global providers
 
 ## Import rules
@@ -36,8 +35,6 @@ area stays inside that feature; code used across features lives in shared.
 - Use relative imports only inside the same small component folder.
 - Feature-specific code must stay inside its feature.
 - Move code to shared only after it is used by more than one feature.
-- Do not import from _legacy; delete an archived file after confirming it is
-  no longer needed.
 
 ## Global typography
 

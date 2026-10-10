@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
+import { env } from "./env.js";
 
 export const connectDB = async () => {
-  try {
-    mongoose.set("strictQuery", true);
+  mongoose.set("strictQuery", true);
+  mongoose.set("sanitizeFilter", true);
 
-    await mongoose.connect(process.env.MONGO_URI);
+  await mongoose.connect(env.MONGO_URI, {
+    serverSelectionTimeoutMS: 10_000,
+  });
 
-    console.log("MongoDB Connected");
-  } catch (error) {
-    console.error("DB Connection Failed:", error.message);
-    process.exit(1);
-  }
+  console.log("MongoDB Connected");
 };

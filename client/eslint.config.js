@@ -23,7 +23,24 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // ESLint's core rule does not recognise lowercase JSX namespaces such as
+      // <motion.div>. Keep those imports lintable without hiding other unused
+      // lowercase variables, and account for component/icon render props.
+      'no-unused-vars': ['error', {
+        varsIgnorePattern: '^(motion|[A-Z_])',
+        argsIgnorePattern: '^[A-Z_]',
+      }],
+    },
+  },
+  {
+    files: [
+      'src/shared/components/scroll/SmoothScroll.jsx',
+      'src/shared/components/ui/button.jsx',
+      'src/shared/components/ui/form.jsx',
+    ],
+    rules: {
+      // These modules intentionally export a component together with a helper.
+      'react-refresh/only-export-components': 'off',
     },
   },
 ])

@@ -1,8 +1,12 @@
 import { useMemo, useState } from "react";
 import { BarChart3, Eye, LockKeyhole, LogOut, RefreshCw } from "lucide-react";
+import Seo from "@/shared/seo/Seo";
 
 const formatNumber = (value) =>
   new Intl.NumberFormat("en-IN").format(Number(value || 0));
+
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api")
+  .replace(/\/$/, "");
 
 const getIndiaDate = () => {
   const offset = 5.5 * 60 * 60 * 1000;
@@ -30,7 +34,8 @@ const AdminViews = () => {
 
     try {
       const token = btoa(`${nextCredentials.username}:${nextCredentials.password}`);
-      const response = await fetch("/api/view-stats", {
+      const response = await fetch(`${API_BASE_URL}/view-stats`, {
+        credentials: "include",
         headers: {
           Accept: "application/json",
           Authorization: `Basic ${token}`,
@@ -76,6 +81,7 @@ const AdminViews = () => {
   if (!stats) {
     return (
       <main className="min-h-screen bg-[#f4f7fb] px-4 py-12 text-[#10233f]">
+        <Seo title="Private Statistics" description="Private Onelement Energy statistics." path="/admin/views" noindex />
         <section className="mx-auto mt-[8vh] w-full max-w-md rounded-2xl border border-slate-200 bg-white p-7 shadow-[0_18px_55px_rgba(10,41,85,0.10)]">
           <div className="mb-6 flex size-12 items-center justify-center rounded-xl bg-[#0a2955] text-white">
             <LockKeyhole aria-hidden="true" size={23} />
@@ -127,6 +133,7 @@ const AdminViews = () => {
 
   return (
     <main className="min-h-screen bg-[#f4f7fb] px-4 py-10 text-[#10233f]">
+      <Seo title="Private Statistics" description="Private Onelement Energy statistics." path="/admin/views" noindex />
       <div className="mx-auto w-full max-w-3xl">
         <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>

@@ -3,10 +3,22 @@ import VisionSection from "../VisionMissionComponents/VisionSection";
 import MissionSection from "../VisionMissionComponents/MissionSection";
 import ValuesBanner from "../VisionMissionComponents/ValuesBanner";
 import BottomCTA from "../VisionMissionComponents/BottomCTA";
+import Seo from "@/shared/seo/Seo";
+import { breadcrumbSchema } from "@/shared/seo/seoData";
 
 const VissionMissionSection = () => {
   return (
     <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#123c72_0%,#0a2955_35%,#071d3d_100%)]">
+      <Seo
+        title="Vision and Mission"
+        description="Read the vision, mission and values guiding Onelement Energy's sustainable technology work."
+        path="/about/vision-mission"
+        structuredData={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About Us", path: "/about" },
+          { name: "Vision and Mission", path: "/about/vision-mission" },
+        ])}
+      />
       <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#35b46e]/15 blur-[180px]" />
 
       <div className="absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-[#7effe5]/10 blur-[180px]" />

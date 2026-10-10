@@ -1,13 +1,13 @@
 import express from "express";
 import {
-  getBlogs, getBlogBySlug, getRelatedBlogs, createBlog, getBlogMeta,
+  getBlogs, getBlogBySlug, getRelatedBlogs, getBlogMeta,
   getHomeBlogs} from "./blog.controller.js";
 import { validate } from "../../middlewares/validate.middleware.js";
 import {
   blogListQueryValidation,
-  blogSlugValidation,
-  createBlogValidation
+  blogSlugValidation
 } from "./blog.validation.js";
+import { rejectUnsupportedMethod } from "../../middlewares/security.middleware.js";
 
 const router = express.Router();
 
@@ -17,10 +17,6 @@ router.get("/home", getHomeBlogs);
 router.get("/related/:slug", validate(blogSlugValidation, "params"), getRelatedBlogs);
 router.get("/:slug", validate(blogSlugValidation, "params"), getBlogBySlug);
 
-router.post(
-  "/",
-  validate(createBlogValidation),
-  createBlog
-);
+router.all("/", rejectUnsupportedMethod);
 
 export default router;

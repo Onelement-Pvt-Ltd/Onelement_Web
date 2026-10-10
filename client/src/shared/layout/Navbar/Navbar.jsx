@@ -7,7 +7,7 @@ import MobileMenu from "./MobileMenu";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Info from "./Info";
 
-const Navbar = ({ loc }) => {
+const Navbar = () => {
   const infoRef = useRef(null);
   const [infoHeight, setInfoHeight] = useState(0);
 

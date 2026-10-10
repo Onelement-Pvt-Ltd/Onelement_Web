@@ -3,7 +3,7 @@ import Technology from "./technology.model.js";
 // GET ALL TECHNOLOGIES
 export const getAllTechnologies = async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
+    const { page, limit } = req.validated.query;
 
     const skip = (page - 1) * limit;
 
@@ -16,8 +16,9 @@ export const getAllTechnologies = async (req, res) => {
 
     const technologies = await Technology.find(filter)
       .select("-__v -createdAt -updatedAt")
+      .sort({ createdAt: -1, _id: -1 })
       .skip(skip)
-      .limit(Number(limit))
+      .limit(limit)
       .lean();
 
     res.status(200).json({
@@ -25,7 +26,7 @@ export const getAllTechnologies = async (req, res) => {
       data: technologies,
       pagination: {
         total,
-        page: Number(page),
+        page,
         totalPages: Math.ceil(total / limit)
       }
     });
@@ -40,7 +41,7 @@ export const getAllTechnologies = async (req, res) => {
 // GET TECHNOLOGY BY SLUG
 export const getTechnologyBySlug = async (req, res) => {
   try {
-    const { slug } = req.params;
+    const { slug } = req.validated.params;
 
     const technology = await Technology.findOne({
       slug,
@@ -72,7 +73,7 @@ export const getTechnologyBySlug = async (req, res) => {
 export const getRelatedTechnologies = async (req, res) => {
   try {
     const currentTechnology = await Technology.exists({
-      slug: req.params.slug,
+      slug: req.validated.params.slug,
       isDeleted: false,
       isActive: true
     });
@@ -85,7 +86,7 @@ export const getRelatedTechnologies = async (req, res) => {
     }
 
     const technologies = await Technology.find({
-      slug: { $ne: req.params.slug },
+      slug: { $ne: req.validated.params.slug },
       isDeleted: false,
       isActive: true
     })

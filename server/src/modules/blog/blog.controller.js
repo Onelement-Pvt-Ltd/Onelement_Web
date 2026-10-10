@@ -86,25 +86,6 @@ export const getBlogBySlug = async (req, res) => {
   }
 };
 
-export const createBlog = async (req, res) => {
-  try {
-    const blog = await Blog.create(req.body);
-
-    res.status(201).json({
-      success: true,
-      data: blog
-    });
-  } catch (error) {
-    if (error.code === 11000) {
-      return res.status(400).json({
-        message: "Slug already exists"
-      });
-    }
-
-    console.error("Failed to create blog", error);
-    res.status(500).json({ message: "Failed to create blog" });
-  }
-};
 export const getBlogMeta = async (req, res) => {
   try {
     const grouped = await Blog.aggregate([

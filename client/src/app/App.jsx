@@ -1,10 +1,12 @@
 import "@/styles/app.css";
 import { Suspense, lazy } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 
 import Layout from "@/shared/layout/Layout";
 import TechnologyLayout from "@/features/technology/ui/TechnologyLayout";
 import BlogsLayout from "@/features/blog/ui/BlogsLayout";
+import NotFound from "@/shared/components/NotFound";
+import RouteError from "@/shared/components/RouteError";
 
 const Home = lazy(() => import("@/features/home/ui/Home"));
 const About = lazy(() => import("@/features/about/ui/About"));
@@ -42,11 +44,13 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <RouteError />,
     children: [
       { index: true, element: withSuspense(Home) },
       { path: "about", element: withSuspense(About) },
       { path: "about/teams", element: withSuspense(Team) },
-      { path: "about/VM", element: withSuspense(VissionMissionSection) },
+      { path: "about/vision-mission", element: withSuspense(VissionMissionSection) },
+      { path: "about/VM", element: <Navigate to="/about/vision-mission" replace /> },
 
       { path: "technologies", element: withSuspense(Technology) },
       {
@@ -60,10 +64,11 @@ const appRouter = createBrowserRouter([
         path: "blogs/:slug",
         element: <BlogsLayout />,
         children: [{ index: true, element: withSuspense(BlogDetails) }]
-      }
+      },
+      { path: "*", element: <NotFound /> }
     ]
   },
-  { path: "/admin/views", element: withSuspense(AdminViews) }
+  { path: "/admin/views", element: withSuspense(AdminViews), errorElement: <RouteError /> }
 ]);
 
 const App = () => {

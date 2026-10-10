@@ -9,6 +9,8 @@ import BlogCard from "@/features/blog/ui/BlogComponents/BlogCard";
 import BlogFilters from "@/features/blog/ui/BlogComponents/BlogFilters";
 import BlogPagination from "./BlogPagination";
 import { smoothScrollTo } from "@/shared/components/scroll/SmoothScroll";
+import Seo from "@/shared/seo/Seo";
+import { breadcrumbSchema } from "@/shared/seo/seoData";
 
 const SKELETON_COUNT = 6;
 
@@ -103,6 +105,15 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-[#f7f8f5] pb-20">
+      <Seo
+        title="Insights"
+        description="Read Onelement Energy insights on sustainable technologies, clean energy and the global energy transition."
+        path="/blogs"
+        structuredData={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Insights", path: "/blogs" },
+        ])}
+      />
       <section className="relative overflow-hidden bg-[#0a2955] text-white">
         <div className="absolute -right-32 -top-44 h-96 w-96 rounded-full border border-white/10" />
         <div className="absolute -right-12 -top-24 h-80 w-80 rounded-full border border-[#0a2955]/15" />

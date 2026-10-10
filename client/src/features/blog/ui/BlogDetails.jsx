@@ -8,6 +8,8 @@ import { fetchBlogBySlug, clearSelectedBlog } from "@/features/blog/model/blogSl
 import { selectSelectedBlog } from "@/features/blog/model/blogSelectors";
 import { useRelatedBlogsQuery } from "@/features/blog/api/blogQueries";
 import { calculateReadingTime } from "@/shared/utils/readingTime";
+import Seo from "@/shared/seo/Seo";
+import { breadcrumbSchema } from "@/shared/seo/seoData";
 
 import BlogCard from "./BlogComponents/BlogCard";
 import { ScrollProgress } from "./ScrollProgress";
@@ -44,7 +46,7 @@ const BlogDetails = () => {
     return () => dispatch(clearSelectedBlog());
   }, [slug, dispatch]);
 
-  const sections = blog?.content || [];
+  const sections = useMemo(() => blog?.content || [], [blog?.content]);
   const readingTime = useMemo(
     () => (sections.length ? calculateReadingTime(sections) : 0),
     [sections]
@@ -56,8 +58,36 @@ const BlogDetails = () => {
       : "/blogs";
   }, [location.state]);
 
-  useEffect(() => {
-    if (blog?.title) document.title = blog.title;
+  const articleStructuredData = useMemo(() => {
+    if (!blog) return null;
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          headline: blog.title,
+          description: blog.excerpt,
+          image: blog.coverImage,
+          datePublished: blog.publishedAt,
+          dateModified: blog.updatedAt || blog.publishedAt,
+          author: {
+            "@type": "Person",
+            name: blog.author?.name || "Onelement Energy editorial team",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Onelement Energy",
+            url: "https://onelement.in",
+          },
+          mainEntityOfPage: `https://onelement.in/blogs/${blog.slug}`,
+        },
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Insights", path: "/blogs" },
+          { name: blog.title, path: `/blogs/${blog.slug}` },
+        ]),
+      ],
+    };
   }, [blog]);
 
   if (loading) return <BlogSkeleton />;
@@ -87,6 +117,17 @@ const BlogDetails = () => {
 
   return (
     <main className="min-h-screen bg-[#f6f8f6] pb-20 text-slate-900">
+      <Seo
+        title={blog.title}
+        description={blog.excerpt}
+        path={`/blogs/${blog.slug}`}
+        image={blog.coverImage}
+        type="article"
+        publishedTime={blog.publishedAt}
+        modifiedTime={blog.updatedAt || blog.publishedAt}
+        author={blog.author?.name || "Onelement Energy editorial team"}
+        structuredData={articleStructuredData}
+      />
       <ScrollProgress />
 
       <header className="relative isolate min-h-[560px] overflow-hidden text-white sm:min-h-[620px]">

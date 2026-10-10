@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useTechnologies } from "@/features/technology/api/technologyQueries";
 import TechnologyThread from "./TechnologyThread";
+import Seo from "@/shared/seo/Seo";
+import { breadcrumbSchema } from "@/shared/seo/seoData";
 
 const LIMIT = 12;
 
@@ -66,6 +68,15 @@ const Technology = () => {
 
   return (
     <main className="bg-[#F6F8F6]">
+      <Seo
+        title="Technologies"
+        description="Explore the sustainable technologies Onelement Energy is developing across clean energy, carbon management and resilient energy systems."
+        path="/technologies"
+        structuredData={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Technologies", path: "/technologies" },
+        ])}
+      />
       <section className="bg-[#0B2440] px-6 py-28 text-[#F6F8F6] md:py-36">
         <div className="mx-auto max-w-3xl md:mx-0 md:ml-[8%]">
           <h1
