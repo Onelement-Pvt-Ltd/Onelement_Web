@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Technology from "./technology.model.js";
 
 // GET ALL TECHNOLOGIES
@@ -86,7 +87,7 @@ export const getRelatedTechnologies = async (req, res) => {
     }
 
     const technologies = await Technology.find({
-      slug: { $ne: req.validated.params.slug },
+      slug: mongoose.trusted({ $ne: req.validated.params.slug }),
       isDeleted: false,
       isActive: true
     })

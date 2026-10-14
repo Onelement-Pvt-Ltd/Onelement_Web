@@ -13,7 +13,7 @@ describe("NotFound", () => {
     );
 
     expect(screen.getByRole("heading", { name: /this page has moved beyond the grid/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /home page/i })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: /return home/i })).toHaveAttribute("href", "/");
     expect(screen.getByRole("button", { name: /go back/i })).toBeInTheDocument();
     await waitFor(() =>
       expect(document.querySelector('meta[name="robots"]')).toHaveAttribute(
@@ -26,5 +26,22 @@ describe("NotFound", () => {
       rules: { "color-contrast": { enabled: false } },
     });
     expect(accessibility.violations).toEqual([]);
+  });
+
+  it("provides resource-specific recovery without exposing technical details", () => {
+    render(
+      <MemoryRouter>
+        <NotFound variant="technology" />
+      </MemoryRouter>,
+    );
+
+    expect(
+      screen.getByRole("heading", { name: /could not find this technology/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /view technologies/i })).toHaveAttribute(
+      "href",
+      "/technologies",
+    );
+    expect(screen.queryByText(/axios|database|api|stack/i)).not.toBeInTheDocument();
   });
 });

@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, CalendarDays, Clock3, List } from "lucide-react";
@@ -10,6 +10,8 @@ import { useRelatedBlogsQuery } from "@/features/blog/api/blogQueries";
 import { calculateReadingTime } from "@/shared/utils/readingTime";
 import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
+import NotFound from "@/shared/components/NotFound";
+import PublicError from "@/shared/components/PublicError";
 
 import BlogCard from "./BlogComponents/BlogCard";
 import { ScrollProgress } from "./ScrollProgress";
@@ -30,7 +32,6 @@ const BlogDetails = () => {
   const { slug } = useParams();
   const location = useLocation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const reduceMotion = useReducedMotion();
 
   const blog = useSelector(selectSelectedBlog);
@@ -93,27 +94,16 @@ const BlogDetails = () => {
   if (loading) return <BlogSkeleton />;
 
   if (error) {
+    if (error.status === 404) return <NotFound variant="article" />;
     return (
-      <div className="flex min-h-[70vh] flex-col items-center justify-center bg-[#f6f8f6] px-6 text-center">
-        <p className="text-lg font-semibold text-red-600">Something went wrong</p>
-        <button
-          type="button"
-          onClick={() => navigate(-1)}
-          className="mt-5 rounded-full bg-[#0a2955] px-6 py-3 text-sm font-bold text-white"
-        >
-          Go back
-        </button>
-      </div>
+      <PublicError
+        resource="article"
+        onRetry={() => dispatch(fetchBlogBySlug(slug))}
+      />
     );
   }
 
-  if (!blog) {
-    return (
-      <div className="flex min-h-[70vh] items-center justify-center bg-[#f6f8f6]">
-        <p className="text-slate-500">Blog not found</p>
-      </div>
-    );
-  }
+  if (!blog) return <NotFound variant="article" />;
 
   return (
     <main className="min-h-screen bg-[#f6f8f6] pb-20 text-slate-900">

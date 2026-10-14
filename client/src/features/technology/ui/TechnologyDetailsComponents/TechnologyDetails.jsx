@@ -13,6 +13,8 @@ import TechnologyPoints from "./TechnologyPoints";
 import { TechnologySkeleton } from "../TechnologySkeleton";
 import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
+import NotFound from "@/shared/components/NotFound";
+import PublicError from "@/shared/components/PublicError";
 
 const TechnologyDetails = () => {
   const { techId } = useParams();
@@ -21,7 +23,8 @@ const TechnologyDetails = () => {
     data: current,
     isLoading,
     isError,
-    error
+    error,
+    refetch,
   } = useTechnology(techId);
   const { data: related = [], isLoading: relatedLoading } =
     useRelatedTechnologies(techId);
@@ -60,23 +63,13 @@ const TechnologyDetails = () => {
 
   /* Error */
   if (isError) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-500">
-          {error?.response?.data?.message || "Failed to load technology"}
-        </p>
-      </div>
-    );
+    const status = error?.response?.status || error?.status;
+    if (status === 404) return <NotFound variant="technology" />;
+    return <PublicError resource="technology" onRetry={refetch} />;
   }
 
   /* Not Found */
-  if (!current) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">Technology not found</p>
-      </div>
-    );
-  }
+  if (!current) return <NotFound variant="technology" />;
 
   return (
     <div className="min-h-screen bg-[#f6f8f6]">

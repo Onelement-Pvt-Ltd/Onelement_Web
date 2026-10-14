@@ -58,6 +58,7 @@ const appRouter = createBrowserRouter([
         element: <TechnologyLayout />,
         children: [{ index: true, element: withSuspense(TechnologyDetails) }]
       },
+      { path: "technologies/details/*", element: <NotFound variant="technology" /> },
 
       { path: "blogs", element: withSuspense(Blog) },
       {
@@ -65,6 +66,7 @@ const appRouter = createBrowserRouter([
         element: <BlogsLayout />,
         children: [{ index: true, element: withSuspense(BlogDetails) }]
       },
+      { path: "blogs/*", element: <NotFound variant="article" /> },
       { path: "*", element: <NotFound /> }
     ]
   },

@@ -26,7 +26,9 @@ export const fetchHomeBlogsAPI = async () => {
 
 export const fetchBlogBySlugAPI = async (slug) => {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 200) {
-    throw new Error("Invalid blog address.");
+    const error = new Error("Invalid blog address.");
+    error.status = 404;
+    throw error;
   }
   const response = await API.get(`/blogs/${encodeURIComponent(slug)}`);
   return response.data.data;
@@ -39,7 +41,9 @@ export const fetchBlogMetaAPI = async () => {
 
 export const fetchRelatedBlogsAPI = async (slug) => {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 200) {
-    throw new Error("Invalid blog address.");
+    const error = new Error("Invalid blog address.");
+    error.status = 404;
+    throw error;
   }
   const response = await API.get(`/blogs/related/${encodeURIComponent(slug)}`);
   return response.data.data;

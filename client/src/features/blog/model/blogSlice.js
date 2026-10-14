@@ -3,8 +3,14 @@ import { fetchBlogBySlugAPI, fetchHomeBlogsAPI } from "../api/blogApi";
 
 export const fetchBlogBySlug = createAsyncThunk(
   "blog/fetchBlogBySlug",
-  async (slug) => {
-    return await fetchBlogBySlugAPI(slug);
+  async (slug, { rejectWithValue }) => {
+    try {
+      return await fetchBlogBySlugAPI(slug);
+    } catch (error) {
+      return rejectWithValue({
+        status: error?.response?.status || error?.status || 500,
+      });
+    }
   }
 );
 
@@ -40,6 +46,7 @@ const blogSlice = createSlice({
       .addCase(fetchBlogBySlug.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.selectedBlog = null;
       })
       .addCase(fetchBlogBySlug.fulfilled, (state, action) => {
         state.loading = false;

@@ -1,38 +1,98 @@
-import { ArrowLeft, Home } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import Seo from "@/shared/seo/Seo";
 
-const NotFound = () => (
-  <main className="grid min-h-screen place-items-center bg-[#f6f8f6] px-6 py-28 text-[#0a2955]">
-    <Seo
-      title="Page Not Found"
-      description="The requested page could not be found."
-      path={window.location.pathname}
-      noindex
-    />
-    <section className="w-full max-w-2xl text-center">
-      <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#1d6903]">Error 404</p>
-      <h1 className="mt-5 text-5xl font-bold tracking-tight sm:text-7xl">This page has moved beyond the grid.</h1>
-      <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
-        The address may be incorrect or the page may no longer be available.
-      </p>
-      <div className="mt-9 flex flex-wrap justify-center gap-3">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 rounded-full bg-[#0a2955] px-6 py-3 font-bold text-white transition-colors hover:bg-[#163B22]"
-        >
-          <Home aria-hidden="true" size={18} /> Home page
-        </Link>
-        <button
-          type="button"
-          onClick={() => window.history.back()}
-          className="inline-flex items-center gap-2 rounded-full border border-[#0a2955]/20 bg-white px-6 py-3 font-bold transition-colors hover:bg-[#eaf1e7]"
-        >
-          <ArrowLeft aria-hidden="true" size={18} /> Go back
-        </button>
+const variants = {
+  page: {
+    label: "Page not found",
+    title: "This page has moved beyond the grid.",
+    description: "The address may be incorrect or the page may no longer be available.",
+    action: "Return home",
+    to: "/",
+  },
+  article: {
+    label: "Article not found",
+    title: "We could not find this article.",
+    description: "The article address may be incorrect or the content may no longer be available.",
+    action: "Browse insights",
+    to: "/blogs",
+  },
+  technology: {
+    label: "Technology not found",
+    title: "We could not find this technology.",
+    description: "The technology address may be incorrect or the page may no longer be available.",
+    action: "View technologies",
+    to: "/technologies",
+  },
+  filters: {
+    label: "Insights view not found",
+    title: "These filters do not lead to an available page.",
+    description: "The filter or page address is invalid. Return to the complete insights collection.",
+    action: "Reset insights",
+    to: "/blogs",
+  },
+};
+
+const NotFound = ({ variant = "page" }) => {
+  const content = variants[variant] || variants.page;
+
+  return (
+    <main className="relative isolate grid min-h-[calc(100svh-4rem)] place-items-center overflow-hidden bg-[#061a36] px-6 py-24 text-white">
+      <Seo
+        title={content.label}
+        description={content.description}
+        path={window.location.pathname}
+        noindex
+      />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_78%_20%,rgba(121,255,224,.14),transparent_28%),radial-gradient(circle_at_18%_82%,rgba(35,182,95,.16),transparent_30%),linear-gradient(120deg,#061a36,#0a2955_65%,#0b3440)]"
+      />
+      <div aria-hidden="true" className="absolute -right-36 top-20 -z-10 h-[30rem] w-[30rem] rounded-full border border-[#79ffe0]/12">
+        <span className="absolute inset-14 rounded-full border border-[#79ffe0]/10" />
+        <span className="absolute inset-28 rounded-full border border-[#79ffe0]/8" />
       </div>
-    </section>
-  </main>
-);
+
+      <section className="w-full max-w-4xl">
+        <div className="flex items-center gap-4 text-xs font-extrabold uppercase tracking-[0.28em] text-[#79ffe0]">
+          <span className="h-0.5 w-12 bg-[#23b65f]" />
+          404 · {content.label}
+        </div>
+        <h1 className="mt-7 max-w-3xl text-[clamp(3rem,7vw,6.8rem)] font-extrabold leading-[0.92] tracking-[-0.06em]">
+          {content.title}
+        </h1>
+        <p className="mt-7 max-w-2xl text-base leading-8 text-white/65 sm:text-lg">
+          {content.description}
+        </p>
+
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link
+            to={content.to}
+            className="group inline-flex items-center gap-2 rounded-full bg-[#23b65f] px-6 py-3.5 font-bold text-white transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-[#2acb6b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#79ffe0]"
+          >
+            {content.action}
+            <ArrowUpRight aria-hidden="true" size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
+          {content.to !== "/" && (
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/7 px-6 py-3.5 font-bold text-white backdrop-blur transition-colors hover:bg-white/13"
+            >
+              <Home aria-hidden="true" size={18} /> Home page
+            </Link>
+          )}
+          <button
+            type="button"
+            onClick={() => window.history.back()}
+            className="inline-flex items-center gap-2 rounded-full px-5 py-3.5 font-bold text-white/68 transition-colors hover:text-white"
+          >
+            <ArrowLeft aria-hidden="true" size={18} /> Go back
+          </button>
+        </div>
+      </section>
+    </main>
+  );
+};
 
 export default NotFound;

@@ -1,4 +1,6 @@
+import mongoose from "mongoose";
 import Blog from "./blog.model.js";
+import { buildBlogFilter } from "./blog.filters.js";
 
 export const getBlogs = async (req, res) => {
   try {
@@ -6,21 +8,7 @@ export const getBlogs = async (req, res) => {
       category = [], year = [], month = [], page = 1, limit = 6
     } = req.validated.query;
 
-    const filter = {};
-    if (category.length) filter.category = { $in: category };
-
-    if (year.length) {
-      const ranges = year.flatMap((selectedYear) =>
-        (month.length ? month : [null]).map((selectedMonth) => ({
-          publishedAt: {
-            $gte: new Date(Date.UTC(selectedYear, selectedMonth ? selectedMonth - 1 : 0, 1)),
-            $lt: new Date(Date.UTC(selectedYear + (selectedMonth ? 0 : 1), selectedMonth || 0, 1))
-          }
-        }))
-      );
-      if (ranges.length === 1) Object.assign(filter, ranges[0]);
-      else filter.$or = ranges;
-    }
+    const filter = buildBlogFilter({ category, year, month });
 
     const skip = (page - 1) * limit;
 
@@ -133,7 +121,7 @@ export const getRelatedBlogs = async (req, res) => {
 
     const blogs = await Blog.find({
       category: currentBlog.category,
-      slug: { $ne: req.validated.params.slug }
+      slug: mongoose.trusted({ $ne: req.validated.params.slug })
     })
       .select("title slug excerpt coverImage category author publishedAt")
       .sort({ publishedAt: -1 })

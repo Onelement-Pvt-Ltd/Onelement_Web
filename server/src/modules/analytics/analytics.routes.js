@@ -6,6 +6,7 @@ import {
   requireOfficialOrigin,
   requireStatsAuth,
 } from "./analytics.controller.js";
+import { isProduction } from "../../config/env.js";
 
 const router = express.Router();
 
@@ -18,9 +19,14 @@ const viewLimiter = rateLimit({
 
 const statsLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 20,
+  limit: isProduction ? 20 : 1000,
   standardHeaders: "draft-7",
   legacyHeaders: false,
+  skipSuccessfulRequests: true,
+  message: {
+    success: false,
+    message: "Too many sign-in attempts. Please try again in 15 minutes.",
+  },
 });
 
 router.post("/views", viewLimiter, requireOfficialOrigin, registerView);

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { motion as Motion, AnimatePresence } from "framer-motion";
 
@@ -12,12 +12,13 @@ import { smoothScrollTo } from "@/shared/components/scroll/SmoothScroll";
 import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
 import { useModalFocus } from "@/shared/hooks/useModalFocus";
+import NotFound from "@/shared/components/NotFound";
 
 const SKELETON_COUNT = 6;
 
 const Blog = () => {
   const location = useLocation();
-  const { filters, setFilter, setPage, clearAll } = useBlogFilters();
+  const { filters, invalidUrl, setFilter, setPage, clearAll } = useBlogFilters();
   const [isMobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const resultsTopRef = useRef(null);
   const filterDrawerRef = useRef(null);
@@ -27,7 +28,6 @@ const Blog = () => {
     data: blogData,
     isLoading,
     isError,
-    error,
     isFetching,
     refetch,
   } = useBlogsQuery(filters);
@@ -48,11 +48,23 @@ const Blog = () => {
     onClose: () => setMobileFiltersOpen(false),
   });
 
-  useEffect(() => {
-    if (isLoading || isFetching || isError || filters.page <= 1) return;
-    const lastPage = Math.max(pagination.totalPages, 1);
-    if (filters.page > lastPage) setPage(lastPage);
-  }, [filters.page, isError, isFetching, isLoading, pagination.totalPages, setPage]);
+  const invalidSelection = useMemo(() => {
+    if (!meta) return false;
+    if (filters.categories.some((category) => !meta.categories.includes(category))) return true;
+
+    const facets = meta.facets ?? [];
+    const categoryFacets = facets.filter(
+      (item) => !filters.categories.length || filters.categories.includes(item.category),
+    );
+    const validYears = new Set(categoryFacets.map((item) => item.year));
+    if (filters.years.some((year) => !validYears.has(year))) return true;
+
+    const yearFacets = categoryFacets.filter(
+      (item) => !filters.years.length || filters.years.includes(item.year),
+    );
+    const validMonths = new Set(yearFacets.map((item) => item.month));
+    return filters.months.some((month) => !validMonths.has(month));
+  }, [filters.categories, filters.months, filters.years, meta]);
 
   const scrollToResults = useCallback(() => {
     const resultsTop = resultsTopRef.current;
@@ -96,6 +108,18 @@ const Blog = () => {
     },
     [scrollToResults, setPage]
   );
+
+  const invalidPage = Boolean(
+    !isLoading &&
+    !isFetching &&
+    !isError &&
+    filters.page > 1 &&
+    filters.page > pagination.totalPages
+  );
+
+  if (invalidUrl || invalidSelection || invalidPage) {
+    return <NotFound variant="filters" />;
+  }
 
   return (
     <div className="min-h-screen bg-[#f7f8f5] pb-20">
@@ -218,19 +242,19 @@ const Blog = () => {
             </div>
 
             {isError && (
-              <div className="text-center py-20 bg-white rounded-2xl shadow-sm">
-                <p className="text-red-500 font-medium">
-                  Something went wrong while loading blogs.
-                </p>
-                <p className="text-sm text-gray-500 mt-2">
-                  {error?.message || "Please try again."}
+              <div className="border-l-4 border-[#23b65f] bg-white px-6 py-16 text-center shadow-[0_18px_55px_rgba(10,41,85,.08)]">
+                <h3 className="text-2xl font-bold tracking-tight text-[#0a2955]">
+                  Insights are temporarily unavailable.
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-[#0a2955]/60">
+                  Please try again in a moment.
                 </p>
                 <button
                   type="button"
                   onClick={() => refetch()}
-                  className="mt-4 px-5 py-2 rounded-lg bg-[#0a2955] text-white text-sm"
+                  className="mt-6 rounded-full bg-[#0a2955] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#163b22]"
                 >
-                  Retry
+                  Try again
                 </button>
               </div>
             )}

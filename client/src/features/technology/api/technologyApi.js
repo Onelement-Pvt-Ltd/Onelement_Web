@@ -14,11 +14,21 @@ export const fetchTechnologies = async (params) => {
 };
 
 export const fetchTechnology = async (slug) => {
-  const response = await API.get(`/technologies/${slug}`);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 200) {
+    const error = new Error("Invalid technology address.");
+    error.status = 404;
+    throw error;
+  }
+  const response = await API.get(`/technologies/${encodeURIComponent(slug)}`);
   return response.data.data;
 };
 
 export const fetchRelatedTechnologies = async (slug) => {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 200) {
+    const error = new Error("Invalid technology address.");
+    error.status = 404;
+    throw error;
+  }
   const response = await API.get(`/technologies/${encodeURIComponent(slug)}/related`);
   return response.data.data;
 };

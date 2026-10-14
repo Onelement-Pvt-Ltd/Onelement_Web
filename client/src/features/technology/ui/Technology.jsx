@@ -36,7 +36,7 @@ const getPageRange = (current, total, delta = 1) => {
 const Technology = () => {
   const [page, setPage] = useState(1);
 
-  const { data, isLoading, isFetching, isError, error } = useTechnologies(
+  const { data, isLoading, isFetching, isError, refetch } = useTechnologies(
     page,
     LIMIT
   );
@@ -57,11 +57,20 @@ const Technology = () => {
 
   if (isError) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#F6F8F6] px-6 text-center">
-        <p className="text-lg text-red-600">
-          {error?.response?.data?.message ||
-            "Failed to load technologies. Please try again shortly."}
-        </p>
+      <div className="grid min-h-screen place-items-center bg-[#F6F8F6] px-6 text-center">
+        <section className="w-full max-w-2xl border-l-4 border-[#23b65f] bg-white p-10 shadow-[0_24px_70px_rgba(10,41,85,.1)]">
+          <h1 className="text-3xl font-bold tracking-tight text-[#0B2440]">
+            Technologies are temporarily unavailable.
+          </h1>
+          <p className="mt-4 leading-7 text-[#0B2440]/60">Please try again in a moment.</p>
+          <button
+            type="button"
+            onClick={() => refetch()}
+            className="mt-7 rounded-full bg-[#0B2440] px-6 py-3 font-bold text-white transition-colors hover:bg-[#163B22]"
+          >
+            Try again
+          </button>
+        </section>
       </div>
     );
   }

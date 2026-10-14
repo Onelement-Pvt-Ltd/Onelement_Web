@@ -33,7 +33,8 @@ const AdminViews = () => {
     setError("");
 
     try {
-      const token = btoa(`${nextCredentials.username}:${nextCredentials.password}`);
+      const username = nextCredentials.username.trim();
+      const token = btoa(`${username}:${nextCredentials.password}`);
       const response = await fetch(`${API_BASE_URL}/view-stats`, {
         credentials: "include",
         headers: {
@@ -47,7 +48,11 @@ const AdminViews = () => {
       try {
         result = responseBody ? JSON.parse(responseBody) : null;
       } catch {
-        throw new Error("The view statistics API is not available. Restart the local development server.");
+        throw new Error(
+          response.ok
+            ? "The view statistics API returned an invalid response."
+            : responseBody || "The view statistics API is not available."
+        );
       }
 
       if (!result) {
@@ -55,7 +60,7 @@ const AdminViews = () => {
       }
 
       if (!response.ok) {
-        throw new Error(result.error || "Unable to load view statistics");
+        throw new Error(result.message || result.error || "Unable to load view statistics");
       }
 
       setStats(result);
