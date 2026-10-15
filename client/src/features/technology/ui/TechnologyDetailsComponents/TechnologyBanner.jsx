@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import Blog1 from "@/assets/BlogImages/Blog1.webp";
+import Blog1 from "@/assets/Blog/Blog1.webp";
 
 const TechnologyBanner = ({ name, banner }) => {
   return (

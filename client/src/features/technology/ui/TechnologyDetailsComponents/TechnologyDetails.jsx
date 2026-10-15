@@ -5,7 +5,7 @@ import {
   useRelatedTechnologies,
   useTechnology
 } from "@/features/technology/api/technologyQueries";
-import Blog1 from "@/assets/BlogImages/Blog1.webp";
+import Blog1 from "@/assets/Blog/Blog1.webp";
 
 import TechnologyBanner from "./TechnologyBanner";
 import TechnologyDescription from "./TechnologyDescription";

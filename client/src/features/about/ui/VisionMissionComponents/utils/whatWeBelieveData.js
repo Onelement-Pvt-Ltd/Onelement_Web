@@ -1,5 +1,5 @@
-import vision from "@/assets/AboutImages/vision.webp";
-import mission from "@/assets/AboutImages/mission.webp";
+import vision from "@/assets/About/vision.webp";
+import mission from "@/assets/About/mission.webp";
 
 export const visionData = {
   id: "01",
