@@ -1,34 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUp, Leaf } from "lucide-react";
 import "./ScrollToTopButton.css";
-import { smoothScrollTo } from "./SmoothScroll";
+import { smoothScrollTo, subscribeToSmoothScroll } from "./SmoothScroll";
 
 const RING_RADIUS = 28;
 const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
 
 const ScrollToTopButton = () => {
   const [visible, setVisible] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const visibleRef = useRef(false);
+  const progressRingRef = useRef(null);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const updateScrollState = () => {
-      const scrollableHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const nextProgress = scrollableHeight > 0
-        ? Math.min(window.scrollY / scrollableHeight, 1)
-        : 0;
+    const updateScrollState = (scrollState) => {
+      const scrollPosition = scrollState?.animatedScroll ?? window.scrollY;
+      const scrollableHeight = scrollState?.limit
+        ?? document.documentElement.scrollHeight - window.innerHeight;
+      const nextProgress = Number.isFinite(scrollState?.progress)
+        ? scrollState.progress
+        : scrollableHeight > 0
+          ? Math.min(Math.max(scrollPosition / scrollableHeight, 0), 1)
+          : 0;
+      const nextVisible = scrollPosition > 420;
 
-      setVisible(window.scrollY > 420);
-      setProgress(nextProgress);
+      if (progressRingRef.current) {
+        progressRingRef.current.setAttribute(
+          "stroke-dashoffset",
+          String(RING_LENGTH * (1 - nextProgress))
+        );
+      }
+
+      if (visibleRef.current !== nextVisible) {
+        visibleRef.current = nextVisible;
+        setVisible(nextVisible);
+      }
     };
 
     updateScrollState();
+    const unsubscribeFromSmoothScroll = subscribeToSmoothScroll(updateScrollState);
     window.addEventListener("scroll", updateScrollState, { passive: true });
     window.addEventListener("resize", updateScrollState);
 
     return () => {
+      unsubscribeFromSmoothScroll();
       window.removeEventListener("scroll", updateScrollState);
       window.removeEventListener("resize", updateScrollState);
     };
@@ -66,12 +82,13 @@ const ScrollToTopButton = () => {
           >
             <circle className="eco-scroll-ring-track" cx="32" cy="32" r={RING_RADIUS} />
             <circle
+              ref={progressRingRef}
               className="eco-scroll-ring-progress"
               cx="32"
               cy="32"
               r={RING_RADIUS}
               strokeDasharray={RING_LENGTH}
-              strokeDashoffset={RING_LENGTH * (1 - progress)}
+              strokeDashoffset={RING_LENGTH}
             />
           </svg>
 

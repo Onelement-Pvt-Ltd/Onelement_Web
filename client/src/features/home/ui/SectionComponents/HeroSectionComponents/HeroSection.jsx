@@ -4,6 +4,8 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import HeroContent from "./HeroContent";
 import CarbonBackground from "./CarbonBackground";
 import TemporaryHeroSlide from "./TemporaryHeroSlide";
+import heroTechnologies from "@/assets/Home/heroTechnologies.jpg";
+import heroWhoWeAre from "@/assets/Home/hero-who-we-are.jpg";
 
 const heroSlides = [
   {
@@ -13,13 +15,17 @@ const heroSlides = [
       "This space is ready for the approved company story and its final supporting visual.",
     linkLabel: "Discover Onelement",
     to: "/about",
-    mediaLabel: "Company visual placeholder",
+    imageUrl: heroWhoWeAre,
+    imageAlt: "Onelement Energy team and company",
+    imageFit: "contain",
     tone: "emerald",
   },
   {
     eyebrow: "Onelement Energy",
     title: "Building a Sustainable Future",
     description: "Developing, Deploying & Decentralizing Sustainable Technologies",
+    imageUrl: "",
+    imageAlt: "Onelement Energy sustainable technology",
     primary: true,
     tone: "navy",
   },
@@ -27,10 +33,12 @@ const heroSlides = [
     eyebrow: "Our technologies",
     title: "Technology designed around energy, environment and industry.",
     description:
-      "This space is ready for the next approved technology story, image or video.",
+      "Sustainability is ecosystem driven",
     linkLabel: "Explore Technologies",
     to: "/technologies",
-    mediaLabel: "Technology visual placeholder",
+    imageUrl: heroTechnologies,
+    imageAlt: "Onelement Energy technologies",
+    imageFit: "cover",
     tone: "cyan",
   },
 ];
@@ -135,8 +143,9 @@ const HeroSection = () => {
               <>
                 <CarbonBackground />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(35,182,95,.13),transparent_32%),linear-gradient(90deg,rgba(6,26,54,.97)_0%,rgba(10,41,85,.86)_48%,rgba(10,41,85,.35)_100%)]" />
+                <div className="absolute inset-0 opacity-45 [background-image:linear-gradient(rgba(54,83,111,.2)_1px,transparent_1px),linear-gradient(90deg,rgba(54,83,111,.2)_1px,transparent_1px)] [background-size:52px_52px]" aria-hidden="true" />
                 <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#061a36]/60 to-transparent" />
-                <HeroContent />
+                <HeroContent slide={activeSlide} />
               </>
             ) : (
               <TemporaryHeroSlide slide={activeSlide} />

@@ -15,7 +15,7 @@ const Content = [
     },
 
     {
-        name: "What OneElement Does",
+        name: "What Onelement Does",
         subtitle: "Clean Technology",
         icon: Leaf,
         content:

@@ -53,7 +53,6 @@
 .eco-scroll-ring-progress {
   stroke: #9bc4ae;
   stroke-linecap: round;
-  transition: stroke-dashoffset 120ms linear;
   filter: drop-shadow(0 0 3px rgba(155, 196, 174, 0.28));
 }
 

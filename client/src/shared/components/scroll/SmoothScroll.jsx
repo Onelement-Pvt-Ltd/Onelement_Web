@@ -8,8 +8,16 @@ const SMOOTH_SCROLL_OPTIONS = {
 };
 
 let activeScroller = null;
+const scrollSubscribers = new Set();
 
 export const getSmoothScroller = () => activeScroller;
+
+export const subscribeToSmoothScroll = (subscriber) => {
+  scrollSubscribers.add(subscriber);
+  if (activeScroller) subscriber(activeScroller);
+
+  return () => scrollSubscribers.delete(subscriber);
+};
 
 export const smoothScrollTo = (target, options = {}) => {
   if (activeScroller) {
@@ -39,6 +47,12 @@ const SmoothScroll = () => {
     activeScroller = lenis;
     let animationFrame;
 
+    const publishScroll = (scrollState) => {
+      scrollSubscribers.forEach((subscriber) => subscriber(scrollState));
+    };
+
+    lenis.on("scroll", publishScroll);
+
     const updateScroll = (time) => {
       lenis.raf(time);
       animationFrame = window.requestAnimationFrame(updateScroll);
@@ -48,6 +62,7 @@ const SmoothScroll = () => {
 
     return () => {
       window.cancelAnimationFrame(animationFrame);
+      lenis.off("scroll", publishScroll);
       lenis.destroy();
       if (activeScroller === lenis) activeScroller = null;
     };

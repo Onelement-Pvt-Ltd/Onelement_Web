@@ -1,26 +1,45 @@
-import Logo from "../../../assets/Logo.png";
+import OEPL_LARGE_BLUE_TRANSPARANT from "@/assets/shared/OEPL_LARGE_BLUE_TRANSPARANT.png"; ;
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menus } from "./navigationData";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-import { motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 
 const Navbar = () => {
+  const [hoveredMenuIndex, setHoveredMenuIndex] = useState(null);
+
   return (
-    <motion.header className="fixed inset-x-0 top-0 z-[9999] mx-auto flex h-16 items-center bg-[#F6F8F6]/90 text-[15px] shadow-sm backdrop-blur-sm">
+    <motion.header className="fixed inset-x-0 top-0 z-9999 mx-auto flex h-16 items-center bg-[#F6F8F6]/90 text-[15px] shadow-sm backdrop-blur-sm">
       <nav className="mx-2.5 flex w-full max-w-full items-center justify-between px-3.5">
         <div className="flex items-center gap-x-3">
           <NavLink to="/" className="rounded-md">
-            <img src={Logo} alt="OEPL" className="w-24" />
+            <img src={OEPL_LARGE_BLUE_TRANSPARANT} alt="OEPL" className="w-24" />
           </NavLink>
         </div>
 
         <div className="flex gap-x-1 lg:items-center">
-          <ul className="mr-10 hidden gap-x-2 lg:flex lg:items-center">
-            {Menus.map((menu) => (
-              <DesktopMenu menu={menu} key={menu.name} />
-            ))}
-          </ul>
+          <LayoutGroup id="primary-navigation">
+            <ul
+              className="mr-10 hidden gap-x-2 lg:flex lg:items-center"
+              onMouseLeave={() => setHoveredMenuIndex(null)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) {
+                  setHoveredMenuIndex(null);
+                }
+              }}
+            >
+              {Menus.map((menu, index) => (
+                <DesktopMenu
+                  menu={menu}
+                  key={menu.name}
+                  isHovered={hoveredMenuIndex === index}
+                  hasHoveredMenu={hoveredMenuIndex !== null}
+                  onHighlight={() => setHoveredMenuIndex(index)}
+                />
+              ))}
+            </ul>
+          </LayoutGroup>
 
           <div className="flex items-center gap-x-5">
             <motion.a

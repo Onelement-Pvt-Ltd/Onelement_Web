@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 const resolveSubmenuPath = (parentPath, childPath) =>
   childPath.startsWith(parentPath) ? childPath : `${parentPath}${childPath}`;
 
-const DesktopMenu = ({ menu }) => {
+const DesktopMenu = ({ menu, isHovered, hasHoveredMenu, onHighlight }) => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const reduceMotion = useReducedMotion();
@@ -14,6 +14,7 @@ const DesktopMenu = ({ menu }) => {
   const hasSubMenu = Boolean(menu?.subMenu?.length);
   const isActive =
     menu.path === "/" ? location.pathname === "/" : location.pathname.startsWith(menu.path);
+  const showIndicator = isHovered || (!hasHoveredMenu && isActive);
   const closeMenu = () => setOpen(false);
 
   const handleBlur = (event) => {
@@ -23,9 +24,15 @@ const DesktopMenu = ({ menu }) => {
   return (
     <li
       className="relative flex h-16 items-center"
-      onMouseEnter={() => hasSubMenu && setOpen(true)}
+      onMouseEnter={() => {
+        onHighlight();
+        if (hasSubMenu) setOpen(true);
+      }}
       onMouseLeave={closeMenu}
-      onFocus={() => hasSubMenu && setOpen(true)}
+      onFocus={() => {
+        onHighlight();
+        if (hasSubMenu) setOpen(true);
+      }}
       onBlur={handleBlur}
       onKeyDown={(event) => event.key === "Escape" && closeMenu()}
     >
@@ -37,7 +44,7 @@ const DesktopMenu = ({ menu }) => {
         className={`group relative flex items-center gap-1.5 rounded-full px-4 py-2 font-semibold transition-colors duration-200 ${
           isActive
             ? "bg-[#163B22]/8 text-[#163B22]"
-            : "text-[#0B2440] hover:bg-[#0B2440]/5 hover:text-[#163B22]"
+            : "text-[#0B2440] hover:bg-[#0B2440]/5 hover:text-[#176B73]"
         }`}
       >
         {menu.name}
@@ -50,12 +57,18 @@ const DesktopMenu = ({ menu }) => {
             <ChevronDown size={15} strokeWidth={2.4} />
           </motion.span>
         )}
-        <span
-          aria-hidden="true"
-          className={`pointer-events-none absolute bottom-0.5 left-4 right-4 h-0.5 origin-left rounded-full bg-[#61a652] transition-transform duration-300 ${
-            isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-          }`}
-        />
+        {showIndicator && (
+          <motion.span
+            layoutId="desktop-navigation-indicator"
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-0.5 left-4 right-4 h-0.5 rounded-full bg-[#61a652]"
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : { type: "spring", stiffness: 430, damping: 36, mass: 0.72 }
+            }
+          />
+        )}
       </Link>
 
       <AnimatePresence>

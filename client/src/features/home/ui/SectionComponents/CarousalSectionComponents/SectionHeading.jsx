@@ -9,7 +9,7 @@ const SectionHeading = () => {
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.6 }}
       >
-        <p className="home-kicker text-[#23b65f]">OUR FOUR PILLARS</p>
+        <p className="home-kicker text-[#23b65f]">ONELEMENT&apos;S FOUR PILLARS</p>
         <h2 className="home-display mt-4 max-w-xl text-4xl font-bold leading-[1.02] text-[#0a2955] sm:text-5xl lg:text-6xl">
           Driving Climate Innovation
         </h2>

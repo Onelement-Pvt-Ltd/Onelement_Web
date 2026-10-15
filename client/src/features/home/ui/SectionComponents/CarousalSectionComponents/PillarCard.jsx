@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-const PillarCard = ({ title, subtitle, icon: Icon, active, onClick, controls }) => {
+const PillarCard = ({ title, subtitle, icon: Icon, active, onClick, onInteract, controls }) => {
   return (
     <motion.button
       type="button"
@@ -11,6 +11,8 @@ const PillarCard = ({ title, subtitle, icon: Icon, active, onClick, controls }) 
       whileHover={{ x: active ? 0 : 4 }}
       whileTap={{ scale: 0.99 }}
       onClick={onClick}
+      onMouseEnter={onInteract}
+      onFocus={onInteract}
       className={`group relative min-h-32 overflow-hidden rounded-2xl border p-4 text-left transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#23b65f] lg:min-h-0 lg:p-5 ${
         active
           ? "border-[#0a2955] bg-[#0a2955] text-white shadow-[0_18px_45px_rgba(10,41,85,.18)]"

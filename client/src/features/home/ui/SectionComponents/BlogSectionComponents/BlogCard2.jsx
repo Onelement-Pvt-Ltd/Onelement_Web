@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import BlogFallback from "@/assets/BlogImages/Blog1.webp";
+import BlogFallback from "@/assets/Blog/Blog1.webp";
 import AuthorFallback from "@/assets/dummy.png";
 import { formatDate } from "@/shared/utils/formatDate";
 

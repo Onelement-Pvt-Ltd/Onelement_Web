@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import Content from "@/features/home/data/pillars";
 import BackgroundGlow from "./BackgroundGlow";
@@ -9,26 +9,42 @@ import PillarContent from "./PillarContent";
 const FourPillars = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const rotationTimerRef = useRef(null);
   const reduceMotion = useReducedMotion();
+
+  const pauseAutoRotation = () => {
+    if (rotationTimerRef.current) {
+      window.clearInterval(rotationTimerRef.current);
+      rotationTimerRef.current = null;
+    }
+    setPaused(true);
+  };
 
   useEffect(() => {
     if (paused || reduceMotion) return undefined;
 
-    const timer = window.setInterval(() => {
+    rotationTimerRef.current = window.setInterval(() => {
       setActiveIndex((current) => (current + 1) % Content.length);
     }, 5000);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      if (rotationTimerRef.current) {
+        window.clearInterval(rotationTimerRef.current);
+        rotationTimerRef.current = null;
+      }
+    };
   }, [paused, reduceMotion]);
 
   return (
     <section
       id="solutions"
       className="relative scroll-mt-24 overflow-hidden bg-[#f6f8f6] py-20 sm:py-24 lg:py-32"
-      onMouseEnter={() => setPaused(true)}
+      onMouseEnter={pauseAutoRotation}
       onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
+      onFocusCapture={pauseAutoRotation}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false);
+      }}
     >
       <BackgroundGlow />
 
@@ -40,6 +56,7 @@ const FourPillars = () => {
             pillars={Content}
             activeIndex={activeIndex}
             onSelect={setActiveIndex}
+            onCardInteract={pauseAutoRotation}
           />
 
           <PillarContent

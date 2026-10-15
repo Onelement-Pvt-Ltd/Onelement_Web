@@ -1,25 +1,31 @@
-import { ArrowUpRight, ImagePlus } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const toneStyles = {
   emerald: {
-    glow: "bg-[#23b65f]/25",
-    accent: "text-[#79ffe0]",
-    panel: "from-[#163b22]/70 to-[#0a2955]/80",
-    surface: "bg-[radial-gradient(circle_at_82%_24%,rgba(35,182,95,.24),transparent_34%),linear-gradient(110deg,#061a36_0%,#0b2440_56%,#163b22_100%)]",
+    glow: "bg-[#2fdc79]/15",
+    accent: "text-[#67f5d0]",
+    frame: "bg-[#1b3858]",
+    marker: "bg-[#2fdc79]",
+    surface: "bg-[radial-gradient(circle_at_82%_24%,rgba(47,220,121,.12),transparent_34%),linear-gradient(110deg,#061a36_0%,#09264a_58%,#0b3150_100%)]",
   },
   cyan: {
-    glow: "bg-cyan-300/20",
-    accent: "text-cyan-200",
-    panel: "from-cyan-950/65 to-[#0a2955]/85",
-    surface: "bg-[radial-gradient(circle_at_78%_30%,rgba(121,255,224,.19),transparent_32%),linear-gradient(110deg,#061a36_0%,#0a2955_60%,#0b3440_100%)]",
+    glow: "bg-[#67f5d0]/12",
+    accent: "text-[#67f5d0]",
+    frame: "bg-[#1b3858]",
+    marker: "bg-[#2fdc79]",
+    surface: "bg-[radial-gradient(circle_at_78%_30%,rgba(103,245,208,.11),transparent_32%),linear-gradient(110deg,#061a36_0%,#09264a_60%,#0b3150_100%)]",
   },
 };
+
+const MEDIA_CLIP_PATH =
+  "polygon(0 0, calc(100% - 2.25rem) 0, 100% 2.25rem, 100% 100%, 2.25rem 100%, 0 calc(100% - 2.25rem))";
 
 const TemporaryHeroSlide = ({ slide }) => {
   const reduceMotion = useReducedMotion();
   const tone = toneStyles[slide.tone] || toneStyles.emerald;
+  const shouldCover = slide.imageFit === "cover";
 
   return (
     <div className={`relative flex min-h-[calc(100svh-4rem)] items-center overflow-hidden px-6 py-24 text-white sm:px-10 lg:px-14 xl:px-20 ${tone.surface}`}>
@@ -56,34 +62,56 @@ const TemporaryHeroSlide = ({ slide }) => {
           </Link>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+        <motion.figure
+          initial={{ opacity: 0, x: reduceMotion ? 0 : 28 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: reduceMotion ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto hidden aspect-[4/5] w-full max-w-md lg:block"
-          aria-label={slide.mediaLabel}
+          className={`relative mx-auto w-full ${
+            shouldCover ? "aspect-[4/3] max-w-xl" : "aspect-[3/4] max-w-md"
+          }`}
         >
-          <div className={`absolute inset-0 rotate-3 rounded-[2.5rem] border border-white/12 bg-gradient-to-br ${tone.panel}`} />
-          <div className="absolute inset-0 -rotate-2 rounded-[2.5rem] border border-white/15 bg-white/6 backdrop-blur-xl" />
-          <div className="absolute inset-7 flex flex-col justify-between rounded-[2rem] border border-dashed border-white/22 bg-[#061a36]/45 p-7">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/48">
-                Visual space
-              </span>
-              <span className="h-2 w-2 rounded-full bg-[#4dff9e] shadow-[0_0_18px_rgba(77,255,158,.7)]" />
-            </div>
-            <div className="grid place-items-center text-center">
-              <span className="grid h-16 w-16 place-items-center rounded-full border border-white/15 bg-white/8 text-[#79ffe0]">
-                <ImagePlus size={25} />
-              </span>
-              <p className="mt-5 max-w-48 text-sm leading-6 text-white/55">{slide.mediaLabel}</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#4dff9e]" />
-              <span className="h-px flex-1 bg-white/15" />
+          <div
+            className={`absolute inset-0 translate-x-3 translate-y-3 ${tone.frame}`}
+            style={{ clipPath: MEDIA_CLIP_PATH }}
+            aria-hidden="true"
+          />
+
+          <div
+            className="relative h-full bg-[#36536f] p-1 shadow-[0_28px_70px_rgba(0,0,0,.28)]"
+            style={{ clipPath: MEDIA_CLIP_PATH }}
+          >
+            <div
+              className="relative h-full overflow-hidden bg-[#071d35]"
+              style={{ clipPath: MEDIA_CLIP_PATH }}
+            >
+              {slide.imageUrl && (
+                <img
+                  src={slide.imageUrl}
+                  alt={slide.imageAlt}
+                  className={`h-full w-full object-center ${
+                    shouldCover ? "object-cover" : "object-contain"
+                  }`}
+                  sizes="(min-width: 1024px) 42vw, 90vw"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#061a36]/28 via-transparent to-transparent"
+                aria-hidden="true"
+              />
             </div>
           </div>
-        </motion.div>
+
+          <div
+            className={`absolute -left-3 top-10 h-24 w-1.5 ${tone.marker}`}
+            aria-hidden="true"
+          />
+          <div className="absolute -bottom-5 left-8 flex items-center gap-2" aria-hidden="true">
+            <span className={`h-1.5 w-16 ${tone.marker}`} />
+            <span className="h-1.5 w-5 bg-white/35" />
+          </div>
+        </motion.figure>
       </div>
     </div>
   );

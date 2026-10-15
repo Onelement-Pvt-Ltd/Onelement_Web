@@ -33,10 +33,7 @@ const ContentSlide = ({ pillar, panelId }) => {
 
       <div className="mt-10 flex flex-col gap-6 border-t border-[#0a2955]/10 pt-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="home-copy text-xs uppercase tracking-[0.18em] text-slate-500">
-            One Element Pvt. Ltd.
-          </p>
-          <p className="mt-1 text-lg font-bold text-[#0a2955]">
+          <p className="text-lg font-bold text-[#0a2955]">
             Building a Sustainable Future
           </p>
         </div>
