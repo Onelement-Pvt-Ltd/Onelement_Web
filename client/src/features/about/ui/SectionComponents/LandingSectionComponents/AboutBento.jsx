@@ -1,6 +1,6 @@
 import { motion as Motion } from "framer-motion";
-import bentoOne from "@/assets/AboutImages/About_Bento_1.webp";
-import bentoTwo from "@/assets/AboutImages/About_Bento_2.webp";
+import bentoOne from "@/assets/About/About_Bento_1.webp";
+import bentoTwo from "@/assets/About/About_Bento_2.webp";
 import { revealItem } from "../../aboutMotion";
 
 const tiles = [

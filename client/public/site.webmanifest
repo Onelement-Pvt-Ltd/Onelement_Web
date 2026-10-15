@@ -7,9 +7,10 @@
   "theme_color": "#0a2955",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/OEPL_BLUE_BGD_FAVICON.png",
+      "sizes": "700x700",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

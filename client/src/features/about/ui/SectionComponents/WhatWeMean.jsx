@@ -1,6 +1,6 @@
 import { motion as Motion } from "framer-motion";
-import mission from "@/assets/AboutImages/mission.webp";
-import vision from "@/assets/AboutImages/vision.webp";
+import mission from "@/assets/About/mission.webp";
+import vision from "@/assets/About/vision.webp";
 import { revealItem, staggerGroup, viewportOnce } from "../aboutMotion";
 
 const beliefs = [
