@@ -1,22 +1,6 @@
 import { motion as Motion } from "framer-motion";
-import mission from "@/assets/About/mission.webp";
-import vision from "@/assets/About/vision.webp";
 import { revealItem, staggerGroup, viewportOnce } from "../aboutMotion";
-
-const beliefs = [
-  {
-    index: "01",
-    title: "Mission",
-    image: mission,
-    text: "To contribute to the ecosystem by developing and delivering sustainable and reliable technologies in alternative clean energy, energy storage and carbon capture. We provide turnkey solutions and integration process for carbon capture, its storage and utilization. We strive to develop zero emission power systems, for off-grid and auxiliary power applications that can draw us closer to an energy independent society."
-  },
-  {
-    index: "02",
-    title: "Vision",
-    image: vision,
-    text: "Creating a futuristic ecosystem that contributes to sustainable living."
-  }
-];
+import { beliefs } from "./utils/whatWeMeanData";
 
 const WhatWeMean = () => (
   <section className="about-beliefs about-section">
@@ -52,7 +36,6 @@ const WhatWeMean = () => (
               <img src={belief.image} alt={`${belief.title} at Onelement Energy`} loading="lazy" />
             </Motion.div>
             <Motion.div className="belief-card" variants={revealItem}>
-              <span className="belief-index">{belief.index}</span>
               <h3>{belief.title}</h3>
               <p>{belief.text}</p>
             </Motion.div>

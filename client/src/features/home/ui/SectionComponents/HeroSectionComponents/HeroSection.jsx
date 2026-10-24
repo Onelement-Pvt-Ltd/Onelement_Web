@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { animate, AnimatePresence, motion, useMotionValue, useReducedMotion } from "framer-motion";
 import HeroContent from "./HeroContent";
 import CarbonBackground from "./CarbonBackground";
 import TemporaryHeroSlide from "./TemporaryHeroSlide";
@@ -12,11 +12,12 @@ const heroSlides = [
     eyebrow: "Who we are",
     title: "Engineering a cleaner future, one step at a time.",
     description:
-      "This space is ready for the approved company story and its final supporting visual.",
+      "",
     linkLabel: "Discover Onelement",
     to: "/about",
     imageUrl: heroWhoWeAre,
     imageAlt: "Onelement Energy team and company",
+    imagePosition: "center",
     imageFit: "contain",
     tone: "emerald",
   },
@@ -38,6 +39,7 @@ const heroSlides = [
     to: "/technologies",
     imageUrl: heroTechnologies,
     imageAlt: "Onelement Energy technologies",
+    imagePosition: "center 68%",
     imageFit: "cover",
     tone: "cyan",
   },
@@ -49,7 +51,10 @@ const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(1);
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
-  const pointerStart = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const gesture = useRef(null);
+  const suppressClick = useRef(false);
+  const dragX = useMotionValue(0);
   const reduceMotion = useReducedMotion();
 
   const selectSlide = (nextIndex, nextDirection) => {
@@ -63,7 +68,7 @@ const HeroSection = () => {
   const activeSlide = heroSlides[activeIndex];
 
   useEffect(() => {
-    if (isPaused || reduceMotion) return undefined;
+    if (isPaused || isDragging || reduceMotion) return undefined;
 
     const timer = window.setTimeout(() => {
       setDirection(1);
@@ -71,24 +76,84 @@ const HeroSection = () => {
     }, AUTOPLAY_DELAY);
 
     return () => window.clearTimeout(timer);
-  }, [activeIndex, isPaused, reduceMotion]);
+  }, [activeIndex, isDragging, isPaused, reduceMotion]);
 
   const handleKeyDown = (event) => {
     if (event.key === "ArrowLeft") showPrevious();
     if (event.key === "ArrowRight") showNext();
   };
 
+  const resetGesture = () => {
+    gesture.current = null;
+    setIsDragging(false);
+    animate(dragX, 0, { duration: reduceMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] });
+  };
+
   const handlePointerDown = (event) => {
-    pointerStart.current = event.clientX;
+    if (!event.isPrimary || event.button > 0) return;
+
+    gesture.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      startedAt: performance.now(),
+      horizontal: false,
+    };
+  };
+
+  const handlePointerMove = (event) => {
+    const current = gesture.current;
+    if (!current || current.pointerId !== event.pointerId) return;
+
+    const distanceX = event.clientX - current.startX;
+    const distanceY = event.clientY - current.startY;
+
+    if (!current.horizontal) {
+      if (Math.abs(distanceX) < 8 && Math.abs(distanceY) < 8) return;
+      if (Math.abs(distanceY) > Math.abs(distanceX)) {
+        resetGesture();
+        return;
+      }
+      current.horizontal = true;
+      setIsDragging(true);
+      event.currentTarget.setPointerCapture?.(event.pointerId);
+    }
+
+    event.preventDefault();
+    dragX.set(distanceX * 0.72);
   };
 
   const handlePointerUp = (event) => {
-    if (pointerStart.current === null) return;
-    const distance = event.clientX - pointerStart.current;
-    pointerStart.current = null;
-    if (Math.abs(distance) < 55) return;
-    if (distance > 0) showPrevious();
-    else showNext();
+    const current = gesture.current;
+    if (!current || current.pointerId !== event.pointerId) return;
+
+    const travelled = event.clientX - current.startX;
+    const elapsed = Math.max(performance.now() - current.startedAt, 1);
+    const speed = (travelled / elapsed) * 1000;
+    const completedDrag = current.horizontal;
+
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    resetGesture();
+
+    if (!completedDrag) return;
+    suppressClick.current = true;
+    window.setTimeout(() => {
+      suppressClick.current = false;
+    }, 0);
+
+    if (travelled > 65 || speed > 520) showPrevious();
+    else if (travelled < -65 || speed < -520) showNext();
+  };
+
+  const handlePointerCancel = () => resetGesture();
+
+  const handleClickCapture = (event) => {
+    if (!suppressClick.current) return;
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   return (
@@ -99,14 +164,17 @@ const HeroSection = () => {
       tabIndex={0}
       onKeyDown={handleKeyDown}
       onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
+      onClickCapture={handleClickCapture}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
       }}
-      className="relative isolate mt-16 min-h-[calc(100svh-4rem)] overflow-hidden bg-[#061a36] outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#79ffe0]"
+      className="relative isolate mt-16 h-[min(calc(100svh-4rem),48rem)] touch-pan-y overflow-hidden bg-[#061a36] outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#79ffe0] lg:h-[min(calc(100dvh-4rem),48rem)]"
     >
       <button
         type="button"
@@ -126,7 +194,7 @@ const HeroSection = () => {
         <ArrowRight aria-hidden="true" size={20} />
       </button>
 
-      <div className="relative min-h-[calc(100svh-4rem)]">
+      <div className="relative h-full">
         <AnimatePresence mode="wait" initial={false}>
           <motion.article
             key={activeIndex}
@@ -137,19 +205,21 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * -50, scale: 0.99 }}
             transition={{ duration: reduceMotion ? 0.01 : 0.56, ease: [0.22, 1, 0.36, 1] }}
-            className="relative min-h-[calc(100svh-4rem)] w-full overflow-hidden bg-[#061a36]"
+            className="relative h-full w-full cursor-grab select-none overflow-hidden bg-[#061a36] active:cursor-grabbing"
           >
-            {activeSlide.primary ? (
-              <>
-                <CarbonBackground />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(35,182,95,.13),transparent_32%),linear-gradient(90deg,rgba(6,26,54,.97)_0%,rgba(10,41,85,.86)_48%,rgba(10,41,85,.35)_100%)]" />
-                <div className="absolute inset-0 opacity-45 [background-image:linear-gradient(rgba(54,83,111,.2)_1px,transparent_1px),linear-gradient(90deg,rgba(54,83,111,.2)_1px,transparent_1px)] [background-size:52px_52px]" aria-hidden="true" />
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#061a36]/60 to-transparent" />
-                <HeroContent slide={activeSlide} />
-              </>
-            ) : (
-              <TemporaryHeroSlide slide={activeSlide} />
-            )}
+            <motion.div className="h-full w-full" style={{ x: dragX }}>
+              {activeSlide.primary ? (
+                <>
+                  <CarbonBackground />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(35,182,95,.13),transparent_32%),linear-gradient(90deg,rgba(6,26,54,.97)_0%,rgba(10,41,85,.86)_48%,rgba(10,41,85,.35)_100%)]" />
+                  <div className="absolute inset-0 opacity-45 [background-image:linear-gradient(rgba(54,83,111,.2)_1px,transparent_1px),linear-gradient(90deg,rgba(54,83,111,.2)_1px,transparent_1px)] [background-size:52px_52px]" aria-hidden="true" />
+                  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#061a36]/60 to-transparent" />
+                  <HeroContent slide={activeSlide} />
+                </>
+              ) : (
+                <TemporaryHeroSlide slide={activeSlide} />
+              )}
+            </motion.div>
           </motion.article>
         </AnimatePresence>
       </div>

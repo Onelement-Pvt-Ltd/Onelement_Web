@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 import TechnologyFallback from "@/assets/CarbonCapture.png";
+import { getTechnologyImage } from "@/features/technology/data/technologyImages";
 
 const FALLBACK_IMAGE = TechnologyFallback;
 
 const TechnologySection = ({ tech, index }) => {
   const previewText = tech.description?.paragraphs?.[0];
   const imageFirst = index % 2 === 0;
+  const image = getTechnologyImage(
+    tech.slug,
+    tech.banner?.image || FALLBACK_IMAGE
+  );
 
   return (
     <Link
@@ -18,16 +23,16 @@ const TechnologySection = ({ tech, index }) => {
         }`}
       >
         <div className="w-full md:w-1/2">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100">
+          <div className="relative aspect-[3/2] overflow-hidden rounded-2xl bg-white">
             <img
-              src={tech.banner?.image || FALLBACK_IMAGE}
+              src={image}
               alt={tech.title}
               loading="lazy"
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src = FALLBACK_IMAGE;
               }}
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="h-full w-full object-contain"
             />
           </div>
         </div>

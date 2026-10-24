@@ -94,7 +94,17 @@ const ChainNode = ({ item, index, mobile = false, reduceMotion }) => {
         </div>
         <div className={mobileTextPosition}>
           <p className="text-[clamp(6.5px,2.1vw,10px)] font-bold uppercase leading-tight text-white">
-            <span className="block">{item.title}</span>
+            <span className="block">
+              {item.number === "02" ? (
+                <>
+                  Green
+                  <br />
+                  Hydrogen
+                </>
+              ) : (
+                item.title
+              )}
+            </span>
             {item.accentTitle && <span className="block text-[#57ddb0]">{item.accentTitle}</span>}
           </p>
           {item.detail && (

@@ -1,6 +1,5 @@
 import { motion as Motion } from "framer-motion";
-import { focusAreas } from "../utils/aboutWhoWeAreData";
-import VerticalCard from "./VerticalCard";
+import technologyVerticals from "@/assets/About/technologyVerticals.png";
 import { revealItem, staggerGroup, viewportOnce } from "../../../aboutMotion";
 
 const TechnologyVerticals = () => (
@@ -23,21 +22,25 @@ const TechnologyVerticals = () => (
             solutions.
           </p>
         </Motion.div>
-        <Motion.div className="vertical-count" variants={revealItem}>
+        {/* <Motion.div className="vertical-count" variants={revealItem}>
           <strong>3</strong>
           <span>Strategic verticals</span>
-        </Motion.div>
+        </Motion.div> */}
       </Motion.header>
 
-      <Motion.div
-        className="vertical-grid"
-        variants={staggerGroup}
+      <Motion.figure
+        className="verticals-visual"
+        variants={revealItem}
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
       >
-        {focusAreas.map((area) => <VerticalCard key={area.id} {...area} />)}
-      </Motion.div>
+        <img
+          src={technologyVerticals}
+          alt="Onelement Energy technology verticals connecting carbon capture, green hydrogen, methanol production and fuel-cell power"
+          loading="lazy"
+        />
+      </Motion.figure>
     </div>
   </section>
 );

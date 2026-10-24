@@ -2,62 +2,53 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Blog1 from "@/assets/Blog/Blog1.webp";
 
-const TechnologyBanner = ({ name, banner }) => {
+const TechnologyBanner = ({ name, banner, image }) => {
   return (
-    <section className="relative w-full min-h-[70vh] flex items-center overflow-hidden">
+    <section className="relative flex min-h-[70vh] w-full items-center overflow-hidden bg-[#0a2955] py-20">
+      <div className="absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-[#23b65f]/10 blur-3xl" />
+      <div className="absolute -right-32 top-0 h-96 w-96 rounded-full bg-[#67f5d0]/10 blur-3xl" />
 
-      <img
-        src={banner?.image || Blog1}
-        alt=""
-        aria-hidden="true"
-        decoding="async"
-        fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover object-center"
-      />
-
-      <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/40" />
-
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-10">
-
-        <nav
-          aria-label="Breadcrumb"
-          className="mb-8 flex items-center text-sm text-white/80 space-x-2"
-        >
-          <Link
-            to="/"
-            className="hover:text-[#9fe870] transition font-medium"
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-6 md:grid-cols-[.82fr_1.18fr] md:px-10 lg:gap-16">
+        <div>
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-8 flex items-center space-x-2 text-sm text-white/80"
           >
-            Home
-          </Link>
+            <Link to="/" className="font-medium transition hover:text-[#9fe870]">
+              Home
+            </Link>
+            <ArrowRight size={14} className="opacity-60" />
+            <Link
+              to="/technologies"
+              className="font-medium transition hover:text-[#9fe870]"
+            >
+              Technologies
+            </Link>
+            <ArrowRight size={14} className="opacity-60" />
+            <span className="max-w-[200px] truncate font-semibold text-white">
+              {name}
+            </span>
+          </nav>
 
-          <ArrowRight size={14} className="opacity-60" />
+          <div className="max-w-2xl space-y-6">
+            <div className="h-1 w-20 rounded-full bg-[#9fe870]" />
+            <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">
+              {name}
+            </h1>
+            <p className="text-lg leading-relaxed text-white/80">
+              {banner?.subtitle}
+            </p>
+          </div>
+        </div>
 
-          <Link
-            to="/technologies"
-            className="hover:text-[#9fe870] transition font-medium"
-          >
-            Technologies
-          </Link>
-
-          <ArrowRight size={14} className="opacity-60" />
-
-          <span className="text-white font-semibold truncate max-w-[200px]">
-            {name}
-          </span>
-        </nav>
-
-        <div className="max-w-2xl space-y-6">
-
-          <div className="h-1 w-20 bg-[#9fe870] rounded-full" />
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
-            {name}
-          </h1>
-
-          <p className="text-lg text-white/80 leading-relaxed">
-            {banner?.subtitle}
-          </p>
-
+        <div className="aspect-[3/2] overflow-hidden rounded-3xl bg-white shadow-[0_30px_70px_rgba(0,0,0,.28)]">
+          <img
+            src={image || banner?.image || Blog1}
+            alt={`${name} technology system`}
+            decoding="async"
+            fetchPriority="high"
+            className="h-full w-full object-contain"
+          />
         </div>
       </div>
     </section>

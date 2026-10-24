@@ -1,8 +1,8 @@
-import vision from "@/assets/About/vision.webp";
-import mission from "@/assets/About/mission.webp";
+import vision from "@/assets/About/vision.jpg";
+import mission from "@/assets/About/mission.jpg";
 
 export const visionData = {
-  id: "01",
+  // id: "01",
   label: "Mission",
   image: vision,
   description:
@@ -10,7 +10,7 @@ export const visionData = {
 };
 
 export const missionData = {
-  id: "02",
+  // id: "02",
   label: "Vision",
   image: mission,
   description:

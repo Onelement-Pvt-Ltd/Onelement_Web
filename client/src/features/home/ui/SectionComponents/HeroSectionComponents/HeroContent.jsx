@@ -2,10 +2,7 @@ import { ArrowDownRight, ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const FEATURE_CLIP_PATH =
-  "polygon(0 0, calc(100% - 2.5rem) 0, 100% 2.5rem, 100% 100%, 2.5rem 100%, 0 calc(100% - 2.5rem))";
-
-const HeroContent = ({ slide }) => {
+const HeroContent = () => {
   const reduceMotion = useReducedMotion();
 
   const container = {
@@ -32,9 +29,9 @@ const HeroContent = ({ slide }) => {
       variants={container}
       initial="hidden"
       animate="visible"
-      className="relative z-10 mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-7xl flex-col justify-center px-6 py-24 sm:px-10 lg:px-14 lg:py-24 xl:px-8"
+      className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col justify-center overflow-y-auto px-6 pb-24 pt-8 sm:px-10 sm:pb-24 sm:pt-10 lg:overflow-hidden lg:px-14 lg:py-[clamp(2.5rem,7vh,5rem)] xl:px-8"
     >
-      <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_.85fr] xl:gap-20">
+      <div className="grid items-center gap-6 sm:gap-8 lg:grid-cols-[1.08fr_.92fr] lg:gap-10 xl:gap-16">
         <div className="relative max-w-3xl">
           <motion.div
             variants={reveal}
@@ -45,35 +42,41 @@ const HeroContent = ({ slide }) => {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.7, delay: reduceMotion ? 0 : 0.18 }}
-              className="h-px w-12 origin-left bg-[#2fdc79]"
+              className="h-px w-12 origin-left bg-white/70"
             />
-            <span className="h-2 w-2 rounded-full border border-[#67f5d0]/80" />
+            <span className="h-2 w-2 rounded-full border border-white/70" />
           </motion.div>
 
           <motion.h1
             variants={reveal}
-            className="home-display mt-7 text-white"
+            className="home-display mt-5 text-white lg:mt-7"
             aria-label="Onelement Energy"
           >
-            <span className="block text-[clamp(2.8rem,7.4vw,7rem)] font-bold leading-[0.88]">
+            <span className="block text-[clamp(2.25rem,11vw,7rem)] font-bold leading-[0.88] lg:text-[clamp(2.8rem,7.4vw,7rem)]">
               ONELEMENT
             </span>
-            <span className="hero-accent-text mt-2 block text-[clamp(2.8rem,7.4vw,7rem)] font-bold leading-[0.88]">
+            <span className="hero-accent-text mt-1 block text-[clamp(2.25rem,11vw,7rem)] font-bold leading-[0.88] lg:mt-2 lg:text-[clamp(2.8rem,7.4vw,7rem)]">
               ENERGY
             </span>
           </motion.h1>
 
           <motion.p
             variants={reveal}
-            className="mt-7 flex flex-wrap items-baseline gap-x-2 text-[clamp(1.35rem,2.6vw,2.2rem)] font-medium leading-tight tracking-[-0.02em] text-white/72"
+            className="mt-4 flex flex-wrap items-baseline gap-x-2 text-[clamp(1.05rem,4.8vw,2.2rem)] font-medium leading-tight tracking-[-0.02em] text-white/72 lg:mt-7 lg:text-[clamp(1.35rem,2.6vw,2.2rem)]"
           >
             <span>Building a</span>
-            <span className="font-semibold text-[#67f5d0]">Sustainable Future</span>
+            <span className="relative inline-block font-semibold text-white">
+              Sustainable Future
+              <span
+                className="absolute -bottom-1 left-0 h-px w-full bg-linear-to-r from-[#67f5d0] via-white/60 to-transparent"
+                aria-hidden="true"
+              />
+            </span>
           </motion.p>
 
           <motion.div
             variants={reveal}
-            className="mt-9 flex flex-col gap-3 sm:flex-row"
+            className="mt-6 flex flex-col gap-3 sm:flex-row lg:mt-9"
           >
             <motion.div
               whileHover={reduceMotion ? undefined : { y: -3 }}
@@ -81,7 +84,7 @@ const HeroContent = ({ slide }) => {
             >
               <Link
                 to="/technologies"
-                className="group flex items-center justify-center gap-3 rounded-full bg-[#2fdc79] px-7 py-4 text-base font-bold text-[#061a36] shadow-[0_14px_40px_rgba(47,220,121,.2)] transition-colors hover:bg-[#45e58a] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#67f5d0]"
+                className="group flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-bold text-[#061a36] shadow-[0_14px_40px_rgba(0,0,0,.22)] transition-colors hover:bg-[#e5f7ef] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:text-base lg:px-7 lg:py-4"
               >
                 Explore Technologies
                 <ArrowRight
@@ -108,76 +111,42 @@ const HeroContent = ({ slide }) => {
 
         <motion.aside
           variants={reveal}
-          whileHover={reduceMotion ? undefined : { y: -5 }}
+          whileHover={reduceMotion ? undefined : { y: -4 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
-          className="relative mx-auto w-full max-w-lg lg:mx-0 lg:translate-y-8"
+          className="relative mx-auto w-full max-w-xl lg:mx-0"
         >
-          <div
-            className="absolute inset-0 translate-x-3 translate-y-3 bg-[#1b3858]"
-            style={{ clipPath: FEATURE_CLIP_PATH }}
-            aria-hidden="true"
-          />
+          <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-[2rem_0_2rem_0] bg-[#2fdc79] shadow-[0_24px_70px_rgba(47,220,121,.18)]" aria-hidden="true" />
 
-          <div
-            className="relative overflow-hidden bg-[#36536f] p-px shadow-[0_30px_80px_rgba(0,0,0,.3)]"
-            style={{ clipPath: FEATURE_CLIP_PATH }}
-          >
-            <div
-              className="relative bg-[#102f50] p-7 sm:p-10"
-              style={{ clipPath: FEATURE_CLIP_PATH }}
-            >
-            {slide?.imageUrl && (
-              <>
-                <img
-                  src={slide.imageUrl}
-                  alt={slide.imageAlt}
-                  className="absolute inset-0 h-full w-full object-contain object-center"
-                  decoding="async"
-                  fetchPriority="high"
-                />
-                <div className="absolute inset-0 bg-[#061a36]/62" aria-hidden="true" />
-              </>
-            )}
+          <div className="relative min-h-[13.5rem] overflow-hidden rounded-[1.5rem_0_1.5rem_0] border border-[#67f5d0]/35 bg-[#102f50] px-5 py-5 shadow-[0_30px_80px_rgba(0,0,0,.3)] sm:min-h-[16rem] sm:px-7 sm:py-7 lg:min-h-[min(30rem,58vh)] lg:rounded-[2rem_0_2rem_0] lg:px-11 lg:py-11">
+            <span className="absolute -right-5 top-1/2 -translate-y-1/2 text-[13rem] font-bold leading-none text-white/[0.025]" aria-hidden="true">&amp;</span>
+            <span className="absolute right-0 top-0 h-20 w-20 bg-[#2fdc79] [clip-path:polygon(100%_0,100%_100%,0_0)]" aria-hidden="true" />
+            <span className="absolute bottom-0 left-0 h-1 w-2/5 bg-linear-to-r from-[#2fdc79] to-[#67f5d0]" aria-hidden="true" />
 
-            <span
-              className="absolute right-0 top-0 h-16 w-16 bg-[#2fdc79]"
-              style={{ clipPath: "polygon(100% 0, 100% 100%, 0 0)" }}
-              aria-hidden="true"
-            />
-
-            <div className="relative z-10">
-              <div className="mb-10 flex items-center justify-between">
-                <div className="flex gap-2" aria-hidden="true">
+            <div className="relative z-10 flex min-h-[10.5rem] flex-col justify-between sm:min-h-[12.5rem] lg:min-h-[min(23rem,48vh)]">
+              <div className="flex items-center justify-between" aria-hidden="true">
+                <div className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-[#2fdc79]" />
                   <span className="h-2 w-2 rounded-full bg-[#67f5d0]/65" />
                   <span className="h-2 w-2 rounded-full bg-white/25" />
                 </div>
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.8, delay: reduceMotion ? 0 : 0.7 }}
-                  className="h-px w-20 origin-right bg-linear-to-r from-transparent to-[#67f5d0]/60"
-                />
+                <span className="h-px w-20 bg-linear-to-r from-transparent to-[#67f5d0]/70" />
               </div>
 
-              <div className="flex items-start justify-between" aria-hidden="true">
-                <span className="font-serif text-6xl leading-none text-[#2fdc79] sm:text-7xl">
+              <div>
+                <span className="block font-serif text-5xl leading-[0.5] text-[#2fdc79] sm:text-6xl lg:text-8xl" aria-hidden="true">
                   &ldquo;
                 </span>
-                <span className="font-serif text-6xl leading-none text-[#2fdc79] sm:text-7xl">
-                  &rdquo;
-                </span>
+
+                <h2 className="home-display mt-2 text-[clamp(1.15rem,5vw,2rem)] font-medium leading-[1.08] text-white sm:text-2xl lg:mt-5 lg:text-4xl">
+                  Decarbonising, Decentralizing & Deploying
+                  <span className="mt-2 block font-semibold leading-tight text-[#67f5d0] sm:mt-3 lg:mt-5">
+                    Sustainable Technologies
+                  </span>
+                </h2>
               </div>
 
-              <h2 className="home-display -mt-2 text-center text-3xl font-medium leading-tight text-white sm:text-4xl lg:text-left">
-                Decarbonising, Decentralizing & Deploying
-                <span className="mt-3 block font-semibold text-[#67f5d0]">
-                  Sustainable Technologies
-                </span>
-              </h2>
-
-              <div className="mt-9 flex items-center gap-4" aria-hidden="true">
-                <span className="h-px flex-1 bg-white/15" />
+              <div className="flex items-center gap-4" aria-hidden="true">
+                <span className="h-px flex-1 bg-white/18" />
                 <motion.span
                   animate={reduceMotion ? undefined : { rotate: [45, 135, 45] }}
                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -185,14 +154,13 @@ const HeroContent = ({ slide }) => {
                 />
               </div>
             </div>
-            </div>
           </div>
         </motion.aside>
       </div>
 
       <motion.div
         variants={reveal}
-        className="mt-14 flex items-center gap-5 lg:mt-16"
+        className="mt-10 hidden items-center gap-5 lg:flex xl:mt-12"
         aria-hidden="true"
       >
         <span className="h-px flex-1 bg-gradient-to-r from-[#2fdc79]/70 via-[#36536f]/70 to-transparent" />

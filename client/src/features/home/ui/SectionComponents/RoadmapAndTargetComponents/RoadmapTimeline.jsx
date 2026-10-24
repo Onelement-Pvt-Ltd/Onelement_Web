@@ -4,7 +4,15 @@ import TimelineNode from "./TimelineNode";
 
 const RoadmapTimeline = () => {
   return (
-    <section className="mt-24 border-t border-white/10 pt-16 lg:mt-28 lg:pt-20">
+    <section className="relative mt-8 border-t border-[#57ddb0]/25 pt-10 sm:mt-12 sm:pt-12 lg:mt-16 lg:pt-16">
+      <div
+        className="pointer-events-none absolute -top-10 left-1/2 h-20 w-[min(44rem,92vw)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(87,221,176,.12),transparent_70%)]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -top-px left-0 h-px w-32 bg-gradient-to-r from-[#57ddb0] to-transparent sm:w-48"
+        aria-hidden="true"
+      />
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}

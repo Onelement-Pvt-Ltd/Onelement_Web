@@ -15,6 +15,7 @@ import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
 import NotFound from "@/shared/components/NotFound";
 import PublicError from "@/shared/components/PublicError";
+import { getTechnologyImage } from "@/features/technology/data/technologyImages";
 
 const TechnologyDetails = () => {
   const { techId } = useParams();
@@ -35,6 +36,10 @@ const TechnologyDetails = () => {
   }, [techId]);
 
   const pageDescription = current?.banner?.subtitle || current?.description?.paragraphs?.[0];
+  const currentImage = getTechnologyImage(
+    current?.slug,
+    current?.banner?.image || Blog1
+  );
   const structuredData = useMemo(() => {
     if (!current) return null;
     return {
@@ -45,8 +50,8 @@ const TechnologyDetails = () => {
           name: current.title,
           description: pageDescription,
           url: `https://onelement.in/technologies/details/${current.slug}`,
-          primaryImageOfPage: current.banner?.image
-            ? { "@type": "ImageObject", url: current.banner.image }
+          primaryImageOfPage: currentImage
+            ? { "@type": "ImageObject", url: currentImage }
             : undefined,
         },
         breadcrumbSchema([
@@ -56,7 +61,7 @@ const TechnologyDetails = () => {
         ]),
       ],
     };
-  }, [current, pageDescription]);
+  }, [current, currentImage, pageDescription]);
 
   /* Loading */
   if (isLoading) return <TechnologySkeleton />;
@@ -77,10 +82,14 @@ const TechnologyDetails = () => {
         title={current.title}
         description={pageDescription}
         path={`/technologies/details/${current.slug}`}
-        image={current.banner?.image}
+        image={currentImage}
         structuredData={structuredData}
       />
-      <TechnologyBanner name={current.title} banner={current.banner} />
+      <TechnologyBanner
+        name={current.title}
+        banner={current.banner}
+        image={currentImage}
+      />
 
       <main className="mx-auto flex max-w-7xl flex-col px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
         <TechnologyDescription
@@ -125,13 +134,16 @@ const TechnologyDetails = () => {
                       to={`/technologies/details/${technology.slug}`}
                       className="group overflow-hidden rounded-3xl border border-[#0a2955]/10 bg-white shadow-[0_16px_45px_rgba(10,41,85,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(10,41,85,0.14)]"
                     >
-                      <div className="aspect-[16/10] overflow-hidden bg-slate-100">
+                      <div className="aspect-[3/2] overflow-hidden bg-white">
                         <img
-                          src={technology.banner?.image || Blog1}
+                          src={getTechnologyImage(
+                            technology.slug,
+                            technology.banner?.image || Blog1
+                          )}
                           alt={technology.title}
                           loading="lazy"
                           decoding="async"
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                          className="h-full w-full object-contain"
                         />
                       </div>
                       <div className="p-6">

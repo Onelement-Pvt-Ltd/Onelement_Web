@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import FourPillars from "./SectionComponents/CarousalSectionComponents/FourPillars";
 import HeroSection from "./SectionComponents/HeroSectionComponents/HeroSection";
-import BlogSection from "./SectionComponents/BlogSectionComponents/BlogSection";
+import PurposeSection from "./SectionComponents/PurposeSectionComponents/PurposeSection";
 import RoadmapSection from "./SectionComponents/RoadmapAndTargetComponents";
 import "./Home.css";
 import Seo from "@/shared/seo/Seo";
@@ -34,7 +34,7 @@ const Home = () => {
       <HeroSection />
       <FourPillars />
       <RoadmapSection />
-      <BlogSection />
+      <PurposeSection />
     </main>
   );
 };

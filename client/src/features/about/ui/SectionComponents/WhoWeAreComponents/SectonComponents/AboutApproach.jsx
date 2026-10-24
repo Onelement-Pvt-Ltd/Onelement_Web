@@ -17,7 +17,6 @@ const AboutApproach = () => (
           <p className="about-eyebrow">Our approach</p>
           <h2 className="about-heading">Everything we do is guided by three principles.</h2>
         </div>
-        <span className="approach-marker" aria-hidden="true">Method / 01—03</span>
       </Motion.header>
       <Motion.div className="approach-grid" variants={staggerGroup}>
         {approachData.map((item) => <ApproachCard key={item.id} {...item} />)}
