@@ -4,7 +4,7 @@ import TechnologyFallback from "@/assets/technologies/technologyFallback.png";
 
 const TechnologyBanner = ({ name, banner, image }) => {
   return (
-    <section className="relative flex min-h-0 w-full items-center overflow-hidden bg-[#0a2955] py-14 sm:py-16 md:min-h-[34rem] lg:min-h-[38rem] lg:py-20">
+    <section className="relative flex min-h-0 w-full items-center overflow-hidden bg-[#0B2440] py-14 sm:py-16 md:min-h-[34rem] lg:min-h-[38rem] lg:py-20">
       <div className="absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-[#23b65f]/10 blur-3xl" />
       <div className="absolute -right-32 top-0 h-96 w-96 rounded-full bg-[#67f5d0]/10 blur-3xl" />
 
@@ -25,7 +25,7 @@ const TechnologyBanner = ({ name, banner, image }) => {
               Technologies
             </Link>
             <ArrowRight size={14} className="opacity-60" />
-            <span className="max-w-[200px] truncate font-semibold text-white">
+            <span className="max-w-[200px] cursor-default truncate font-semibold text-white transition-colors duration-200 hover:text-[#9fe870]">
               {name}
             </span>
           </nav>

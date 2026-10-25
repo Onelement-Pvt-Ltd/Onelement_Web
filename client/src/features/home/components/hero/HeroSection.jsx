@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { animate, AnimatePresence, motion, useMotionValue, useReducedMotion } from "framer-motion";
 import HeroContent from "./HeroContent";
@@ -45,21 +45,29 @@ const heroSlides = [
 ];
 
 const AUTOPLAY_DELAY = 7000;
+const MOBILE_BREAKPOINT = "(max-width: 767px)";
 
 const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(1);
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia(MOBILE_BREAKPOINT).matches
+  );
+  const [hasChangedSlide, setHasChangedSlide] = useState(false);
   const gesture = useRef(null);
   const suppressClick = useRef(false);
   const dragX = useMotionValue(0);
   const reduceMotion = useReducedMotion();
 
-  const selectSlide = (nextIndex, nextDirection) => {
+  const selectSlide = useCallback((nextIndex, nextDirection) => {
+    const normalizedIndex = (nextIndex + heroSlides.length) % heroSlides.length;
+
     setDirection(nextDirection);
-    setActiveIndex((nextIndex + heroSlides.length) % heroSlides.length);
-  };
+    setHasChangedSlide(true);
+    setActiveIndex(normalizedIndex);
+  }, []);
 
   const showPrevious = () => selectSlide(activeIndex - 1, -1);
   const showNext = () => selectSlide(activeIndex + 1, 1);
@@ -67,15 +75,22 @@ const HeroSection = () => {
   const activeSlide = heroSlides[activeIndex];
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
+    const handleChange = (event) => setIsMobile(event.matches);
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
     if (isPaused || isDragging || reduceMotion) return undefined;
 
     const timer = window.setTimeout(() => {
-      setDirection(1);
-      setActiveIndex((currentIndex) => (currentIndex + 1) % heroSlides.length);
+      selectSlide(activeIndex + 1, 1);
     }, AUTOPLAY_DELAY);
 
     return () => window.clearTimeout(timer);
-  }, [activeIndex, isDragging, isPaused, reduceMotion]);
+  }, [activeIndex, isDragging, isPaused, reduceMotion, selectSlide]);
 
   const handleKeyDown = (event) => {
     if (event.key === "ArrowLeft") showPrevious();
@@ -155,6 +170,17 @@ const HeroSection = () => {
     event.stopPropagation();
   };
 
+  const renderSlide = (slide) => slide.primary ? (
+    <>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(35,182,95,.13),transparent_32%),linear-gradient(90deg,rgba(6,26,54,.97)_0%,rgba(10,41,85,.86)_48%,rgba(10,41,85,.35)_100%)]" />
+      <div className="absolute inset-0 opacity-45 [background-image:linear-gradient(rgba(54,83,111,.2)_1px,transparent_1px),linear-gradient(90deg,rgba(54,83,111,.2)_1px,transparent_1px)] [background-size:52px_52px]" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#061a36]/60 to-transparent" />
+      <HeroContent slide={slide} />
+    </>
+  ) : (
+    <TemporaryHeroSlide slide={slide} />
+  );
+
   return (
     <section
       id="home"
@@ -167,11 +193,11 @@ const HeroSection = () => {
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerCancel}
       onClickCapture={handleClickCapture}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocusCapture={() => setIsPaused(true)}
+      onMouseEnter={() => !isMobile && setIsPaused(true)}
+      onMouseLeave={() => !isMobile && setIsPaused(false)}
+      onFocusCapture={() => !isMobile && setIsPaused(true)}
       onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
+        if (!isMobile && !event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
       }}
       className="relative isolate mt-16 h-[min(calc(100svh-4rem),48rem)] touch-pan-y overflow-hidden bg-[#061a36] outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#79ffe0] lg:h-[min(calc(100dvh-4rem),48rem)]"
     >
@@ -194,33 +220,44 @@ const HeroSection = () => {
       </button>
 
       <div className="relative h-full">
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.article
-            key={activeIndex}
-            custom={direction}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${activeIndex + 1} of ${heroSlides.length}: ${activeSlide.eyebrow}`}
-            initial={reduceMotion ? { opacity: 0 } : { x: `${direction * 100}%` }}
-            animate={reduceMotion ? { opacity: 1 } : { x: 0 }}
-            exit={reduceMotion ? { opacity: 0 } : { x: `${direction * -100}%` }}
-            transition={{ duration: reduceMotion ? 0.01 : 0.55, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute inset-0 h-full w-full cursor-grab touch-pan-y select-none overflow-hidden bg-[#061a36] active:cursor-grabbing"
-          >
-            <motion.div className="h-full w-full" style={{ x: dragX }}>
-              {activeSlide.primary ? (
-                <>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(35,182,95,.13),transparent_32%),linear-gradient(90deg,rgba(6,26,54,.97)_0%,rgba(10,41,85,.86)_48%,rgba(10,41,85,.35)_100%)]" />
-                  <div className="absolute inset-0 opacity-45 [background-image:linear-gradient(rgba(54,83,111,.2)_1px,transparent_1px),linear-gradient(90deg,rgba(54,83,111,.2)_1px,transparent_1px)] [background-size:52px_52px]" aria-hidden="true" />
-                  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#061a36]/60 to-transparent" />
-                  <HeroContent slide={activeSlide} />
-                </>
-              ) : (
-                <TemporaryHeroSlide slide={activeSlide} />
-              )}
-            </motion.div>
-          </motion.article>
-        </AnimatePresence>
+        {isMobile ? (
+          <div className="hero-mobile-viewport">
+            <article
+              key={activeIndex}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${activeIndex + 1} of ${heroSlides.length}: ${activeSlide.eyebrow}`}
+              className={`hero-mobile-slide ${
+                hasChangedSlide
+                  ? direction > 0
+                    ? "hero-mobile-slide--next"
+                    : "hero-mobile-slide--previous"
+                  : ""
+              }`}
+            >
+              {renderSlide(activeSlide)}
+            </article>
+          </div>
+        ) : (
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.article
+              key={activeIndex}
+              custom={direction}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${activeIndex + 1} of ${heroSlides.length}: ${activeSlide.eyebrow}`}
+              initial={reduceMotion ? { opacity: 0 } : { x: `${direction * 100}%` }}
+              animate={reduceMotion ? { opacity: 1 } : { x: 0 }}
+              exit={reduceMotion ? { opacity: 0 } : { x: `${direction * -100}%` }}
+              transition={{ duration: reduceMotion ? 0.01 : 0.55, ease: [0.4, 0, 0.2, 1] }}
+              className="absolute inset-0 h-full w-full cursor-grab touch-pan-y select-none overflow-hidden bg-[#061a36] active:cursor-grabbing"
+            >
+              <motion.div className="h-full w-full" style={{ x: dragX }}>
+                {renderSlide(activeSlide)}
+              </motion.div>
+            </motion.article>
+          </AnimatePresence>
+        )}
       </div>
 
       <div className="absolute bottom-7 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-[#061a36]/62 px-3 py-2 backdrop-blur-xl" role="tablist" aria-label="Choose featured story">

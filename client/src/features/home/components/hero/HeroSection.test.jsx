@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import HeroSection from "./HeroSection";
 
 describe("HeroSection carousel", () => {
@@ -65,5 +65,42 @@ describe("HeroSection carousel", () => {
         name: "Technology designed around energy, environment and industry.",
       }),
     ).toBeInTheDocument();
+  });
+
+  it("uses the CSS slide transition on mobile controls", async () => {
+    const originalMatchMedia = window.matchMedia;
+    window.matchMedia = vi.fn((query) => ({
+      matches: query === "(max-width: 767px)",
+      media: query,
+      onchange: null,
+      addListener: () => {},
+      removeListener: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => false,
+    }));
+
+    try {
+      const user = userEvent.setup();
+      render(
+        <MemoryRouter>
+          <HeroSection />
+        </MemoryRouter>,
+      );
+
+      await user.click(screen.getByRole("button", { name: "Next hero slide" }));
+
+      const slide = await screen.findByRole("group", {
+        name: "3 of 3: Our technologies",
+      });
+      expect(slide).toHaveClass("hero-mobile-slide--next");
+      expect(
+        screen.getByRole("heading", {
+          name: "Technology designed around energy, environment and industry.",
+        }),
+      ).toBeInTheDocument();
+    } finally {
+      window.matchMedia = originalMatchMedia;
+    }
   });
 });
