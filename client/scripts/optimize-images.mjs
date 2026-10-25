@@ -7,8 +7,6 @@ const images = [
   ["../src/assets/shared/OEPL_LARGE_WHITE_TRANSPARENT.png", "../src/assets/shared/OEPL_LARGE_WHITE_TRANSPARENT.webp", 260, true],
   ["../src/assets/technologies/carbonCapture_OEPL.png", "../src/assets/technologies/carbonCapture_OEPL.webp", 1800],
   ["../src/assets/technologies/pemFuelCell_OEPL.png", "../src/assets/technologies/pemFuelCell_OEPL.webp", 1800],
-  ["../src/assets/technologies/gh2Ecosystem_OEPL.png", "../src/assets/technologies/gh2Ecosystem_OEPL.webp", 1800],
-  ["../src/assets/technologies/eFuel_OEPL.png", "../src/assets/technologies/eFuel_OEPL.webp", 1800],
   ["../src/assets/about/technologyVerticals.png", "../src/assets/about/technologyVerticals.webp", 1800],
   ["../src/assets/about/technologyVerticals.png", "../src/assets/about/technologyVerticals-900.webp", 900, false, 82],
   ["../src/assets/about/carbonPipes.jpg", "../src/assets/about/carbonPipes.webp", 1400],

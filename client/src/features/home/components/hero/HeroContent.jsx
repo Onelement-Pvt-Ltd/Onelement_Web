@@ -65,10 +65,10 @@ const HeroContent = () => {
             className="mt-4 flex flex-wrap items-baseline gap-x-2 text-[clamp(1.05rem,4.8vw,2.2rem)] font-medium leading-tight tracking-[-0.02em] text-white/72 lg:mt-7 lg:text-[clamp(1.35rem,2.6vw,2.2rem)]"
           >
             <span>Building a</span>
-            <span className="relative inline-block font-semibold text-white">
+            <span className="relative inline-block rounded-sm bg-[#2fdc79]/10 px-1.5 py-0.5 font-bold text-[#67f5d0]">
               Sustainable Future
               <span
-                className="absolute -bottom-1 left-0 h-px w-full bg-linear-to-r from-[#67f5d0] via-white/60 to-transparent"
+                className="absolute -bottom-1 left-0 h-0.5 w-full bg-linear-to-r from-[#2fdc79] via-[#67f5d0] to-[#2fdc79]/20 shadow-[0_0_12px_rgba(47,220,121,.5)]"
                 aria-hidden="true"
               />
             </span>
@@ -122,7 +122,7 @@ const HeroContent = () => {
                 &ldquo;
               </span>
 
-              <p className="home-display mt-3 text-[clamp(1.2rem,4.5vw,2rem)] font-medium leading-[1.16] text-white sm:text-2xl lg:mt-5 lg:text-4xl">
+              <p className="home-display text-[clamp(1.2rem,4.5vw,2rem)] font-medium leading-[1.16] text-white sm:text-2xl lg:text-4xl">
                 Decarbonising, Decentralizing &amp; Deploying
                 <span className="mt-2 block font-semibold text-[#67f5d0] sm:mt-3">
                   Sustainable Technologies
