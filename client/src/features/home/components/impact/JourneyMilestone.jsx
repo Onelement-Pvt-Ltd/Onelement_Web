@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const TimelineNode = ({ item, index }) => {
+const JourneyMilestone = ({ item, index }) => {
   return (
     <motion.article
       initial={{ opacity: 0, y: 24 }}
@@ -28,4 +28,4 @@ const TimelineNode = ({ item, index }) => {
   );
 };
 
-export default TimelineNode;
+export default JourneyMilestone;

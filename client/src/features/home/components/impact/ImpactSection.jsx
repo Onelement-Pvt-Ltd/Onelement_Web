@@ -1,8 +1,8 @@
-import SectionHeading from "./SectionHeading";
-import MissionGrid from "./MissionGrid";
-import RoadmapTimeline from "./RoadmapTimeline";
+import ImpactHeading from "./ImpactHeading";
+import CcusValueChain from "./CcusValueChain";
+import JourneyTimeline from "./JourneyTimeline";
 
-const RoadmapSection = () => {
+const ImpactSection = () => {
   return (
     <section id="impact" className="relative isolate scroll-mt-24 overflow-hidden bg-[#071f41] py-[clamp(3.5rem,8vw,8rem)]">
       <div className="absolute -left-48 top-0 h-96 w-96 rounded-full bg-[#23b65f]/15 blur-[120px]" />
@@ -10,14 +10,14 @@ const RoadmapSection = () => {
       <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] bg-size-[56px_56px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-        <SectionHeading />
+        <ImpactHeading />
 
-        <MissionGrid />
+        <CcusValueChain />
 
-        <RoadmapTimeline />
+        <JourneyTimeline />
       </div>
     </section>
   );
 };
 
-export default RoadmapSection;
+export default ImpactSection;

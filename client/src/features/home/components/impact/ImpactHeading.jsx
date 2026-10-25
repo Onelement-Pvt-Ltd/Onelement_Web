@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const SectionHeading = () => {
+const ImpactHeading = () => {
   return (
     <div className="mx-auto max-w-4xl text-center">
       <motion.p
@@ -39,4 +39,4 @@ const SectionHeading = () => {
   );
 };
 
-export default SectionHeading;
+export default ImpactHeading;

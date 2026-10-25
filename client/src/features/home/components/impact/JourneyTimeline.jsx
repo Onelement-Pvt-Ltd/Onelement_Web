@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { roadmapTimeline } from "@/features/home/data/roadmap";
-import TimelineNode from "./TimelineNode";
+import { journeyMilestones } from "@/features/home/data/journeyMilestones";
+import JourneyMilestone from "./JourneyMilestone";
 
-const RoadmapTimeline = () => {
+const JourneyTimeline = () => {
   return (
     <section className="relative mt-8 border-t border-[#57ddb0]/25 pt-10 sm:mt-12 sm:pt-12 lg:mt-16 lg:pt-16">
       <div
@@ -41,8 +41,8 @@ const RoadmapTimeline = () => {
         />
 
         <div className="grid gap-10 lg:grid-cols-4 lg:gap-8">
-          {roadmapTimeline.map((item, index) => (
-            <TimelineNode key={item.year} item={item} index={index} />
+          {journeyMilestones.map((item, index) => (
+            <JourneyMilestone key={item.year} item={item} index={index} />
           ))}
         </div>
       </div>
@@ -50,4 +50,4 @@ const RoadmapTimeline = () => {
   );
 };
 
-export default RoadmapTimeline;
+export default JourneyTimeline;

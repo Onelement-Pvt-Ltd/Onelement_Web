@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <motion.header className="fixed inset-x-0 top-0 z-9999 mx-auto flex h-16 items-center bg-[#F6F8F6]/90 text-[15px] shadow-sm backdrop-blur-sm">
-      <nav className="mx-2.5 flex w-full max-w-full items-center justify-between px-3.5">
+      <nav className="mx-0 flex w-full max-w-full items-center justify-between px-2.5 sm:mx-2.5 sm:px-3.5">
         <div className="flex items-center gap-x-3">
           <NavLink to="/" className="rounded-md">
             <img

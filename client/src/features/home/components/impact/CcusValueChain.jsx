@@ -158,7 +158,7 @@ const ChainNode = ({ item, index, mobile = false, reduceMotion }) => {
   );
 };
 
-const MissionGrid = () => {
+const CcusValueChain = () => {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -296,4 +296,4 @@ const MissionGrid = () => {
   );
 };
 
-export default MissionGrid;
+export default CcusValueChain;

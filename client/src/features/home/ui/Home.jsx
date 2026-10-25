@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import FourPillars from "../components/pillars/FourPillars";
 import HeroSection from "../components/hero/HeroSection";
 import PurposeSection from "../components/purpose/PurposeSection";
-import RoadmapSection from "../components/roadmap";
+import ImpactSection from "../components/impact";
 import "./Home.css";
 import Seo from "@/shared/seo/Seo";
 import { organizationSchema, websiteSchema } from "@/shared/seo/seoData";
@@ -33,7 +33,7 @@ const Home = () => {
       />
       <HeroSection />
       <FourPillars />
-      <RoadmapSection />
+      <ImpactSection />
       <PurposeSection />
     </main>
   );

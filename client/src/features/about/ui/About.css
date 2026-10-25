@@ -1,8 +1,8 @@
 .about-page {
-  --about-ink: #0a2955;
-  --about-muted: rgba(10, 41, 85, .68);
+  --about-ink: #0b2440;
+  --about-muted: rgba(11, 36, 64, .68);
   --about-green: #23b65f;
-  --about-line: rgba(10, 41, 85, .14);
+  --about-line: rgba(11, 36, 64, .14);
   background: rgba(35, 182, 95, .035);
   color: var(--about-ink);
   overflow: hidden;
@@ -77,10 +77,10 @@
   position: relative;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid rgba(10, 41, 85, .1);
+  border: 1px solid rgba(11, 36, 64, .1);
   border-radius: .7rem;
-  background: rgba(10, 41, 85, .12);
-  box-shadow: 0 18px 45px -38px rgba(10, 41, 85, .65);
+  background: rgba(11, 36, 64, .12);
+  box-shadow: 0 18px 45px -38px rgba(11, 36, 64, .65);
 }
 
 .about-bento-card:nth-child(1) { grid-column: 1; grid-row: 1 / span 4; }
@@ -95,7 +95,7 @@
 .about-bento-label strong { max-width: 15ch; font-size: clamp(.85rem, 1.65vw, 1.08rem); font-weight: 750; letter-spacing: .035em; line-height: 1.2; text-transform: uppercase; }
 .about-bento-label span { color: #8ff0b5; font-size: .66rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 
-.about-beliefs { background: #0a2955; color: #ffffff; }
+.about-beliefs { background: var(--about-ink); color: #ffffff; }
 .about-beliefs .about-eyebrow { color: #23b65f; }
 .about-beliefs .about-heading { max-width: 17ch; }
 .about-beliefs-intro { display: flex; align-items: end; justify-content: space-between; gap: 3rem; }
@@ -122,14 +122,14 @@
 .verticals-visual img { display: block; width: 100%; height: auto; }
 .vertical-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; }
 .vertical-card { min-height: 22rem; padding: clamp(1.5rem, 3vw, 2.25rem); border: 1px solid var(--about-line); border-radius: 1rem; background: rgba(35,182,95,.035); transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
-.vertical-card:hover { transform: translateY(-3px); border-color: rgba(35,182,95,.45); box-shadow: 0 22px 45px -38px rgba(10,41,85,.7); }
+.vertical-card:hover { transform: translateY(-3px); border-color: rgba(35,182,95,.45); box-shadow: 0 22px 45px -38px rgba(11,36,64,.7); }
 .vertical-icon { display: grid; width: 3rem; height: 3rem; place-items: center; border-radius: .7rem; background: rgba(35,182,95,.13); color: var(--about-green); }
 .vertical-short { display: block; margin-top: 3.5rem; color: var(--about-green); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 .vertical-card h3 { margin-top: .8rem; font-size: 1.45rem; font-weight: 700; line-height: 1.2; }
 .vertical-card p { margin-top: 1.2rem; color: var(--about-muted); line-height: 1.7; }
 
 .about-approach-wrap { background: #ffffff; padding: 0 clamp(.625rem, 2vw, 2rem) clamp(4.5rem, 8vw, 7.5rem); }
-.about-approach { position: relative; overflow: hidden; padding: clamp(2rem, 6vw, 5rem); border-radius: clamp(1.5rem, 3vw, 2.5rem); background: #0a2955; color: #ffffff; }
+.about-approach { position: relative; overflow: hidden; padding: clamp(2rem, 6vw, 5rem); border-radius: clamp(1.5rem, 3vw, 2.5rem); background: var(--about-ink); color: #ffffff; }
 .about-approach::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(35,182,95,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(35,182,95,.045) 1px, transparent 1px); background-size: 2.5rem 2.5rem; content: ""; pointer-events: none; }
 .about-approach .about-eyebrow { display: inline-block; color: var(--about-green); }
 .about-approach .about-heading { color: #ffffff; }
@@ -159,7 +159,8 @@
 }
 
 @media (max-width: 620px) {
-  .about-shell { width: min(100% - 1.25rem, 1280px); }
+  .about-shell { width: min(100% - 2rem, 1280px); }
+  .about-hero { padding-top: 5.25rem; }
   .about-title { font-size: clamp(2.55rem, 13vw, 4rem); }
   .about-bento { aspect-ratio: .92 / 1; }
   .belief-media { height: 16rem; }
@@ -168,7 +169,9 @@
   .vertical-count { display: flex; align-items: center; gap: 1rem; }
   .vertical-count span { margin-top: 0; }
   .vertical-grid { grid-template-columns: 1fr; }
-  .verticals-visual { margin-inline: -.35rem; }
+  .verticals-visual { margin-inline: 0; }
+  .about-approach-wrap { padding-inline: 1rem; }
+  .about-approach-wrap .about-shell { width: 100%; }
   .approach-head { grid-template-columns: 1fr; align-items: start; }
   .approach-grid { gap: 1.15rem; }
   .approach-card, .approach-card:nth-child(2), .approach-card:nth-child(3) { grid-template-columns: 3.5rem 1fr; width: calc(100% - .55rem); margin-left: 0; padding: 1.15rem; }
