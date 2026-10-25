@@ -1,5 +1,5 @@
-import TechnologyVerticals from "./SectonComponents/TechnologyVerticals";
-import AboutApproach from "./SectonComponents/AboutApproach";
+import TechnologyVerticals from "./SectionComponents/TechnologyVerticals";
+import AboutApproach from "./SectionComponents/AboutApproach";
 
 const AboutWhoWeAre = () => (
   <>

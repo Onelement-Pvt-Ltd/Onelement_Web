@@ -33,7 +33,7 @@ const MissionCard = ({ item, index }) => {
         to="/technologies"
         className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-bold text-[#79ffe0] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#79ffe0]"
       >
-        Learn More
+        Explore {item.title}
         <ArrowUpRight size={17} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </Link>
 

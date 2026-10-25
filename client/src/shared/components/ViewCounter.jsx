@@ -1,15 +1,13 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Eye } from "lucide-react";
+import { API_BASE_URL } from "@/shared/config/api";
 
 const LEGACY_STORAGE_KEYS = [
   "onelement:last-counted-date",
   "onelement:view-total",
   "onelement:view-total-time",
 ];
-
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api")
-  .replace(/\/$/, "");
 
 const registerView = async () => {
   const response = await fetch(`${API_BASE_URL}/views`, {

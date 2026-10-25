@@ -10,8 +10,8 @@ import RouteError from "@/shared/components/RouteError";
 const Home = lazy(() => import("@/features/home/ui/Home"));
 const About = lazy(() => import("@/features/about/ui/About"));
 const Team = lazy(() => import("@/features/team/ui/WhoWeAre"));
-const VissionMissionSection = lazy(() =>
-  import("@/features/about/ui/VisionMissionComponents/VissionMissionSection")
+const VisionMissionSection = lazy(() =>
+  import("@/features/about/ui/VisionMissionComponents/VisionMissionSection")
 );
 
 const Technology = lazy(() =>
@@ -21,8 +21,8 @@ const TechnologyDetails = lazy(() =>
   import("@/features/technology/ui/TechnologyDetailsComponents/TechnologyDetails")
 );
 
-const BlogComingSoon = lazy(() =>
-  import("@/features/blog/ui/BlogComingSoon")
+const ArticlesComingSoon = lazy(() =>
+  import("@/features/blog/ui/ArticlesComingSoon")
 );
 const AdminViews = lazy(() => import("@/features/admin/ui/AdminViews"));
 
@@ -47,7 +47,7 @@ const appRouter = createBrowserRouter([
       { index: true, element: withSuspense(Home) },
       { path: "about", element: withSuspense(About) },
       { path: "about/teams", element: withSuspense(Team) },
-      { path: "about/vision-mission", element: withSuspense(VissionMissionSection) },
+      { path: "about/vision-mission", element: withSuspense(VisionMissionSection) },
       { path: "about/VM", element: <Navigate to="/about/vision-mission" replace /> },
 
       { path: "technologies", element: withSuspense(Technology) },
@@ -58,8 +58,8 @@ const appRouter = createBrowserRouter([
       },
       { path: "technologies/details/*", element: <NotFound variant="technology" /> },
 
-      { path: "articles", element: withSuspense(BlogComingSoon) },
-      { path: "articles/*", element: withSuspense(BlogComingSoon) },
+      { path: "articles", element: withSuspense(ArticlesComingSoon) },
+      { path: "articles/*", element: <Navigate to="/articles" replace /> },
       { path: "blogs", element: <Navigate to="/articles" replace /> },
       { path: "blogs/*", element: <Navigate to="/articles" replace /> },
       { path: "*", element: <NotFound /> }

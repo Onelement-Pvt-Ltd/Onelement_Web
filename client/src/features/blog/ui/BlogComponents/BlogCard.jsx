@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import BlogFallback from "@/assets/Blog/Blog1.webp";
-import AuthorFallback from "@/assets/dummy.png";
+import BlogFallback from "@/assets/Blog/articleFallback.webp";
+import AuthorFallback from "@/assets/articleAuthorFallback.png";
 
 const formatDate = (value) => {
   const date = new Date(value);

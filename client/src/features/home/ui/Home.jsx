@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import FourPillars from "./SectionComponents/CarousalSectionComponents/FourPillars";
+import FourPillars from "./SectionComponents/CarouselSectionComponents/FourPillars";
 import HeroSection from "./SectionComponents/HeroSectionComponents/HeroSection";
 import PurposeSection from "./SectionComponents/PurposeSectionComponents/PurposeSection";
 import RoadmapSection from "./SectionComponents/RoadmapAndTargetComponents";
@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <main className="home-page overflow-hidden bg-[#f6f8f6] text-[#0a2955]">
       <Seo
-        description="Explore Onelement Energy's sustainable technology work, company journey and articles for a cleaner, more resilient energy future."
+        description="Onelement Energy develops carbon capture, E-Fuel, PEM fuel cell and green hydrogen technologies for a cleaner, more resilient energy future."
         path="/"
         structuredData={{
           "@context": "https://schema.org",

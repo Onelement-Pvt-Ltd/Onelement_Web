@@ -13,9 +13,9 @@ const Layout = () => {
     <div className="min-h-screen flex flex-col">
       <SmoothScroll />
       <Navbar loc={loc} />
-      <main className="grow">
+      <div className="grow">
         <Outlet key={location.pathname} />
-      </main>
+      </div>
       <Footer />
       <ScrollToTopButton />
     </div>

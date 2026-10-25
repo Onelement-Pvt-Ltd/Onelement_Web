@@ -1,5 +1,5 @@
 import carbonCaptureImage from "@/assets/Technologies/carbonCapture_OEPL.webp";
-import pemFuelCellImage from "@/assets/Technologies/penFuelCell_OEPL.webp";
+import pemFuelCellImage from "@/assets/Technologies/pemFuelCell_OEPL.webp";
 import gh2Image from "@/assets/Technologies/gh2Ecosystem_OEPL.webp";
 import eFuelImage from "@/assets/Technologies/eFuel_OEPL.webp";
 

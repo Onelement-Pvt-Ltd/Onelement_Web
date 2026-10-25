@@ -10,7 +10,7 @@ const topics = [
   { label: "Industry perspectives", icon: BookOpen },
 ];
 
-const BlogComingSoon = () => {
+const ArticlesComingSoon = () => {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -19,6 +19,7 @@ const BlogComingSoon = () => {
         title="Articles — Coming Soon"
         description="Onelement Energy articles on clean technology, sustainability and the energy transition are coming soon."
         path="/articles"
+        noindex
         structuredData={breadcrumbSchema([
           { name: "Home", path: "/" },
           { name: "Articles", path: "/articles" },
@@ -116,4 +117,4 @@ const BlogComingSoon = () => {
   );
 };
 
-export default BlogComingSoon;
+export default ArticlesComingSoon;

@@ -35,6 +35,8 @@ const WhatWeMean = () => (
             <Motion.div className="belief-media" variants={revealItem}>
               <img
                 src={belief.image}
+                srcSet={`${belief.imageSmall} 900w, ${belief.image} ${belief.imageWidth}w`}
+                sizes="(min-width: 901px) 42vw, calc(100vw - 1.25rem)"
                 alt={`${belief.title} at Onelement Energy`}
                 loading="lazy"
                 decoding="async"

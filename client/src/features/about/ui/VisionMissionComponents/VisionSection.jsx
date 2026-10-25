@@ -11,7 +11,12 @@ const VisionSection = () => {
         description={visionData.description}
       />
 
-      <ImageFrame image={visionData.image} alt={visionData.label} />
+      <ImageFrame
+        image={visionData.image}
+        imageSmall={visionData.imageSmall}
+        imageWidth={visionData.imageWidth}
+        alt={visionData.label}
+      />
     </section>
   );
 };

@@ -1,7 +1,7 @@
 import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
-import OEPL_LARGE_WHITE_TRANSPARANT from "@/assets/shared/OEPL_LARGE_WHITE_TRANSPARANT.png";
+import OEPL_LARGE_WHITE_TRANSPARENT from "@/assets/shared/OEPL_LARGE_WHITE_TRANSPARENT.webp";
 import ViewCounter from "@/shared/components/ViewCounter";
 import "./Footer.css";
 
@@ -20,7 +20,15 @@ const Footer = () => (
     <div className="footer-shell">
       <div className="footer-lead">
         <Link to="/" className="footer-logo-link" aria-label="Onelement home">
-          <img src={OEPL_LARGE_WHITE_TRANSPARANT} alt="Onelement Energy" className="footer-logo" />
+          <img
+            src={OEPL_LARGE_WHITE_TRANSPARENT}
+            alt="Onelement Energy"
+            width="260"
+            height="115"
+            loading="lazy"
+            decoding="async"
+            className="footer-logo"
+          />
         </Link>
         <p>Practical technologies for a cleaner, more resilient energy future.</p>
       </div>

@@ -1,12 +1,11 @@
-import { Outlet } from "react-router"
-import Technology from "./Technology"
+import { Outlet } from "react-router-dom";
 
 const TechnologyLayout = () => {
   return (
     <div className="pt-16">
-        <Outlet/>
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
 export default TechnologyLayout

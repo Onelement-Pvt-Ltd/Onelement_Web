@@ -1,11 +1,6 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { fetchBlogsAPI, fetchBlogMetaAPI, fetchRelatedBlogsAPI } from "./blogApi";
 
-// NOTE: keepPreviousData is the TanStack Query v5 API. Flagging since I
-// can't verify your installed version from this conversation — if you're
-// on v4, this needs `keepPreviousData: true` passed as a query option
-// instead of imported as a placeholderData function. Please confirm version.
-
 export const blogKeys = {
   all: ["blogs"],
   list: (filters) => [...blogKeys.all, "list", filters],

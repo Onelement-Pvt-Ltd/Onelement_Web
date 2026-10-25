@@ -2,8 +2,9 @@ import { useEffect } from "react";
 
 const SITE_NAME = "Onelement Energy";
 const SITE_URL = "https://onelement.in";
+const DEFAULT_IMAGE = "/OEPL_BLUE_BGD_FAVICON.png";
 const DEFAULT_DESCRIPTION =
-  "Onelement Energy develops sustainable technologies for a cleaner, more resilient energy future.";
+  "Onelement Energy develops carbon capture, E-Fuel, PEM fuel cell and green hydrogen technologies for a cleaner, more resilient energy future.";
 
 const toAbsoluteUrl = (value) => {
   if (!value) return null;
@@ -47,6 +48,7 @@ const Seo = ({
   description = DEFAULT_DESCRIPTION,
   path = "/",
   image,
+  imageAlt = SITE_NAME,
   type = "website",
   noindex = false,
   publishedTime,
@@ -57,7 +59,7 @@ const Seo = ({
   useEffect(() => {
     const pageTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | Sustainable Technologies`;
     const canonicalUrl = toAbsoluteUrl(path) || SITE_URL;
-    const imageUrl = toAbsoluteUrl(image);
+    const imageUrl = toAbsoluteUrl(image || DEFAULT_IMAGE);
 
     document.title = pageTitle;
     upsertCanonical(canonicalUrl);
@@ -70,11 +72,13 @@ const Seo = ({
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:url", canonicalUrl);
     upsertMeta("property", "og:image", imageUrl);
+    upsertMeta("property", "og:image:alt", imageAlt);
 
-    upsertMeta("name", "twitter:card", imageUrl ? "summary_large_image" : "summary");
+    upsertMeta("name", "twitter:card", image ? "summary_large_image" : "summary");
     upsertMeta("name", "twitter:title", pageTitle);
     upsertMeta("name", "twitter:description", description);
     upsertMeta("name", "twitter:image", imageUrl);
+    upsertMeta("name", "twitter:image:alt", imageAlt);
 
     upsertMeta("property", "article:published_time", publishedTime);
     upsertMeta("property", "article:modified_time", modifiedTime);
@@ -93,7 +97,7 @@ const Seo = ({
     return () => {
       document.getElementById(scriptId)?.remove();
     };
-  }, [author, description, image, modifiedTime, noindex, path, publishedTime, structuredData, title, type]);
+  }, [author, description, image, imageAlt, modifiedTime, noindex, path, publishedTime, structuredData, title, type]);
 
   return null;
 };

@@ -24,7 +24,7 @@ const About = () => {
   }, [hash]);
 
   return (
-  <div className="about-page">
+  <main className="about-page">
     <Seo
       title="About Us"
       description="Learn about Onelement Energy's purpose, approach and work developing sustainable technologies for energy, environment and industry."
@@ -42,7 +42,7 @@ const About = () => {
     /* <div>
       <WhatWeDo />
     </div> */}
-  </div>
+  </main>
   );
 };
 

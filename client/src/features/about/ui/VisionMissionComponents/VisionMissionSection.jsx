@@ -6,9 +6,9 @@ import BottomCTA from "../VisionMissionComponents/BottomCTA";
 import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
 
-const VissionMissionSection = () => {
+const VisionMissionSection = () => {
   return (
-    <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#123c72_0%,#0a2955_35%,#071d3d_100%)]">
+    <main className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#123c72_0%,#0a2955_35%,#071d3d_100%)]">
       <Seo
         title="Vision and Mission"
         description="Read the vision, mission and values guiding Onelement Energy's sustainable technology work."
@@ -38,8 +38,8 @@ const VissionMissionSection = () => {
 
         <BottomCTA />
       </div>
-    </section>
+    </main>
   );
 };
 
-export default VissionMissionSection;
+export default VisionMissionSection;

@@ -40,9 +40,11 @@ const TemporaryHeroSlide = ({ slide }) => {
           <h2 className="home-display mt-5 text-[clamp(2.45rem,9vw,4.8rem)] font-bold leading-[0.92] text-white lg:mt-7 lg:text-[clamp(2.5rem,5vw,5.8rem)] lg:leading-[0.94]">
             {slide.title}
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-white/82 sm:text-base sm:leading-7 lg:mt-7 lg:text-lg lg:leading-8 lg:text-white/68">
-            {slide.description}
-          </p>
+          {slide.description && (
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-white/82 sm:text-base sm:leading-7 lg:mt-7 lg:text-lg lg:leading-8 lg:text-white/68">
+              {slide.description}
+            </p>
+          )}
 
           <Link
             to={slide.to}

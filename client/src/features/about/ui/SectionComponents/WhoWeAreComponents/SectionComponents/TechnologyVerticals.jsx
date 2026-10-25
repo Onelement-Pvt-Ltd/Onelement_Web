@@ -1,5 +1,6 @@
 import { motion as Motion } from "framer-motion";
 import technologyVerticals from "@/assets/About/technologyVerticals.webp";
+import technologyVerticalsSmall from "@/assets/About/technologyVerticals-900.webp";
 import { revealItem, staggerGroup, viewportOnce } from "../../../aboutMotion";
 
 const TechnologyVerticals = () => (
@@ -37,6 +38,8 @@ const TechnologyVerticals = () => (
       >
         <img
           src={technologyVerticals}
+          srcSet={`${technologyVerticalsSmall} 900w, ${technologyVerticals} 1619w`}
+          sizes="(min-width: 1280px) 1280px, 100vw"
           alt="Onelement Energy technology verticals connecting carbon capture, green hydrogen, methanol production and fuel-cell power"
           loading="lazy"
           decoding="async"

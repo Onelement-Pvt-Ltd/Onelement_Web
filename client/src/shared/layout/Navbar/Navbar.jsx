@@ -1,4 +1,4 @@
-import OEPL_LARGE_BLUE_TRANSPARANT from "@/assets/shared/OEPL_LARGE_BLUE_TRANSPARANT.png"; ;
+import OEPL_LARGE_BLUE_TRANSPARENT from "@/assets/shared/OEPL_LARGE_BLUE_TRANSPARENT.webp";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menus } from "./navigationData";
@@ -14,7 +14,14 @@ const Navbar = () => {
       <nav className="mx-2.5 flex w-full max-w-full items-center justify-between px-3.5">
         <div className="flex items-center gap-x-3">
           <NavLink to="/" className="rounded-md">
-            <img src={OEPL_LARGE_BLUE_TRANSPARANT} alt="OEPL" className="w-24" />
+            <img
+              src={OEPL_LARGE_BLUE_TRANSPARENT}
+              alt="Onelement Energy"
+              width="260"
+              height="115"
+              decoding="async"
+              className="h-auto w-24"
+            />
           </NavLink>
         </div>
 

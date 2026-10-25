@@ -4,7 +4,7 @@ import { getTechnologyImage } from "@/features/technology/data/technologyImages"
 
 const FALLBACK_IMAGE = TechnologyFallback;
 
-const TechnologySection = ({ tech, index }) => {
+const TechnologyCard = ({ tech, index }) => {
   const previewText = tech.description?.paragraphs?.[0];
   const imageFirst = index % 2 === 0;
   const image = getTechnologyImage(
@@ -68,4 +68,4 @@ const TechnologySection = ({ tech, index }) => {
   );
 };
 
-export default TechnologySection;
+export default TechnologyCard;

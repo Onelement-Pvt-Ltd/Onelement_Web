@@ -16,7 +16,7 @@ import PublicError from "@/shared/components/PublicError";
 import BlogCard from "./BlogComponents/BlogCard";
 import { ScrollProgress } from "./ScrollProgress";
 import { BlogSkeleton } from "./BlogSkeleton";
-import AuthorFallback from "@/assets/dummy.png";
+import AuthorFallback from "@/assets/articleAuthorFallback.png";
 
 const formatDate = (value) => {
   const date = new Date(value);

@@ -22,7 +22,7 @@ const ContentSlide = ({ pillar, panelId }) => {
           </div>
         </div>
 
-        <p className="home-kicker mt-10 text-[#23b65f]">{pillar.subtitle}</p>
+        <p className="home-kicker mt-10 text-[#167a3f]">{pillar.subtitle}</p>
         <h3 className="home-display mt-3 text-4xl font-bold leading-none text-[#0a2955] sm:text-5xl">
           {pillar.name}
         </h3>
@@ -42,7 +42,7 @@ const ContentSlide = ({ pillar, panelId }) => {
           to="/technologies"
           className="group inline-flex w-fit items-center gap-2 rounded-full bg-[#0a2955] px-5 py-3 font-bold text-white transition-colors hover:bg-[#23b65f] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#23b65f]"
         >
-          Learn More
+          Explore technologies
           <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
         </Link>
       </div>

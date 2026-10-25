@@ -8,7 +8,7 @@ const routes = [
   { path: "/about/teams", file: "../dist/about/teams/index.html", indexable: true },
   { path: "/about/vision-mission", file: "../dist/about/vision-mission/index.html", indexable: true },
   { path: "/technologies", file: "../dist/technologies/index.html", indexable: true },
-  { path: "/articles", file: "../dist/articles/index.html", indexable: true },
+  { path: "/articles", file: "../dist/articles/index.html", indexable: false },
   { path: "/admin/views", file: "../dist/admin/views/index.html", indexable: false },
 ];
 
@@ -36,6 +36,7 @@ for (const route of routes.filter((route) => route.indexable)) {
   check(sitemap.includes(`<loc>${SITE_URL}${route.path}</loc>`), `${route.path}: missing from sitemap`);
 }
 check(!sitemap.includes("/admin/"), "Private admin route must not appear in the sitemap");
+check(!sitemap.includes("/articles</loc>"), "Coming-soon articles route must not appear in the sitemap");
 check(!sitemap.includes("/about/VM"), "Legacy vision and mission route must not appear in the sitemap");
 
 if (failures.length) {

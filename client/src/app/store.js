@@ -2,18 +2,16 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import technologyReducer from "@/features/technology/model/technologySlice";
 import blogReducer from "@/features/blog/model/blogSlice";
 
 const rootReducer = combineReducers({
-  technology: technologyReducer,
   blog: blogReducer
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["technology","blog"] 
+  whitelist: ["blog"]
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -19,12 +19,12 @@ area stays inside that feature; code used across features lives in shared.
     |   |-- team/            Team page UI
     |   -- technology/
     |       |-- api/         HTTP functions and React Query hooks
-    |       |-- model/       Technology state
     |       -- ui/          Technology pages and components
     |-- shared/
     |   |-- components/      Reusable UI primitives and scroll controls
+    |   |-- config/          Shared runtime configuration
     |   |-- layout/          App layout, navbar, and footer
-    |   |-- lib/             Library integration helpers
+    |   |-- seo/             Metadata and structured-data helpers
     |   -- utils/           Framework-independent utilities
     |-- styles/              Global and application-wide styles
     -- main.jsx             Browser entry point and global providers
