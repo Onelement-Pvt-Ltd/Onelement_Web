@@ -119,10 +119,7 @@
 .vertical-count strong { display: block; font-size: 3rem; line-height: 1; }
 .vertical-count span { display: block; margin-top: .5rem; color: var(--about-green); font-weight: 700; }
 .verticals-visual { position: relative; margin: clamp(2rem, 4vw, 3.5rem) max(-1rem, -2vw) 0; background: #ffffff; }
-.verticals-visual::before, .verticals-visual::after { position: absolute; z-index: 1; top: 0; bottom: 0; width: clamp(1rem, 5vw, 4rem); content: ""; pointer-events: none; }
-.verticals-visual::before { left: 0; background: linear-gradient(90deg, #ffffff, transparent); }
-.verticals-visual::after { right: 0; background: linear-gradient(270deg, #ffffff, transparent); }
-.verticals-visual img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
+.verticals-visual img { display: block; width: 100%; height: auto; }
 .vertical-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; }
 .vertical-card { min-height: 22rem; padding: clamp(1.5rem, 3vw, 2.25rem); border: 1px solid var(--about-line); border-radius: 1rem; background: rgba(35,182,95,.035); transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
 .vertical-card:hover { transform: translateY(-3px); border-color: rgba(35,182,95,.45); box-shadow: 0 22px 45px -38px rgba(10,41,85,.7); }
@@ -133,19 +130,19 @@
 
 .about-approach-wrap { background: #ffffff; padding: 0 clamp(.625rem, 2vw, 2rem) clamp(4.5rem, 8vw, 7.5rem); }
 .about-approach { position: relative; overflow: hidden; padding: clamp(2rem, 6vw, 5rem); border-radius: clamp(1.5rem, 3vw, 2.5rem); background: #0a2955; color: #ffffff; }
-.about-approach::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(121,255,224,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(121,255,224,.045) 1px, transparent 1px); background-size: 2.5rem 2.5rem; content: ""; pointer-events: none; }
-.about-approach .about-eyebrow { display: inline-block; color: #79ffe0; }
+.about-approach::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(35,182,95,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(35,182,95,.045) 1px, transparent 1px); background-size: 2.5rem 2.5rem; content: ""; pointer-events: none; }
+.about-approach .about-eyebrow { display: inline-block; color: var(--about-green); }
 .about-approach .about-heading { color: #ffffff; }
-.approach-head { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 2rem; padding-bottom: 2rem; border-bottom: 2px solid rgba(121,255,224,.72); }
+.approach-head { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 2rem; padding-bottom: 2rem; border-bottom: 2px solid rgba(35,182,95,.72); }
 .approach-grid { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.25rem; width: min(100%, 70rem); margin-top: 3rem; margin-left: auto; }
-.approach-card { display: grid; grid-template-columns: 6rem minmax(12rem, 19rem) minmax(0, 1fr); align-items: center; width: 100%; min-height: 9rem; padding: clamp(1.25rem, 2.5vw, 2rem); border: 1px solid rgba(121,255,224,.3); border-radius: 1.25rem; background: rgba(255,255,255,.075); color: #ffffff; box-shadow: .55rem .55rem 0 #23b65f; backdrop-filter: blur(6px); transition: background-color .25s ease, box-shadow .25s ease, translate .25s ease; }
+.approach-card { display: grid; grid-template-columns: 6rem minmax(12rem, 19rem) minmax(0, 1fr); align-items: center; width: 100%; min-height: 9rem; padding: clamp(1.25rem, 2.5vw, 2rem); border: 1px solid rgba(255,255,255,.11); border-radius: 1rem; background: rgba(255,255,255,.055); color: #ffffff; transition: background-color .25s ease, border-color .25s ease, translate .25s ease; }
 .approach-card:nth-child(2) { width: calc(100% - clamp(1.5rem, 5vw, 5rem)); margin-left: clamp(1.5rem, 5vw, 5rem); }
 .approach-card:nth-child(3) { width: calc(100% - clamp(3rem, 10vw, 10rem)); margin-left: clamp(3rem, 10vw, 10rem); }
-.approach-card:hover { background: rgba(255,255,255,.11); box-shadow: .8rem .8rem 0 #23b65f; translate: 0 -.18rem; }
-.approach-card > span { align-self: stretch; display: grid; place-items: center; border-right: 1px solid rgba(121,255,224,.28); color: #ffffff; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; letter-spacing: -.06em; line-height: 1; }
+.approach-card:hover { border-color: rgba(35,182,95,.42); background: rgba(255,255,255,.085); translate: 0 -.18rem; }
+.approach-card > span { align-self: stretch; display: grid; place-items: center; border-right: 1px solid rgba(255,255,255,.11); color: var(--about-green); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; letter-spacing: -.06em; line-height: 1; }
 .approach-card-copy { display: contents; }
 .approach-card h3 { padding-inline: clamp(1.25rem, 3vw, 2.5rem); color: #ffffff; font-size: clamp(1.25rem, 2.2vw, 1.7rem); font-weight: 700; line-height: 1.2; }
-.approach-card p { padding-left: clamp(1.25rem, 3vw, 2.5rem); border-left: 1px solid rgba(121,255,224,.38); color: rgba(255,255,255,.78); line-height: 1.7; }
+.approach-card p { padding-left: clamp(1.25rem, 3vw, 2.5rem); border-left: 1px solid rgba(255,255,255,.11); color: rgba(255,255,255,.72); line-height: 1.8; }
 
 @media (max-width: 900px) {
   .about-hero-grid { grid-template-columns: 1fr; }

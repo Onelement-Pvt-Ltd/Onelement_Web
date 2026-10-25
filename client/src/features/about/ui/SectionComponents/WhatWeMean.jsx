@@ -3,7 +3,7 @@ import { revealItem, staggerGroup, viewportOnce } from "../aboutMotion";
 import { beliefs } from "./utils/whatWeMeanData";
 
 const WhatWeMean = () => (
-  <section className="about-beliefs about-section">
+  <section id="what-we-mean" className="about-beliefs about-section scroll-mt-24">
     <div className="about-shell">
       <Motion.header
         className="about-beliefs-intro"
@@ -33,7 +33,12 @@ const WhatWeMean = () => (
             viewport={viewportOnce}
           >
             <Motion.div className="belief-media" variants={revealItem}>
-              <img src={belief.image} alt={`${belief.title} at Onelement Energy`} loading="lazy" />
+              <img
+                src={belief.image}
+                alt={`${belief.title} at Onelement Energy`}
+                loading="lazy"
+                decoding="async"
+              />
             </Motion.div>
             <Motion.div className="belief-card" variants={revealItem}>
               <h3>{belief.title}</h3>

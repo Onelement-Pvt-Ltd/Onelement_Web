@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import Blog1 from "@/assets/Blog/Blog1.webp";
+import TechnologyFallback from "@/assets/CarbonCapture.png";
 
 const TechnologyBanner = ({ name, banner, image }) => {
   return (
-    <section className="relative flex min-h-[70vh] w-full items-center overflow-hidden bg-[#0a2955] py-20">
+    <section className="relative flex min-h-0 w-full items-center overflow-hidden bg-[#0a2955] py-14 sm:py-16 md:min-h-[34rem] lg:min-h-[38rem] lg:py-20">
       <div className="absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-[#23b65f]/10 blur-3xl" />
       <div className="absolute -right-32 top-0 h-96 w-96 rounded-full bg-[#67f5d0]/10 blur-3xl" />
 
@@ -43,7 +43,7 @@ const TechnologyBanner = ({ name, banner, image }) => {
 
         <div className="aspect-[3/2] overflow-hidden rounded-3xl bg-white shadow-[0_30px_70px_rgba(0,0,0,.28)]">
           <img
-            src={image || banner?.image || Blog1}
+            src={image || banner?.image || TechnologyFallback}
             alt={`${name} technology system`}
             decoding="async"
             fetchPriority="high"

@@ -1,9 +1,9 @@
 import { motion as Motion } from "framer-motion";
-import technologyVerticals from "@/assets/About/technologyVerticals.png";
+import technologyVerticals from "@/assets/About/technologyVerticals.webp";
 import { revealItem, staggerGroup, viewportOnce } from "../../../aboutMotion";
 
 const TechnologyVerticals = () => (
-  <section className="about-verticals about-section">
+  <section id="where-we-focus" className="about-verticals about-section scroll-mt-24">
     <div className="about-shell">
       <Motion.header
         className="verticals-head"
@@ -39,6 +39,7 @@ const TechnologyVerticals = () => (
           src={technologyVerticals}
           alt="Onelement Energy technology verticals connecting carbon capture, green hydrogen, methanol production and fuel-cell power"
           loading="lazy"
+          decoding="async"
         />
       </Motion.figure>
     </div>

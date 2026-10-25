@@ -17,12 +17,12 @@ const renderAt = (path) =>
 
 describe("useBlogFilters URL validation", () => {
   it("accepts supported filter and page values", () => {
-    renderAt("/blogs?category=Solar&year=2025&month=3&page=2");
+    renderAt("/articles?category=Solar&year=2025&month=3&page=2");
     expect(screen.getByText("valid")).toBeInTheDocument();
   });
 
   it("rejects malformed or unsupported filter URLs", () => {
-    renderAt("/blogs?year=not-a-year&page=0&debug=true");
+    renderAt("/articles?year=not-a-year&page=0&debug=true");
     expect(screen.getByText("invalid")).toBeInTheDocument();
   });
 });

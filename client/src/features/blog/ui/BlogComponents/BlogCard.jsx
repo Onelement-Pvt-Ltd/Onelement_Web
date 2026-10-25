@@ -21,7 +21,7 @@ const BlogCard = ({ blog, returnTo }) => {
 
   return (
     <Link
-      to={`/blogs/${blog.slug}`}
+      to={`/articles/${blog.slug}`}
       state={returnTo ? { insightsPath: returnTo } : undefined}
       className="group block h-full rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-4"
     >

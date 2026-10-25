@@ -1,5 +1,5 @@
-import mission from "@/assets/About/mission.jpg";
-import vision from "@/assets/About/vision.jpg";
+import mission from "@/assets/About/mission.webp";
+import vision from "@/assets/About/vision.webp";
 
 export const beliefs = [
   {

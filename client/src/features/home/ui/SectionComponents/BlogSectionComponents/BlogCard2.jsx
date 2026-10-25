@@ -28,7 +28,7 @@ const BlogCard2 = ({ blog, variant }) => {
   return (
     <article className="h-full">
       <Link
-        to={`/blogs/${blog.slug}`}
+        to={`/articles/${blog.slug}`}
         className={`group overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white shadow-[0_18px_50px_-38px_rgba(15,23,42,0.65)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-4 ${cardStyles[variant]}`}
       >
         <div className={`relative shrink-0 overflow-hidden bg-slate-100 ${imageStyles[variant]}`}>

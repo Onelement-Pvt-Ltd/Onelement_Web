@@ -4,7 +4,7 @@ import LandingHeading from "./LandingHeading";
 import { revealItem, staggerGroup } from "../../aboutMotion";
 
 const AboutLanding = () => (
-  <section className="about-hero">
+  <section id="about-us" className="about-hero scroll-mt-24">
     <Motion.div
       className="about-shell about-hero-grid"
       variants={staggerGroup}

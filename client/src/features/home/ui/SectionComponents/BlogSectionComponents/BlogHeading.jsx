@@ -24,7 +24,7 @@ const BlogHeading = () => {
         transition={{ duration: 0.6, delay: 0.12 }}
         className="home-copy max-w-xl border-l-2 border-[#23b65f] pl-6 text-base leading-8 text-slate-600 lg:justify-self-end"
       >
-        Discover the latest insights, innovations and sustainability stories
+        Discover the latest articles, innovations and sustainability stories
         shaping the future of clean energy and engineering.
       </motion.p>
     </div>

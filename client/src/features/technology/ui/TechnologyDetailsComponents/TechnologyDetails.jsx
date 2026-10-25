@@ -5,7 +5,7 @@ import {
   useRelatedTechnologies,
   useTechnology
 } from "@/features/technology/api/technologyQueries";
-import Blog1 from "@/assets/Blog/Blog1.webp";
+import TechnologyFallback from "@/assets/CarbonCapture.png";
 
 import TechnologyBanner from "./TechnologyBanner";
 import TechnologyDescription from "./TechnologyDescription";
@@ -15,7 +15,10 @@ import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
 import NotFound from "@/shared/components/NotFound";
 import PublicError from "@/shared/components/PublicError";
-import { getTechnologyImage } from "@/features/technology/data/technologyImages";
+import {
+  getTechnologyImage,
+  sortTechnologies,
+} from "@/features/technology/data/technologyImages";
 
 const TechnologyDetails = () => {
   const { techId } = useParams();
@@ -38,8 +41,9 @@ const TechnologyDetails = () => {
   const pageDescription = current?.banner?.subtitle || current?.description?.paragraphs?.[0];
   const currentImage = getTechnologyImage(
     current?.slug,
-    current?.banner?.image || Blog1
+    current?.banner?.image || TechnologyFallback
   );
+  const orderedRelated = sortTechnologies(related);
   const structuredData = useMemo(() => {
     if (!current) return null;
     return {
@@ -101,7 +105,7 @@ const TechnologyDetails = () => {
 
         <TechnologyPoints points={current.points} />
 
-        {(relatedLoading || related.length > 0) && (
+        {(relatedLoading || orderedRelated.length > 0) && (
           <section className="mt-20 border-t border-[#0a2955]/10 pt-14 sm:mt-24 sm:pt-16">
             <div className="mb-9 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
               <div>
@@ -128,7 +132,7 @@ const TechnologyDetails = () => {
                       className="h-[360px] animate-pulse rounded-3xl bg-[#0a2955]/8"
                     />
                   ))
-                : related.map((technology) => (
+                : orderedRelated.map((technology) => (
                     <Link
                       key={technology.slug}
                       to={`/technologies/details/${technology.slug}`}
@@ -138,7 +142,7 @@ const TechnologyDetails = () => {
                         <img
                           src={getTechnologyImage(
                             technology.slug,
-                            technology.banner?.image || Blog1
+                            technology.banner?.image || TechnologyFallback
                           )}
                           alt={technology.title}
                           loading="lazy"

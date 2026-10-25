@@ -1,8 +1,8 @@
 import { motion as Motion } from "framer-motion";
-import carbonPipes from "@/assets/About/carbonPipes.jpg";
-import gh2Tanks from "@/assets/About/gh2Tanks.jpg";
-import solarPanelInstall from "@/assets/About/solarPanelInstall.png";
-import yellowPipesBuilding from "@/assets/About/yellowPipesBuilding.png";
+import carbonPipes from "@/assets/About/carbonPipes.webp";
+import gh2Tanks from "@/assets/About/gh2Tanks.webp";
+import solarPanelInstall from "@/assets/About/solarPanelInstall.webp";
+import yellowPipesBuilding from "@/assets/About/yellowPipesBuilding.webp";
 import { revealItem } from "../../aboutMotion";
 
 const tiles = [

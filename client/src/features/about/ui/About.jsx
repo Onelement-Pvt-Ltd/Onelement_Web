@@ -4,8 +4,26 @@ import WhatWeMean from "./SectionComponents/WhatWeMean";
 import WhoWeAre from "./SectionComponents/WhoWeAreComponents/WhoWeAre";
 import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-const About = () => (
+const About = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return undefined;
+
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(hash.slice(1))?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [hash]);
+
+  return (
   <div className="about-page">
     <Seo
       title="About Us"
@@ -25,6 +43,7 @@ const About = () => (
       <WhatWeDo />
     </div> */}
   </div>
-);
+  );
+};
 
 export default About;

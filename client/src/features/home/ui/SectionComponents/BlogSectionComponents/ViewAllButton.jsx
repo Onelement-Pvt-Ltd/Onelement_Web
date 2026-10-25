@@ -11,7 +11,7 @@ const ViewAllButton = () => {
       transition={{ duration: 0.5 }}
       className="mt-12 flex justify-center"
     >
-      <Link to="/blogs">
+      <Link to="/articles">
         <motion.button
           whileHover={{ x: 4 }}
           whileTap={{ scale: 0.98 }}

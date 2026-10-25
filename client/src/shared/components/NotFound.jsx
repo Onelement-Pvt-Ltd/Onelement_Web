@@ -14,8 +14,8 @@ const variants = {
     label: "Article not found",
     title: "We could not find this article.",
     description: "The article address may be incorrect or the content may no longer be available.",
-    action: "Browse insights",
-    to: "/blogs",
+    action: "Browse articles",
+    to: "/articles",
   },
   technology: {
     label: "Technology not found",
@@ -25,11 +25,11 @@ const variants = {
     to: "/technologies",
   },
   filters: {
-    label: "Insights view not found",
+    label: "Articles view not found",
     title: "These filters do not lead to an available page.",
-    description: "The filter or page address is invalid. Return to the complete insights collection.",
-    action: "Reset insights",
-    to: "/blogs",
+    description: "The filter or page address is invalid. Return to the complete article collection.",
+    action: "Reset articles",
+    to: "/articles",
   },
 };
 

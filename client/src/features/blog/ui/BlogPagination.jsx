@@ -35,7 +35,7 @@ const BlogPagination = ({ page, totalPages, onPageChange }) => {
   };
 
   return (
-    <nav aria-label="Blog pagination" className="flex justify-center items-center flex-wrap gap-2">
+    <nav aria-label="Article pagination" className="flex justify-center items-center flex-wrap gap-2">
       <button
         type="button"
         disabled={!canGoPrev}

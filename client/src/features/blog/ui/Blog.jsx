@@ -124,12 +124,12 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-[#f7f8f5] pb-20">
       <Seo
-        title="Insights"
-        description="Read Onelement Energy insights on sustainable technologies, clean energy and the global energy transition."
-        path="/blogs"
+        title="Articles"
+        description="Read Onelement Energy articles on sustainable technologies, clean energy and the global energy transition."
+        path="/articles"
         structuredData={breadcrumbSchema([
           { name: "Home", path: "/" },
-          { name: "Insights", path: "/blogs" },
+          { name: "Articles", path: "/articles" },
         ])}
       />
       <section className="relative overflow-hidden bg-[#0a2955] text-white">
@@ -138,7 +138,7 @@ const Blog = () => {
         <div className="mx-auto flex max-w-7xl items-end justify-between gap-8 px-6 py-20 md:py-24">
           <div className="relative max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-emerald-300">Ideas for a cleaner future</p>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">Energy insights,<br /><span className="text-emerald-300">built for action.</span></h1>
+            <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">Energy articles,<br /><span className="text-emerald-300">built for action.</span></h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 md:text-lg">Research, technology perspectives, and practical thinking from the people building tomorrow's energy systems.</p>
           </div>
 
@@ -186,7 +186,7 @@ const Blog = () => {
                   key="drawer"
                   role="dialog"
                   aria-modal="true"
-                  aria-label="Filter blogs"
+                  aria-label="Filter articles"
                   tabIndex={-1}
                   className="fixed left-0 top-0 z-50 h-full w-[90%] max-w-sm overflow-y-auto bg-[#f7f8f5] p-5 lg:hidden"
                   initial={{ x: "-100%" }}
@@ -244,7 +244,7 @@ const Blog = () => {
             {isError && (
               <div className="border-l-4 border-[#23b65f] bg-white px-6 py-16 text-center shadow-[0_18px_55px_rgba(10,41,85,.08)]">
                 <h3 className="text-2xl font-bold tracking-tight text-[#0a2955]">
-                  Insights are temporarily unavailable.
+                  Articles are temporarily unavailable.
                 </h3>
                 <p className="mt-3 text-sm leading-6 text-[#0a2955]/60">
                   Please try again in a moment.
@@ -289,7 +289,7 @@ const Blog = () => {
 
             {!isError && !isLoading && blogs.length === 0 && (
               <div className="text-center py-20 text-gray-500 bg-white rounded-2xl shadow-sm">
-                <p>No blogs found{hasActiveFilters ? " for the selected filters." : "."}</p>
+                <p>No articles found{hasActiveFilters ? " for the selected filters." : "."}</p>
                 {hasActiveFilters && (
                   <button
                     type="button"

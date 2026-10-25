@@ -3,6 +3,7 @@ import { useTechnologies } from "@/features/technology/api/technologyQueries";
 import TechnologyThread from "./TechnologyThread";
 import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
+import { sortTechnologies } from "@/features/technology/data/technologyImages";
 
 const LIMIT = 12;
 
@@ -41,7 +42,7 @@ const Technology = () => {
     LIMIT
   );
 
-  const technologies = data?.data ?? [];
+  const technologies = sortTechnologies(data?.data ?? []);
   const pagination = data?.pagination;
   const totalPages = pagination?.totalPages ?? 1;
 

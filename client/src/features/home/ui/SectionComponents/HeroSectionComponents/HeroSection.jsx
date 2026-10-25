@@ -2,10 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { animate, AnimatePresence, motion, useMotionValue, useReducedMotion } from "framer-motion";
 import HeroContent from "./HeroContent";
-import CarbonBackground from "./CarbonBackground";
 import TemporaryHeroSlide from "./TemporaryHeroSlide";
-import heroTechnologies from "@/assets/Home/heroTechnologies.jpg";
-import heroWhoWeAre from "@/assets/Home/hero-who-we-are.jpg";
+import heroTechnologies from "@/assets/Home/heroTechnologies.webp";
+import heroWhoWeAre from "@/assets/Home/hero-who-we-are.webp";
 
 const heroSlides = [
   {
@@ -195,22 +194,22 @@ const HeroSection = () => {
       </button>
 
       <div className="relative h-full">
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence initial={false} custom={direction}>
           <motion.article
             key={activeIndex}
+            custom={direction}
             role="group"
             aria-roledescription="slide"
             aria-label={`${activeIndex + 1} of ${heroSlides.length}: ${activeSlide.eyebrow}`}
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * 70, scale: 0.985 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * -50, scale: 0.99 }}
-            transition={{ duration: reduceMotion ? 0.01 : 0.56, ease: [0.22, 1, 0.36, 1] }}
-            className="relative h-full w-full cursor-grab select-none overflow-hidden bg-[#061a36] active:cursor-grabbing"
+            initial={reduceMotion ? { opacity: 0 } : { x: `${direction * 100}%` }}
+            animate={reduceMotion ? { opacity: 1 } : { x: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { x: `${direction * -100}%` }}
+            transition={{ duration: reduceMotion ? 0.01 : 0.55, ease: [0.4, 0, 0.2, 1] }}
+            className="absolute inset-0 h-full w-full cursor-grab touch-pan-y select-none overflow-hidden bg-[#061a36] active:cursor-grabbing"
           >
             <motion.div className="h-full w-full" style={{ x: dragX }}>
               {activeSlide.primary ? (
                 <>
-                  <CarbonBackground />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(35,182,95,.13),transparent_32%),linear-gradient(90deg,rgba(6,26,54,.97)_0%,rgba(10,41,85,.86)_48%,rgba(10,41,85,.35)_100%)]" />
                   <div className="absolute inset-0 opacity-45 [background-image:linear-gradient(rgba(54,83,111,.2)_1px,transparent_1px),linear-gradient(90deg,rgba(54,83,111,.2)_1px,transparent_1px)] [background-size:52px_52px]" aria-hidden="true" />
                   <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#061a36]/60 to-transparent" />

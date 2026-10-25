@@ -54,9 +54,9 @@ const BlogDetails = () => {
   );
   const insightsPath = useMemo(() => {
     const candidate = location.state?.insightsPath;
-    return typeof candidate === "string" && /^\/blogs(?:\?|$)/.test(candidate)
+    return typeof candidate === "string" && /^\/articles(?:\?|$)/.test(candidate)
       ? candidate
-      : "/blogs";
+      : "/articles";
   }, [location.state]);
 
   const articleStructuredData = useMemo(() => {
@@ -80,12 +80,12 @@ const BlogDetails = () => {
             name: "Onelement Energy",
             url: "https://onelement.in",
           },
-          mainEntityOfPage: `https://onelement.in/blogs/${blog.slug}`,
+          mainEntityOfPage: `https://onelement.in/articles/${blog.slug}`,
         },
         breadcrumbSchema([
           { name: "Home", path: "/" },
-          { name: "Insights", path: "/blogs" },
-          { name: blog.title, path: `/blogs/${blog.slug}` },
+          { name: "Articles", path: "/articles" },
+          { name: blog.title, path: `/articles/${blog.slug}` },
         ]),
       ],
     };
@@ -110,7 +110,7 @@ const BlogDetails = () => {
       <Seo
         title={blog.title}
         description={blog.excerpt}
-        path={`/blogs/${blog.slug}`}
+        path={`/articles/${blog.slug}`}
         image={blog.coverImage}
         type="article"
         publishedTime={blog.publishedAt}
@@ -134,7 +134,7 @@ const BlogDetails = () => {
             className="mb-9 inline-flex w-fit items-center gap-2 text-sm font-semibold text-white/75 transition-colors hover:text-white"
           >
             <ArrowLeft size={17} />
-            Back to insights
+            Back to articles
           </Link>
 
           <div className="max-w-5xl">
@@ -243,10 +243,10 @@ const BlogDetails = () => {
               </h2>
             </div>
             <Link
-              to="/blogs"
+              to="/articles"
               className="text-sm font-bold text-[#163B22] underline-offset-4 hover:underline"
             >
-              Browse all insights
+              Browse all articles
             </Link>
           </div>
 

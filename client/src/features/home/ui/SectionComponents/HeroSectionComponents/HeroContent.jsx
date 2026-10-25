@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -111,50 +111,32 @@ const HeroContent = () => {
 
         <motion.aside
           variants={reveal}
-          whileHover={reduceMotion ? undefined : { y: -4 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
           className="relative mx-auto w-full max-w-xl lg:mx-0"
         >
-          <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-[2rem_0_2rem_0] bg-[#2fdc79] shadow-[0_24px_70px_rgba(47,220,121,.18)]" aria-hidden="true" />
+          <blockquote className="flex min-h-[13.5rem] border-l-4 border-[#2fdc79] bg-[#0b2747]/88 px-6 py-7 shadow-[0_24px_65px_rgba(0,0,0,.22)] sm:min-h-[16rem] sm:px-8 sm:py-9 lg:min-h-[min(28rem,54vh)] lg:px-11 lg:py-12">
+            <div className="my-auto w-full">
+              <span
+                className="block font-serif text-5xl leading-none text-[#2fdc79] sm:text-6xl"
+                aria-hidden="true"
+              >
+                &ldquo;
+              </span>
 
-          <div className="relative min-h-[13.5rem] overflow-hidden rounded-[1.5rem_0_1.5rem_0] border border-[#67f5d0]/35 bg-[#102f50] px-5 py-5 shadow-[0_30px_80px_rgba(0,0,0,.3)] sm:min-h-[16rem] sm:px-7 sm:py-7 lg:min-h-[min(30rem,58vh)] lg:rounded-[2rem_0_2rem_0] lg:px-11 lg:py-11">
-            <span className="absolute -right-5 top-1/2 -translate-y-1/2 text-[13rem] font-bold leading-none text-white/[0.025]" aria-hidden="true">&amp;</span>
-            <span className="absolute right-0 top-0 h-20 w-20 bg-[#2fdc79] [clip-path:polygon(100%_0,100%_100%,0_0)]" aria-hidden="true" />
-            <span className="absolute bottom-0 left-0 h-1 w-2/5 bg-linear-to-r from-[#2fdc79] to-[#67f5d0]" aria-hidden="true" />
-
-            <div className="relative z-10 flex min-h-[10.5rem] flex-col justify-between sm:min-h-[12.5rem] lg:min-h-[min(23rem,48vh)]">
-              <div className="flex items-center justify-between" aria-hidden="true">
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-[#2fdc79]" />
-                  <span className="h-2 w-2 rounded-full bg-[#67f5d0]/65" />
-                  <span className="h-2 w-2 rounded-full bg-white/25" />
-                </div>
-                <span className="h-px w-20 bg-linear-to-r from-transparent to-[#67f5d0]/70" />
-              </div>
-
-              <div>
-                <span className="block font-serif text-5xl leading-[0.5] text-[#2fdc79] sm:text-6xl lg:text-8xl" aria-hidden="true">
-                  &ldquo;
+              <p className="home-display mt-3 text-[clamp(1.2rem,4.5vw,2rem)] font-medium leading-[1.16] text-white sm:text-2xl lg:mt-5 lg:text-4xl">
+                Decarbonising, Decentralizing &amp; Deploying
+                <span className="mt-2 block font-semibold text-[#67f5d0] sm:mt-3">
+                  Sustainable Technologies
                 </span>
+              </p>
 
-                <h2 className="home-display mt-2 text-[clamp(1.15rem,5vw,2rem)] font-medium leading-[1.08] text-white sm:text-2xl lg:mt-5 lg:text-4xl">
-                  Decarbonising, Decentralizing & Deploying
-                  <span className="mt-2 block font-semibold leading-tight text-[#67f5d0] sm:mt-3 lg:mt-5">
-                    Sustainable Technologies
-                  </span>
-                </h2>
-              </div>
-
-              <div className="flex items-center gap-4" aria-hidden="true">
-                <span className="h-px flex-1 bg-white/18" />
-                <motion.span
-                  animate={reduceMotion ? undefined : { rotate: [45, 135, 45] }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                  className="h-3 w-3 rotate-45 border border-[#2fdc79]"
-                />
-              </div>
+              <span
+                className="mt-3 block font-serif text-5xl leading-none text-[#2fdc79] sm:text-6xl lg:mt-5"
+                aria-hidden="true"
+              >
+                &rdquo;
+              </span>
             </div>
-          </div>
+          </blockquote>
         </motion.aside>
       </div>
 

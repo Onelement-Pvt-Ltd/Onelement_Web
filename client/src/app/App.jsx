@@ -4,7 +4,6 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 
 import Layout from "@/shared/layout/Layout";
 import TechnologyLayout from "@/features/technology/ui/TechnologyLayout";
-import BlogsLayout from "@/features/blog/ui/BlogsLayout";
 import NotFound from "@/shared/components/NotFound";
 import RouteError from "@/shared/components/RouteError";
 
@@ -22,9 +21,8 @@ const TechnologyDetails = lazy(() =>
   import("@/features/technology/ui/TechnologyDetailsComponents/TechnologyDetails")
 );
 
-const Blog = lazy(() => import("@/features/blog/ui/Blog"));
-const BlogDetails = lazy(() =>
-  import("@/features/blog/ui/BlogDetails")
+const BlogComingSoon = lazy(() =>
+  import("@/features/blog/ui/BlogComingSoon")
 );
 const AdminViews = lazy(() => import("@/features/admin/ui/AdminViews"));
 
@@ -60,13 +58,10 @@ const appRouter = createBrowserRouter([
       },
       { path: "technologies/details/*", element: <NotFound variant="technology" /> },
 
-      { path: "blogs", element: withSuspense(Blog) },
-      {
-        path: "blogs/:slug",
-        element: <BlogsLayout />,
-        children: [{ index: true, element: withSuspense(BlogDetails) }]
-      },
-      { path: "blogs/*", element: <NotFound variant="article" /> },
+      { path: "articles", element: withSuspense(BlogComingSoon) },
+      { path: "articles/*", element: withSuspense(BlogComingSoon) },
+      { path: "blogs", element: <Navigate to="/articles" replace /> },
+      { path: "blogs/*", element: <Navigate to="/articles" replace /> },
       { path: "*", element: <NotFound /> }
     ]
   },
