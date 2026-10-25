@@ -1,7 +1,7 @@
-import carbonCaptureImage from "@/assets/Technologies/carbonCapture_OEPL.webp";
-import pemFuelCellImage from "@/assets/Technologies/pemFuelCell_OEPL.webp";
-import gh2Image from "@/assets/Technologies/gh2Ecosystem_OEPL.webp";
-import eFuelImage from "@/assets/Technologies/eFuel_OEPL.webp";
+import carbonCaptureImage from "@/assets/technologies/carbonCapture_OEPL.webp";
+import pemFuelCellImage from "@/assets/technologies/pemFuelCell_OEPL.webp";
+import gh2Image from "@/assets/technologies/gh2Ecosystem_OEPL.webp";
+import eFuelImage from "@/assets/technologies/eFuel_OEPL.webp";
 
 const technologyImages = {
   "carbon-capture": carbonCaptureImage,

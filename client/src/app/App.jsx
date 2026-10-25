@@ -11,14 +11,14 @@ const Home = lazy(() => import("@/features/home/ui/Home"));
 const About = lazy(() => import("@/features/about/ui/About"));
 const Team = lazy(() => import("@/features/team/ui/WhoWeAre"));
 const VisionMissionSection = lazy(() =>
-  import("@/features/about/ui/VisionMissionComponents/VisionMissionSection")
+  import("@/features/about/components/vision-mission/VisionMissionSection")
 );
 
 const Technology = lazy(() =>
   import("@/features/technology/ui/Technology")
 );
 const TechnologyDetails = lazy(() =>
-  import("@/features/technology/ui/TechnologyDetailsComponents/TechnologyDetails")
+  import("@/features/technology/ui/details/TechnologyDetails")
 );
 
 const ArticlesComingSoon = lazy(() =>

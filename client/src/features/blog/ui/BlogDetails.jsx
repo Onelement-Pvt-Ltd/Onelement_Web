@@ -13,10 +13,10 @@ import { breadcrumbSchema } from "@/shared/seo/seoData";
 import NotFound from "@/shared/components/NotFound";
 import PublicError from "@/shared/components/PublicError";
 
-import BlogCard from "./BlogComponents/BlogCard";
+import BlogCard from "./components/BlogCard";
 import { ScrollProgress } from "./ScrollProgress";
 import { BlogSkeleton } from "./BlogSkeleton";
-import AuthorFallback from "@/assets/articleAuthorFallback.png";
+import AuthorFallback from "@/assets/articles/authorFallback.png";
 
 const formatDate = (value) => {
   const date = new Date(value);

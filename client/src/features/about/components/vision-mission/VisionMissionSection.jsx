@@ -1,0 +1,45 @@
+import SectionHeading from "./SectionHeading";
+import VisionSection from "./VisionSection";
+import MissionSection from "./MissionSection";
+import ValuesBanner from "./ValuesBanner";
+import BottomCTA from "./BottomCTA";
+import Seo from "@/shared/seo/Seo";
+import { breadcrumbSchema } from "@/shared/seo/seoData";
+
+const VisionMissionSection = () => {
+  return (
+    <main className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#123c72_0%,#0a2955_35%,#071d3d_100%)]">
+      <Seo
+        title="Vision and Mission"
+        description="Read the vision, mission and values guiding Onelement Energy's sustainable technology work."
+        path="/about/vision-mission"
+        structuredData={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About Us", path: "/about" },
+          { name: "Vision and Mission", path: "/about/vision-mission" },
+        ])}
+      />
+      <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#35b46e]/15 blur-[180px]" />
+
+      <div className="absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-[#7effe5]/10 blur-[180px]" />
+
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:70px_70px]" />
+
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-28 px-6 py-20 sm:px-8 lg:px-10 xl:px-0">
+        <SectionHeading />
+
+        <VisionSection />
+
+        <div className="h-px bg-gradient-to-r from-transparent via-[#35b46e]/40 to-transparent" />
+
+        <MissionSection />
+
+        <ValuesBanner />
+
+        <BottomCTA />
+      </div>
+    </main>
+  );
+};
+
+export default VisionMissionSection;

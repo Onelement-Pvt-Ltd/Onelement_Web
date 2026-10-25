@@ -5,8 +5,8 @@ import { motion as Motion, AnimatePresence } from "framer-motion";
 import { useBlogFilters } from "@/features/blog/hooks/useBlogFilters";
 import { useBlogsQuery, useBlogMetaQuery } from "@/features/blog/api/blogQueries";
 
-import BlogCard from "@/features/blog/ui/BlogComponents/BlogCard";
-import BlogFilters from "@/features/blog/ui/BlogComponents/BlogFilters";
+import BlogCard from "@/features/blog/ui/components/BlogCard";
+import BlogFilters from "@/features/blog/ui/components/BlogFilters";
 import BlogPagination from "./BlogPagination";
 import { smoothScrollTo } from "@/shared/components/scroll/SmoothScroll";
 import Seo from "@/shared/seo/Seo";

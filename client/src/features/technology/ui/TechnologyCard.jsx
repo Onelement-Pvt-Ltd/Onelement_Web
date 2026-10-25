@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import TechnologyFallback from "@/assets/CarbonCapture.png";
+import TechnologyFallback from "@/assets/technologies/technologyFallback.png";
 import { getTechnologyImage } from "@/features/technology/data/technologyImages";
 
 const FALLBACK_IMAGE = TechnologyFallback;

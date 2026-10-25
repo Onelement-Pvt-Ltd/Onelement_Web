@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import FourPillars from "./SectionComponents/CarouselSectionComponents/FourPillars";
-import HeroSection from "./SectionComponents/HeroSectionComponents/HeroSection";
-import PurposeSection from "./SectionComponents/PurposeSectionComponents/PurposeSection";
-import RoadmapSection from "./SectionComponents/RoadmapAndTargetComponents";
+import FourPillars from "../components/pillars/FourPillars";
+import HeroSection from "../components/hero/HeroSection";
+import PurposeSection from "../components/purpose/PurposeSection";
+import RoadmapSection from "../components/roadmap";
 import "./Home.css";
 import Seo from "@/shared/seo/Seo";
 import { organizationSchema, websiteSchema } from "@/shared/seo/seoData";

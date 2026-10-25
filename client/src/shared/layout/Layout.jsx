@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Navbar from "./Navbar/Navbar";
-import Footer from "./Footer/Footer";
+import Navbar from "./navbar/Navbar";
+import Footer from "./footer/Footer";
 import ScrollToTop from "@/shared/components/scroll/ScrollToTop";
 import ScrollToTopButton from "@/shared/components/scroll/ScrollToTopButton";
 import SmoothScroll from "@/shared/components/scroll/SmoothScroll";

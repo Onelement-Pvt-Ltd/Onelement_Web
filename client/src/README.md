@@ -7,19 +7,26 @@ area stays inside that feature; code used across features lives in shared.
 
     src/
     |-- app/                 Application shell, routes, Redux store
-    |-- assets/              Images and other static source assets
+    |-- assets/              Static assets grouped by feature or shared use
     |-- features/
-    |   |-- about/           About page UI and local data
-    |   |-- blog/
+    |   |-- about/
+    |   |   |-- components/  Landing, overview, and vision/mission sections
+    |   |   |-- data/        About-page content models
+    |   |   -- ui/          Page composition and styles
+    |   |-- blog/            Preserved article feature for its future launch
     |   |   |-- api/         HTTP functions and React Query hooks
     |   |   |-- hooks/       Blog-specific React hooks
     |   |   |-- model/       Redux slice and selectors
-    |   |   -- ui/          Blog pages and components
-    |   |-- home/            Home page UI and home-only data
+    |   |   -- ui/          Article pages and local components
+    |   |-- home/
+    |   |   |-- components/  Components grouped by page section
+    |   |   |-- data/        Home-page content models
+    |   |   -- ui/          Page composition and styles
     |   |-- team/            Team page UI
     |   -- technology/
     |       |-- api/         HTTP functions and React Query hooks
-    |       -- ui/          Technology pages and components
+    |       |-- data/        Technology content and image mapping
+    |       -- ui/          Listing page and detail-page components
     |-- shared/
     |   |-- components/      Reusable UI primitives and scroll controls
     |   |-- config/          Shared runtime configuration
@@ -31,7 +38,7 @@ area stays inside that feature; code used across features lives in shared.
 
 ## Import rules
 
-- Use the @/ alias for imports that cross a feature boundary.
+- Use the `@/` alias for imports that cross a feature boundary.
 - Use relative imports only inside the same small component folder.
 - Feature-specific code must stay inside its feature.
 - Move code to shared only after it is used by more than one feature.

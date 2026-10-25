@@ -1,7 +1,7 @@
 import "./About.css";
-import AboutLanding from "./SectionComponents/LandingSectionComponents/AboutLanding";
-import WhatWeMean from "./SectionComponents/WhatWeMean";
-import WhoWeAre from "./SectionComponents/WhoWeAreComponents/WhoWeAre";
+import AboutLanding from "../components/landing/AboutLanding";
+import WhatWeMean from "../components/overview/WhatWeMean";
+import FocusAndApproach from "../components/overview/FocusAndApproach";
 import Seo from "@/shared/seo/Seo";
 import { breadcrumbSchema } from "@/shared/seo/seoData";
 import { useEffect } from "react";
@@ -36,7 +36,7 @@ const About = () => {
     />
     <AboutLanding />
     <WhatWeMean />
-    <WhoWeAre />
+    <FocusAndApproach />
 
     { // dont remove this comment, it is for future reference. This section is commented out because it is not needed at the moment. It can be uncommented in the future if needed.
     /* <div>
