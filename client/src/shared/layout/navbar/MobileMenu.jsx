@@ -63,10 +63,7 @@ export default function MobileMenu({ Menus }) {
           >
             <div className="flex items-start justify-between gap-4 border-b border-[#0B2440]/10 px-6 pb-5 pt-7">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#1d6903]">
-                  Navigation
-                </p>
-                <p className="mt-2 text-2xl font-bold tracking-tight">Explore Onelement</p>
+                <p className="text-2xl font-bold tracking-tight">Explore Onelement</p>
               </div>
               <button
                 ref={closeButtonRef}

@@ -50,6 +50,7 @@
 .about-hero {
   border-bottom: 1px solid var(--about-line);
   padding-block: clamp(4rem, 8vw, 7rem);
+  padding-top: clamp(6.25rem, 9vw, 7rem);
 }
 
 .about-hero-grid {
@@ -160,7 +161,7 @@
 
 @media (max-width: 620px) {
   .about-shell { width: min(100% - 2rem, 1280px); }
-  .about-hero { padding-top: 5.25rem; }
+  .about-hero { padding-top: 6rem; }
   .about-title { font-size: clamp(2.55rem, 13vw, 4rem); }
   .about-bento { aspect-ratio: .92 / 1; }
   .belief-media { height: 16rem; }
