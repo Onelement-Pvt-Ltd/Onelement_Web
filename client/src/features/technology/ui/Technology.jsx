@@ -92,7 +92,7 @@ const Technology = () => {
           <h1
             className="text-4xl font-semibold leading-[1.1] sm:text-5xl md:text-6xl"
           >
-            Engineering renewable power for what's next
+            Energy, Infrastructure and Sustainability
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-[#F6F8F6]/70 sm:text-lg">
             Four core technologies working together to capture, store, and

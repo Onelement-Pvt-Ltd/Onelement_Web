@@ -13,7 +13,7 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Onelement Energy",
-  legalName: "Onelement Pvt Ltd.",
+  legalName: "Onelement Energy Private Limited",
   url: SITE_URL,
   logo: `${SITE_URL}/OEPL_BLUE_BGD_FAVICON.png`,
   email: "info@onelement.in",

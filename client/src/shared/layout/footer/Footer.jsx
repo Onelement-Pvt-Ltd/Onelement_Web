@@ -2,7 +2,6 @@ import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
 import OEPL_LARGE_WHITE_TRANSPARENT from "@/assets/shared/OEPL_LARGE_WHITE_TRANSPARENT.webp";
-import ViewCounter from "@/shared/components/ViewCounter";
 import "./Footer.css";
 
 
@@ -30,7 +29,6 @@ const Footer = () => (
             className="footer-logo"
           />
         </Link>
-        <p>Practical technologies for a cleaner, more resilient energy future.</p>
       </div>
 
       <div className="footer-grid">
@@ -58,15 +56,14 @@ const Footer = () => (
           <p className="footer-kicker">Get in touch</p>
           <address>
             <a href="mailto:info@onelement.in"><Mail aria-hidden="true" size={18} /><span>info@onelement.in</span></a>
-            <p><MapPin aria-hidden="true" size={18} /><span>Jubilee Hills<br />Hyderabad, India</span></p>
+            <p><MapPin aria-hidden="true" size={18} /><span>Hyderabad, Telangana, India</span></p>
           </address>
-          <ViewCounter />
         </section>
       </div>
 
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Onelement Pvt Ltd.</p>
-        <p>All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Onelement Energy Private Limited</p>
+        <p>All Rights Reserved.</p>
       </div>
     </div>
   </footer>

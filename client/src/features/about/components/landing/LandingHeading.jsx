@@ -1,7 +1,7 @@
 const LandingHeading = () => (
   <div>
     <p className="about-eyebrow">About us</p>
-    <h1 className="about-title">Engineering tomorrow's energy.</h1>
+    <h1 className="about-title">Ecosystem for Climate Resilience</h1>
     <div className="about-rule" />
     <p className="about-copy about-hero-copy">
       Onelement Energy was founded with a clear purpose to develop practical,
