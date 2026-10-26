@@ -105,19 +105,19 @@ const DesktopMenu = ({ menu, isHovered, hasHoveredMenu, onHighlight }) => {
                       onClick={closeMenu}
                       className={`group/item flex items-center gap-3 rounded-xl px-3 py-3 transition-colors ${
                         submenuActive
-                          ? "bg-[#163B22] text-white"
-                          : "text-[#0B2440] hover:bg-[#eef4ed]"
+                          ? "bg-[#0B2440] text-white shadow-[0_8px_22px_rgba(11,36,64,.16)]"
+                          : "text-[#0B2440] hover:bg-[#23b65f]/12 hover:text-[#0B2440]"
                       }`}
                     >
                       {Icon && (
                         <span
                           className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${
                             submenuActive
-                              ? "bg-white/12"
-                              : "bg-[#163B22]/8 text-[#163B22] group-hover/item:bg-[#163B22]/12"
+                              ? "bg-[#23b65f]/18 text-[#67f5d0]"
+                              : "bg-[#0B2440]/7 text-[#0B2440] group-hover/item:bg-[#23b65f]/16 group-hover/item:text-[#168346]"
                           }`}
                         >
-                          <Icon size={17} strokeWidth={1.9} />
+                          <Icon className="h-[18px] w-[18px] opacity-90" size={18} strokeWidth={1.8} />
                         </span>
                       )}
                       <span className="min-w-0">

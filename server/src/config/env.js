@@ -40,6 +40,13 @@ export const env = Object.freeze({
   FRONTEND_ORIGINS: [...new Set(frontendOrigins)],
   VIEW_STATS_USERNAME: process.env.VIEW_STATS_USERNAME || "",
   VIEW_STATS_PASSWORD: process.env.VIEW_STATS_PASSWORD || "",
+  SMTP_HOST: process.env.SMTP_HOST || "",
+  SMTP_PORT: Number(process.env.SMTP_PORT) || 465,
+  SMTP_SECURE: (process.env.SMTP_SECURE || "true").toLowerCase() === "true",
+  SMTP_USER: process.env.SMTP_USER || "",
+  SMTP_PASS: process.env.SMTP_PASS || "",
+  CONTACT_FROM: process.env.CONTACT_FROM || "",
+  CONTACT_TO: process.env.CONTACT_TO || "web@onelement.in",
   TRUST_PROXY: trustProxy,
   SHUTDOWN_TIMEOUT_MS: shutdownTimeoutMs,
 });

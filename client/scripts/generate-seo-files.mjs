@@ -22,6 +22,7 @@ const staticPages = [
   { path: "/about/teams", title: `Who We Are | ${SITE_NAME}`, description: "Meet the people behind Onelement Energy and learn about the team working across energy, environment and industry.", priority: "0.7", frequency: "monthly" },
   { path: "/about/vision-mission", title: `Vision and Mission | ${SITE_NAME}`, description: "Read the vision, mission and values guiding Onelement Energy's sustainable technology work.", priority: "0.7", frequency: "monthly" },
   { path: "/technologies", title: `Technologies | ${SITE_NAME}`, description: "Explore the sustainable technologies Onelement Energy is developing across clean energy, carbon management and resilient energy systems.", priority: "0.9", frequency: "weekly" },
+  { path: "/contact", title: `Contact Us | ${SITE_NAME}`, description: "Contact Onelement Energy in Hyderabad to discuss clean energy, carbon capture, E-Fuel, fuel cell and green hydrogen opportunities.", priority: "0.7", frequency: "yearly" },
   { path: "/articles", title: `Articles Coming Soon | ${SITE_NAME}`, description: "Onelement Energy articles on clean technology, sustainability and the energy transition are coming soon.", indexable: false },
 ];
 

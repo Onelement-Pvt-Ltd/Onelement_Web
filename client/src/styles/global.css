@@ -17,10 +17,15 @@
 html {
   scroll-behavior: smooth;
   font-family: var(--site-font-family);
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   background-color: #f6f8f6;
   color: #0a2955;
   font-family: var(--site-font-family);

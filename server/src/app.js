@@ -10,6 +10,7 @@ import { errorHandler } from "./middlewares/error.middleware.js";
 import technologyRoutes from "./modules/technology/technology.routes.js";
 import blogRoutes from "./modules/blog/blog.routes.js";
 import analyticsRoutes from "./modules/analytics/analytics.routes.js";
+import contactRoutes from "./modules/contact/contact.routes.js";
 
 const app = express();
 
@@ -87,6 +88,7 @@ const cachePublicContent = (req, res, next) => {
 app.use("/api", apiLimiter);
 app.use("/api/technologies", cachePublicContent, technologyRoutes);
 app.use("/api/blogs", cachePublicContent, blogRoutes);
+app.use("/api/contact", contactRoutes);
 app.use("/api", analyticsRoutes);
 
 app.use((req, res) => {

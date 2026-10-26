@@ -8,6 +8,7 @@ const routes = [
   { path: "/about/teams", file: "../dist/about/teams/index.html", indexable: true },
   { path: "/about/vision-mission", file: "../dist/about/vision-mission/index.html", indexable: true },
   { path: "/technologies", file: "../dist/technologies/index.html", indexable: true },
+  { path: "/contact", file: "../dist/contact/index.html", indexable: true },
   { path: "/articles", file: "../dist/articles/index.html", indexable: false },
   { path: "/admin/views", file: "../dist/admin/views/index.html", indexable: false },
 ];

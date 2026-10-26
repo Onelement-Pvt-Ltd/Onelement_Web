@@ -1,4 +1,10 @@
-import { Building2, Compass, Dessert, Focus, Lock, ShieldPlus, Users } from "lucide-react";
+import { Building2, FlaskConical, Focus } from "lucide-react";
+import MeaningIcon from "@/shared/icons/company/MeaningIcon";
+import {
+  DownstreamProductsIcon,
+  GreenHydrogenIcon,
+  IndustrialCaptureIcon,
+} from "@/shared/icons/technology/TechnologyIcons";
 
 export const Menus = [
   {
@@ -16,7 +22,7 @@ export const Menus = [
       },
       {
         name: "What We Mean",
-        icon: Compass,
+        icon: MeaningIcon,
         path: "/about#what-we-mean",
       },
       {
@@ -33,25 +39,25 @@ export const Menus = [
     subMenu: [
       {
         name: "Carbon Capture",
-        icon: ShieldPlus,
+        icon: IndustrialCaptureIcon,
         type: "Society",
         path: "/technologies/details/carbon-capture",
       },
       {
         name: "E-Fuel",
-        icon: Lock,
+        icon: FlaskConical,
         type: "Council",
         path: "/technologies/details/efuel",
       },
       {
         name: "PEM Fuel Cell",
-        icon: Users,
+        icon: DownstreamProductsIcon,
         type: "Society",
         path: "/technologies/details/pem-fuel-cell",
       },
       {
         name: "GH2",
-        icon: Dessert,
+        icon: GreenHydrogenIcon,
         type: "Society",
         path: "/technologies/details/gh2",
       },

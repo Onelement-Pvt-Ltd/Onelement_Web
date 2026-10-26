@@ -34,21 +34,6 @@ const toDailyObject = (daily) => {
   return daily;
 };
 
-export const requireOfficialOrigin = (req, res, next) => {
-  const origin = req.get("origin");
-  if (!origin) {
-    return res.status(403).json({ success: false, message: "Request origin required" });
-  }
-
-  try {
-    if (env.FRONTEND_ORIGINS.includes(new URL(origin).origin)) return next();
-  } catch {
-    // Invalid origins are rejected below.
-  }
-
-  return res.status(403).json({ success: false, message: "Origin not allowed" });
-};
-
 export const requireStatsAuth = (req, res, next) => {
   if (!env.VIEW_STATS_USERNAME || !env.VIEW_STATS_PASSWORD) {
     return res.status(503).json({ success: false, message: "Statistics service unavailable" });

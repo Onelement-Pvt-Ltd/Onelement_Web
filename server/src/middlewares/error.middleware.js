@@ -11,13 +11,12 @@ export const errorHandler = (err, req, res, next) => {
     });
   }
 
+  const message = process.env.NODE_ENV === "development"
+    ? err.message
+    : err.publicMessage || (statusCode < 500 ? err.message : "Something went wrong");
+
   res.status(statusCode).json({
     success: false,
-    message:
-      process.env.NODE_ENV === "development"
-        ? err.message
-        : statusCode < 500
-          ? err.message
-          : "Something went wrong"
+    message,
   });
 };

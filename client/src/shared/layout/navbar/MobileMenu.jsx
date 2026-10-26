@@ -113,9 +113,6 @@ export default function MobileMenu({ Menus }) {
                           active ? "text-[#1d6903]" : "hover:text-[#1d6903]"
                         }`}
                       >
-                        <span className="mr-3 text-xs font-semibold text-[#0B2440]/35">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
                         {name}
                       </NavLink>
 
@@ -157,12 +154,18 @@ export default function MobileMenu({ Menus }) {
                                   className={({ isActive }) =>
                                     `flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition-colors ${
                                       isActive
-                                        ? "bg-[#163B22] text-white"
-                                        : "hover:bg-white hover:text-[#1d6903]"
+                                        ? "bg-[#0B2440] text-white shadow-[0_8px_20px_rgba(11,36,64,.14)]"
+                                        : "text-[#0B2440] hover:bg-[#23b65f]/12 hover:text-[#168346]"
                                     }`
                                   }
                                 >
-                                  {Icon && <Icon size={17} strokeWidth={1.9} />}
+                                  {Icon && (
+                                    <Icon
+                                      className="h-[18px] w-[18px] opacity-90"
+                                      size={18}
+                                      strokeWidth={1.8}
+                                    />
+                                  )}
                                   {subName}
                                 </NavLink>
                               );
@@ -174,6 +177,26 @@ export default function MobileMenu({ Menus }) {
                   </motion.li>
                 );
               })}
+
+              <motion.li
+                variants={{
+                  hidden: reduceMotion ? { opacity: 0 } : { opacity: 0, x: 18 },
+                  visible: { opacity: 1, x: 0 },
+                }}
+                className="border-b border-[#0B2440]/8"
+              >
+                <NavLink
+                  to="/contact"
+                  onClick={closeDrawer}
+                  className={({ isActive }) =>
+                    `block px-3 py-4 text-[17px] font-semibold transition-colors ${
+                      isActive ? "text-[#1d6903]" : "hover:text-[#1d6903]"
+                    }`
+                  }
+                >
+                  Contact Us
+                </NavLink>
+              </motion.li>
             </motion.ul>
 
             <div className="border-t border-[#0B2440]/10 bg-white/55 px-6 py-5">

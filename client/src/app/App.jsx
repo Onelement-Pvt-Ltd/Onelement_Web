@@ -24,6 +24,7 @@ const TechnologyDetails = lazy(() =>
 const ArticlesComingSoon = lazy(() =>
   import("@/features/blog/ui/ArticlesComingSoon")
 );
+const Contact = lazy(() => import("@/features/contact/ui/Contact"));
 const AdminViews = lazy(() => import("@/features/admin/ui/AdminViews"));
 
 const PageLoader = () => (
@@ -62,6 +63,7 @@ const appRouter = createBrowserRouter([
       { path: "articles/*", element: <Navigate to="/articles" replace /> },
       { path: "blogs", element: <Navigate to="/articles" replace /> },
       { path: "blogs/*", element: <Navigate to="/articles" replace /> },
+      { path: "contact", element: withSuspense(Contact) },
       { path: "*", element: <NotFound /> }
     ]
   },

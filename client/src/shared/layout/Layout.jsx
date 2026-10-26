@@ -10,7 +10,7 @@ const Layout = () => {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen w-full min-w-0 flex-col overflow-x-clip">
       <SmoothScroll />
       <Navbar loc={loc} />
       <div className="grow">

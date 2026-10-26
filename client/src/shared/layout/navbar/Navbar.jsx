@@ -11,8 +11,8 @@ const Navbar = () => {
 
   return (
     <motion.header className="fixed inset-x-0 top-0 z-9999 mx-auto flex h-16 items-center bg-[#F6F8F6]/90 text-[15px] shadow-sm backdrop-blur-sm">
-      <nav className="mx-0 flex w-full max-w-full items-center justify-between px-2.5 sm:mx-2.5 sm:px-3.5">
-        <div className="flex items-center gap-x-3">
+      <nav className="mx-0 flex min-w-0 w-full max-w-full items-center justify-between px-2.5 sm:mx-2.5 sm:px-3.5">
+        <div className="flex shrink-0 items-center gap-x-3">
           <NavLink to="/" className="rounded-md">
             <img
               src={OEPL_LARGE_BLUE_TRANSPARENT}
@@ -25,7 +25,7 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        <div className="flex gap-x-1 lg:items-center">
+        <div className="ml-auto flex min-w-0 gap-x-1 lg:items-center">
           <LayoutGroup id="primary-navigation">
             <ul
               className="mr-10 hidden gap-x-2 lg:flex lg:items-center"
@@ -48,15 +48,19 @@ const Navbar = () => {
             </ul>
           </LayoutGroup>
 
-          <div className="flex items-center gap-x-5">
-            <motion.a
-              href="#contactus"
+          <div className="flex shrink-0 items-center gap-x-5">
+            <motion.div
+              className="hidden lg:block"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.95 }}
-              className="rounded bg-[#0B2440] px-4 py-1.5 text-white shadow-md transition-colors hover:bg-[#163B22]"
             >
-              Contact Us
-            </motion.a>
+              <NavLink
+                to="/contact"
+                className="block rounded bg-[#0B2440] px-4 py-1.5 text-white shadow-md transition-colors hover:bg-[#163B22] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#23b65f]"
+              >
+                Contact Us
+              </NavLink>
+            </motion.div>
 
             <div className="lg:hidden">
               <MobileMenu Menus={Menus} />

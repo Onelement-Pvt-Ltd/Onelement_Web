@@ -10,7 +10,7 @@ const footerLinks = [
   { label: "About us", to: "/about" },
   { label: "Technologies", to: "/technologies" },
   { label: "Articles", to: "/articles" },
-  { label: "Contact", to: "/#contactus" }
+  { label: "Contact", to: "/contact" }
 ];
 
 const Footer = () => (

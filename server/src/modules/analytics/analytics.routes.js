@@ -3,10 +3,10 @@ import { rateLimit } from "express-rate-limit";
 import {
   getViewStats,
   registerView,
-  requireOfficialOrigin,
   requireStatsAuth,
 } from "./analytics.controller.js";
 import { isProduction } from "../../config/env.js";
+import { requireOfficialOrigin } from "../../middlewares/security.middleware.js";
 
 const router = express.Router();
 

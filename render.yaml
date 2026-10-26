@@ -21,3 +21,17 @@ services:
         sync: false
       - key: VIEW_STATS_PASSWORD
         sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_SECURE
+        value: "true"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: CONTACT_FROM
+        value: web@onelement.in
+      - key: CONTACT_TO
+        value: web@onelement.in

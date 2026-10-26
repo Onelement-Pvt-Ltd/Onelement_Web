@@ -7,10 +7,12 @@ import {
   Zap,
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import DownstreamProductsIcon from "./icons/DownstreamProductsIcon";
-import GreenHydrogenIcon from "./icons/GreenHydrogenIcon";
 import IndiaMapIcon from "./icons/IndiaMapIcon";
-import IndustrialCaptureIcon from "./icons/IndustrialCaptureIcon";
+import {
+  DownstreamProductsIcon,
+  GreenHydrogenIcon,
+  IndustrialCaptureIcon,
+} from "@/shared/icons/technology/TechnologyIcons";
 
 const chainItems = [
   {
@@ -86,7 +88,7 @@ const ChainNode = ({ item, index, mobile = false, reduceMotion }) => {
         <div className={`relative mx-auto h-[clamp(2.65rem,14vw,4rem)] w-[clamp(2.65rem,14vw,4rem)] ${isTop ? "order-2" : "order-1"}`}>
           <span className="absolute inset-0 rounded-full border border-dashed border-white/45" />
           <span className="absolute inset-1.5 grid place-items-center rounded-full border border-[#36536f] bg-[#0b2949] text-white">
-            <Icon className="h-[60%] w-[60%]" size={20} strokeWidth={1.65} />
+            <Icon className="h-[60%] w-[60%] text-white/75" size={20} strokeWidth={1.35} />
           </span>
           <span className="absolute -right-1 -top-1.5 grid h-[clamp(1.25rem,6vw,1.75rem)] w-[clamp(1.25rem,6vw,1.75rem)] place-items-center rounded-full bg-[#57ddb0] text-[clamp(8px,2.5vw,10px)] font-bold text-[#061a36] shadow-[0_0_0_3px_#061a36]">
             {item.number}
@@ -134,7 +136,7 @@ const ChainNode = ({ item, index, mobile = false, reduceMotion }) => {
         <div className="relative aspect-square w-1/3 shrink-0">
           <span className="absolute inset-0 rounded-full border border-dashed border-white/45" />
           <span className="absolute inset-2 grid place-items-center rounded-full border border-[#36536f] bg-[#0b2949] text-white">
-            <Icon className="h-[60%] w-[60%]" size={30} strokeWidth={1.65} />
+            <Icon className="h-[60%] w-[60%] text-white/75" size={30} strokeWidth={1.35} />
           </span>
           <span className="absolute -right-1 -top-2 grid h-[clamp(1.5rem,3.6vw,2.25rem)] w-[clamp(1.5rem,3.6vw,2.25rem)] place-items-center rounded-full bg-[#57ddb0] text-[clamp(.625rem,1.4vw,.875rem)] font-bold text-[#061a36] shadow-[0_0_0_4px_#061a36]">
             {item.number}
