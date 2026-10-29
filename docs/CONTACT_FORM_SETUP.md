@@ -25,12 +25,18 @@ SMTP_PORT=465
 SMTP_SECURE=true
 SMTP_USER=web@onelement.in
 SMTP_PASS=your-mailbox-password
+RESEND_API_KEY=
 CONTACT_FROM=web@onelement.in
 CONTACT_TO=web@onelement.in
 ```
 
 For port `587`, set `SMTP_SECURE=false`. Never add the real password to Git or
 to the frontend environment variables.
+
+Render's free web services block outbound SMTP ports. For that deployment,
+verify the sender domain in Resend and set `RESEND_API_KEY`. When the key is
+present, the backend sends through Resend's HTTPS API and otherwise falls back
+to the SMTP settings above.
 
 ## 4. Deploy and test
 

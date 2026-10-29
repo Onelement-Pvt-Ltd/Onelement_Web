@@ -45,6 +45,7 @@ export const env = Object.freeze({
   SMTP_SECURE: (process.env.SMTP_SECURE || "true").toLowerCase() === "true",
   SMTP_USER: process.env.SMTP_USER || "",
   SMTP_PASS: process.env.SMTP_PASS || "",
+  RESEND_API_KEY: process.env.RESEND_API_KEY || "",
   CONTACT_FROM: process.env.CONTACT_FROM || "",
   CONTACT_TO: process.env.CONTACT_TO || "web@onelement.in",
   TRUST_PROXY: trustProxy,
